@@ -119,6 +119,9 @@ class _RawDataPaneState extends State<RawDataPane> {
 
   Widget _buildScaleDataWidget(MiScaleData data) {
     return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("lib/assets/b.png"), fit: BoxFit.cover)),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Text(data.toString()),

@@ -1,5 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
+import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/models/resolution.dart';
+import 'package:graduation_projectflutter/ui/resolution_list.dart';
+import 'package:http/http.dart' as http;
 
 class qusetions extends StatefulWidget {
   const qusetions({Key? key}) : super(key: key);
@@ -8,23 +14,47 @@ class qusetions extends StatefulWidget {
   _qusetionsState createState() => _qusetionsState();
 }
 
+PatientResolution resolution = new PatientResolution(
+    id: "",
+    height: "height",
+    age: "age",
+    Drugs: "Drugs",
+    ChronicDiseases: "ChronicDiseases",
+    PatientRID: "PatientRID");
+
+String theUrl =
+    'http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getResolution.php';
+
+Future<bool> PostResolution(PatientResolution item) async {
+  var myResolution = item.toJson();
+  var ResolutionBody = json.encode(myResolution);
+  var res = await http.post(Uri.parse(Uri.encodeFull(theUrl)),
+      headers: {"Accept": "application/json"}, body: ResolutionBody);
+  return Future.value(res.statusCode == 200 ? true : false);
+}
+
+TextEditingController _height = TextEditingController();
+TextEditingController _age = TextEditingController();
+TextEditingController Drugs = TextEditingController();
+TextEditingController ChronicDiseases = TextEditingController();
+
 class _qusetionsState extends State<qusetions> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+    _height.text = resolution.height;
+    _age.text = resolution.age;
+    Drugs.text = resolution.Drugs;
+    ChronicDiseases.text = resolution.ChronicDiseases;
+
+    return MaterialApp(
+      title: '',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Welcome to your Questionnaire page',
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: Colors.teal,
+          title: Text(""),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -63,9 +93,9 @@ class _qusetionsState extends State<qusetions> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
+                  TextField(
+                    controller: _height,
+                    onChanged: (value) => updateheight(),
                   ),
                   const Text(
                     "Enter your age",
@@ -78,9 +108,9 @@ class _qusetionsState extends State<qusetions> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
+                  TextField(
+                    controller: _age,
+                    onChanged: (value) => updateage(),
                   ),
                   const Text(
                     "If you have any chronic diseases, please write it here ",
@@ -90,17 +120,9 @@ class _qusetionsState extends State<qusetions> {
                       color: Colors.black,
                     ),
                   ),
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    autofocus: true,
-                  ),
-                  TextFormField(
-                    textAlign: TextAlign.center,
-                    autofocus: true,
-                  ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
+                  TextField(
+                    controller: ChronicDiseases,
+                    onChanged: (value) => updatechronicdiseases(),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -116,17 +138,9 @@ class _qusetionsState extends State<qusetions> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
-                  ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
-                  ),
-                  TextFormField(
-                    autofocus: true,
-                    obscureText: true,
+                  TextField(
+                    controller: Drugs,
+                    onChanged: (value) => updatedrugs(),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -139,6 +153,8 @@ class _qusetionsState extends State<qusetions> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ResolutionA()));
+                      //   saveResolution();
+                      //  print("/////////////");
                     },
                     color: Colors.teal,
                     elevation: 20,
@@ -160,5 +176,26 @@ class _qusetionsState extends State<qusetions> {
         ),
       ),
     );
+  }
+
+  void saveResolution() async {
+    var saveResponse = await PostResolution(resolution);
+    saveResponse == true ? Navigator.pop(context, true) : null;
+  }
+
+  void updateheight() {
+    resolution.height = _height.text;
+  }
+
+  void updateage() {
+    resolution.age = _age.text;
+  }
+
+  void updatechronicdiseases() {
+    resolution.ChronicDiseases = ChronicDiseases.text;
+  }
+
+  void updatedrugs() {
+    resolution.Drugs = Drugs.text;
   }
 }

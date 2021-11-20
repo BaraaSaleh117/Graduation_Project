@@ -11,7 +11,8 @@ while($resultsForm = $stamement ->fetch()){
     array_push(
         $myarray,array(
             "id" => $resultsForm['id'],
-            "ExistingDiseases" => $resultsForm['ExistingDiseases'],
+            "height" => $resultsForm['height'],
+            "age" => $resultsForm['age'],
             "Drugs" => $resultsForm['Drugs'],
             "ChronicDiseases" => $resultsForm['ChronicDiseases'],
             "PatientRID" => $resultsForm['PatientRID'],

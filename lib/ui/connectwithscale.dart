@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/scale/scaleapp.dart';
 
 class ConnectScale extends StatefulWidget {
@@ -16,128 +17,130 @@ class _ConnectScaleState extends State<ConnectScale> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          // child: Container(
-          //   decoration: const BoxDecoration(
-          //     image: DecorationImage(
-          //         image: AssetImage("lib/assets/SS.png"), fit: BoxFit.cover),
-          //   ),
-          padding: const EdgeInsets.all(40.0),
-          child: Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Smart Scale",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("lib/assets/xa.png"), fit: BoxFit.cover),
+            ),
+            padding: const EdgeInsets.all(40.0),
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Smart Scale",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.teal,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const Text(
+                    "You Can enter your weight manually here",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    autofocus: false,
+                  ),
+                  const Text(
+                    "And the last date you weighed",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    autofocus: false,
+                  ),
+                  const SizedBox(
+                    height: 90.0,
+                  ),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                  const Text(
+                    " Or Easier for you Via Bluetooth from here",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 40,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ScaleApp()));
+                    },
                     color: Colors.teal,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Text(
+                      "Bluetooth ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.white),
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const Text(
-                  "You Can enter your weight manually here",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black,
+                  const SizedBox(
+                    height: 20.0,
                   ),
-                ),
-                TextFormField(
-                  textAlign: TextAlign.center,
-                  autofocus: false,
-                ),
-                const Text(
-                  "And the last date you weighed",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black,
+                  const SizedBox(
+                    height: 5.0,
                   ),
-                ),
-                TextFormField(
-                  textAlign: TextAlign.center,
-                  autofocus: false,
-                ),
-                const SizedBox(
-                  height: 90.0,
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                const Text(
-                  " Or Easier for you Via Bluetooth from here",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black,
+                  const SizedBox(
+                    height: 50.0,
                   ),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                MaterialButton(
-                  minWidth: double.infinity,
-                  height: 40,
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ScaleApp()));
-                  },
-                  color: Colors.teal,
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
+                  const SizedBox(
+                    height: 50.0,
                   ),
-                  child: const Text(
-                    "Bluetooth ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        color: Colors.white),
+                  const SizedBox(
+                    height: 40.0,
                   ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                const SizedBox(
-                  height: 40.0,
-                ),
-                MaterialButton(
-                  minWidth: double.infinity,
-                  height: 40,
-                  onPressed: () {
-                    //
-                    // Navigator.push(context, MaterialPageRoute(
-                    //     builder: (context) => DropDownDemo()));
-                  },
-                  color: Colors.teal,
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 40,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FitnessAppHomeScreen()));
+                    },
+                    color: Colors.teal,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Text(
+                      "Next",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.white),
+                    ),
                   ),
-                  child: const Text(
-                    "Next",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

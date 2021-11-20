@@ -32,6 +32,27 @@ class FetchApi {
     return patientsList;
   }
 
+  // Future<String> PostRes(Map<String, dynamic> data) async {
+  //   String theUrl =
+  //       'http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getResolution.php';
+  //   try {
+  //     var res = await http.post(Uri.parse(Uri.encodeFull(theUrl)),
+  //         body: jsonEncode(data),
+  //         headers: {
+  //           "Content-Type": "application/json; charset=UTF-8",
+  //         });
+
+  //     if (res.statusCode == 200) {
+  //       return "success";
+  //     } else {
+  //       print(res.body);
+  //       return "err";
+  //     }
+  //   } catch (SocketException) {
+  //     return "err";
+  //   }
+  // }
+
   getPatientRecords() async {
     //Get Patients Data From Localhost API
     String theUrl =
@@ -74,6 +95,8 @@ class FetchApi {
     return patientsList;
   }
 
+  List<PatientResolution> RList = [];
+
   getPatientResolution() async {
     //Get Patients Data From Localhost API
     String theUrl =
@@ -85,7 +108,9 @@ class FetchApi {
     for (var u in responceBody) {
       patientsList.add(PatientResolution.fromJson(u));
     }
-    return patientsList;
+    RList = patientsList;
+
+    return RList;
   }
 
   getPatientLogin() async {
