@@ -19,8 +19,10 @@ class _ResolutionAState extends State<ResolutionA> {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("lib/assets/SS.png"), fit: BoxFit.cover),
+                  image: AssetImage("lib/assets/Se1.png"), fit: BoxFit.fill),
             ),
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
             padding: const EdgeInsets.all(40.0),
             child: Form(
               child: Column(

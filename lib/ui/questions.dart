@@ -53,16 +53,15 @@ class _qusetionsState extends State<qusetions> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(""),
-        ),
         body: SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("lib/assets/H.png"), fit: BoxFit.cover),
+                  image: AssetImage("lib/assets/Q.jpg"), fit: BoxFit.cover),
             ),
-            padding: const EdgeInsets.all(10.0),
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 50.0),
             child: Form(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,10 +72,16 @@ class _qusetionsState extends State<qusetions> {
                   const Text(
                     "We are pleased to know some information about you",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Colors.teal,
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 29,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                              color: Colors.teal,
+                              blurRadius: 7.0,
+                              offset: Offset(2.0, 4.0))
+                        ]),
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 50.0,
@@ -86,8 +91,8 @@ class _qusetionsState extends State<qusetions> {
                     "Enter your height",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -101,8 +106,8 @@ class _qusetionsState extends State<qusetions> {
                     "Enter your age",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -116,8 +121,8 @@ class _qusetionsState extends State<qusetions> {
                     "If you have any chronic diseases, please write it here ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
                   TextField(
@@ -131,8 +136,8 @@ class _qusetionsState extends State<qusetions> {
                     "Enter the names of the drugs if you use",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -141,6 +146,12 @@ class _qusetionsState extends State<qusetions> {
                   TextField(
                     controller: Drugs,
                     onChanged: (value) => updatedrugs(),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
                   ),
                   const SizedBox(
                     height: 20.0,

@@ -15,7 +15,7 @@ class _BackgroundState extends State<Background> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("lib/assets/H.png"), fit: BoxFit.cover),
+              image: AssetImage("lib/assets/H.png"), fit: BoxFit.fill),
         ),
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
@@ -30,13 +30,17 @@ class _BackgroundState extends State<Background> {
                   children: const <Widget>[
                     Text(
                       " Welcome to ",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       " BHA Diabetics Macros ",
                       style: TextStyle(
                           fontSize: 30,
+                          wordSpacing: 7,
+                          letterSpacing: 3,
                           fontWeight: FontWeight.bold,
                           color: Colors.teal),
                     ),
@@ -45,7 +49,16 @@ class _BackgroundState extends State<Background> {
                     ),
                     Text(
                       "A Smart Dietitian Application for Diabetes Patient",
-                      style: TextStyle(fontSize: 17, color: Colors.black),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          shadows: [
+                            Shadow(
+                                color: Colors.red,
+                                blurRadius: 5.0,
+                                offset: Offset(2.0, 10.0))
+                          ]),
                     ),
                     SizedBox(
                       height: 20,
@@ -61,6 +74,12 @@ class _BackgroundState extends State<Background> {
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.teal,
+                          shadows: [
+                            Shadow(
+                                color: Colors.black,
+                                blurRadius: 10.0,
+                                offset: Offset(0.0, 10.0))
+                          ],
                           fontWeight: FontWeight.bold),
                     ),
                   ],

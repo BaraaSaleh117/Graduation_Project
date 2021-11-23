@@ -61,9 +61,11 @@ class _PatientLoginState extends State<PatientLogin> {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("lib/assets/welcome.png"),
-                  fit: BoxFit.cover),
+                  image: AssetImage("lib/assets/healthy.jpg"),
+                  fit: BoxFit.fill),
             ),
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
             padding: const EdgeInsets.all(40.0),
             child: Form(
               //  key: formKey,
