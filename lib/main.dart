@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/resolution_list.dart';
 import 'package:http/http.dart' as http;
 import 'fetch_api/fetchapi.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Background()
+        home: PatientUi()
         /*Scaffold(
         appBar: AppBar(
           title: Text(""),

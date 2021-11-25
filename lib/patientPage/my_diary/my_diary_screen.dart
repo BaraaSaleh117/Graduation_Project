@@ -79,6 +79,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animationController: widget.animationController!,
       ),
     );
+
     listViews.add(
       TitleView(
         titleTxt: 'Meals today',
