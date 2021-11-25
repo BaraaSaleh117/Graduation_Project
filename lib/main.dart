@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: PatientUi()
+        home: Background()
         /*Scaffold(
         appBar: AppBar(
           title: Text(""),
