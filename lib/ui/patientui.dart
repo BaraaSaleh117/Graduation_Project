@@ -127,7 +127,9 @@ class _PatientUiState extends State<PatientUi> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       )),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed("BreakFast");
+                      },
                     ),
                   ),
                   Container(

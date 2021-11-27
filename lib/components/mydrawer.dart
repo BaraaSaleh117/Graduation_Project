@@ -37,7 +37,9 @@ class MyDrawer extends StatelessWidget {
               color: Colors.teal,
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed("PatientsUi");
+            },
           ),
           ListTile(
             title: Text(

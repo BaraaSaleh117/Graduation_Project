@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfastinfo.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
+import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
+import 'package:graduation_projectflutter/ui/mealsui/snak.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/resolution_list.dart';
 import 'package:http/http.dart' as http;
@@ -41,13 +47,32 @@ class MyApp extends StatelessWidget {
     TextEditingController _Drugs = TextEditingController();
     TextEditingController _ChronicDiseases = TextEditingController();
     return MaterialApp(
-        title: '',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: Background()
-        /*Scaffold(
+      title: '',
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
+      home: BreakFastss(),
+      routes: {
+        "PatientsUi": (context) {
+          return PatientUi();
+        },
+        "BreakFast": (context) {
+          return BreakFast();
+        },
+        "Lunch": (context) {
+          return Lunch();
+        },
+        "Snaks": (context) {
+          return Snaks();
+        },
+        "Dinner": (context) {
+          return Dinner();
+        },
+        "BreakFastInfo": (context) {
+          return BreakFastInformations();
+        },
+      },
+      /*Scaffold(
         appBar: AppBar(
           title: Text(""),
         ),
@@ -83,7 +108,7 @@ class MyApp extends StatelessWidget {
           },
         ),
       ),*/
-        );
+    );
   }
 }
 

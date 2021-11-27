@@ -69,8 +69,10 @@ flutter:
   - lib/assets/Se1.png
   - lib/assets/bb.png
   - lib/assets/images/
-       
+  - lib/assets/images/
   - lib/assets/fitness_app/
+       
+  - lib/assets/BreakFastsPic/
       
   - lib/assets/introduction_animation/
  fonts:
