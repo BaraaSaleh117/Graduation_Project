@@ -1,11 +1,12 @@
 class Meals {
-  late String Id, Mealname, Mealtype, Mealtime, Description;
+  late String Id, Mealname, Mealtype, Mealtime, Calories, Description;
 
   Meals(
     this.Id,
     this.Mealname,
     this.Mealtype,
     this.Mealtime,
+    this.Calories,
     this.Description,
   );
 
@@ -14,6 +15,9 @@ class Meals {
     Mealname = map['Mealname'];
     Mealtype = map['Mealtype'];
     Mealtime = map['Mealtime'];
+
+    Calories = map['Calories'];
+
     Description = map['Description'];
   }
 }

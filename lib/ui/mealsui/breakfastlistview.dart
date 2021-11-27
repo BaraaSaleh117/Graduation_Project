@@ -1,4 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
@@ -11,103 +14,51 @@ class BreakFastss extends StatefulWidget {
 }
 
 class _BreakFastssState extends State<BreakFastss> {
+  var breakfastslist = [
+    {
+      'Id': '1',
+      'Mealname': 'Eggs with vegetables',
+      'Mealtype': 'BreakFast',
+      'Mealtime': '10:00 Am',
+      'Calories': '400 Kcal',
+      'Description': 'Eggs with vegetables good breakfastn',
+    },
+    {
+      'Id': '2',
+      'Mealname': 'vegetables',
+      'Mealtype': 'BreakFast',
+      'Mealtime': '9:00 Am',
+      'Calories': '390 Kcal',
+      'Description': 'Eggs good breakfastn',
+    },
+    {
+      'Id': '3',
+      'Mealname': 'Milk',
+      'Mealtype': 'BreakFast',
+      'Mealtime': '5:00 Am',
+      'Calories': '700 Kcal',
+      'Description': 'Milk good breakfastn',
+    }
+  ];
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("BreakFasts"),
+          title: Text("               BreakFasts"),
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
         ),
         drawer: MyDrawer(),
-        body: ListView(
-          children: <Widget>[
-            InkWell(
-              child: Container(
-                height: 120,
-                width: double.infinity,
-                child: Card(
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: Image.asset(
-                          "lib/assets/BreakFastsPic/2.jpg",
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          alignment: Alignment.topCenter,
-                          height: 120,
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                "Eggs with vegetables",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "350 kcal",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    "How to prepare  ",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.teal),
-                                  ),
-                                  Icon(
-                                    Icons.dining_outlined,
-                                    color: Colors.teal,
-                                    size: 30,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: FitnessAppTheme.white,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      bottomLeft: const Radius.circular(8.0),
-                      bottomRight: Radius.circular(8.0),
-                      topRight: const Radius.circular(60.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: FitnessAppTheme.nearlyBlue.withOpacity(0.7),
-                        offset: const Offset(1.1, 7.1),
-                        blurRadius: 10.0),
-                  ],
-                ),
-              ),
-              onTap: () {
-                print("Hiii");
-              },
-            )
-          ],
+        body: ListView.builder(
+          itemCount: breakfastslist.length,
+          itemBuilder: (context, i) {
+            return mealsList(
+                Id: breakfastslist[i]['Id']!,
+                Mealname: breakfastslist[i]['Mealname']!,
+                Mealtype: breakfastslist[i]['Mealtype']!,
+                Mealtime: breakfastslist[i]['Mealtime']!,
+                Calories: breakfastslist[i]['Calories']!,
+                Description: breakfastslist[i]['Description']!);
+          },
         ));
   }
 }

@@ -4,7 +4,7 @@ import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.da
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfastinfo.dart';
+import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           return PatientUi();
         },
         "BreakFast": (context) {
-          return BreakFast();
+          return BreakFastss();
         },
         "Lunch": (context) {
           return Lunch();
@@ -68,8 +68,8 @@ class MyApp extends StatelessWidget {
         "Dinner": (context) {
           return Dinner();
         },
-        "BreakFastInfo": (context) {
-          return BreakFastInformations();
+        "Details": (context) {
+          return Details();
         },
       },
       /*Scaffold(
