@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
@@ -26,6 +24,17 @@ class _BreakFastssState extends State<BreakFastss> {
     return responceBody;
   }
 
+  Future getBreakFasts() async {
+    //Get Patients Data From Localhost API
+    String theUrl =
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getMeals.php";
+    var data = {"mealtype": "Breakfast"};
+    var res = await http.post(Uri.parse(theUrl),
+        body: data, headers: {"Accept": "application/json"});
+    var responceBody = json.decode(res.body);
+    return responceBody;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +43,7 @@ class _BreakFastssState extends State<BreakFastss> {
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
         ),
         body: FutureBuilder(
-          future: getMeals(),
+          future: getBreakFasts(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
