@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+import 'package:graduation_projectflutter/ui/mealsui/Test.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
@@ -67,9 +68,6 @@ class MyApp extends StatelessWidget {
         },
         "Dinner": (context) {
           return Dinner();
-        },
-        "Details": (context) {
-          return Details();
         },
       },
       /*Scaffold(

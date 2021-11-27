@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
+import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 
 class mealsList extends StatelessWidget {
   late final String Id;
@@ -51,7 +52,7 @@ class mealsList extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        Calories,
+                        Calories + " Kcal",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15,
@@ -65,7 +66,7 @@ class mealsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "How to prepare  ",
+                            "Show Details",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 15,
@@ -102,7 +103,16 @@ class mealsList extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed("Details");
+        Navigator.of(context).push(MaterialPageRoute(builder: (contex) {
+          return Details(
+            Idd: Id,
+            Mealnamed: Mealname,
+            Mealtyped: Mealtype,
+            Mealtimed: Mealtime,
+            Caloriesd: Calories,
+            Descriptiond: Description,
+          );
+        }));
       },
     );
   }
