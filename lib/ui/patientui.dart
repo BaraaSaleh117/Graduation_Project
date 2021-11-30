@@ -5,6 +5,11 @@ import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
+import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
+import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -157,7 +162,11 @@ class _PatientUiState extends State<PatientUi> {
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.of(context).pushNamed("BreakFast");
+                        //  Navigator.of(context).pushNamed("BreakFast");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BreakFastss()));
                       },
                     ),
                   ),
@@ -182,7 +191,8 @@ class _PatientUiState extends State<PatientUi> {
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.of(context).pushNamed("Lunch");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Lunch()));
                       },
                     ),
                   ),
@@ -207,7 +217,8 @@ class _PatientUiState extends State<PatientUi> {
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.of(context).pushNamed("Snacks");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Snacks()));
                       },
                     ),
                   ),
@@ -232,7 +243,8 @@ class _PatientUiState extends State<PatientUi> {
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.of(context).pushNamed("Dinner");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Dinner()));
                       },
                     ),
                   )
