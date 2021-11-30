@@ -40,7 +40,7 @@ class _Details extends State<Details> {
                     height: 50,
                     color: Colors.black.withOpacity(0.4),
                     child: Text(
-                      widget.Caloriesd,
+                      widget.Caloriesd + " Kcal",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -62,12 +62,16 @@ class _Details extends State<Details> {
                             Text(
                               "Meal name : ",
                               style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.w700),
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                             Text(
                               widget.Mealnamed,
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.red.withOpacity(0.7)),
                             ),
                           ],
                         )),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
-import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
-import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -14,10 +12,27 @@ class BreakFastss extends StatefulWidget {
 }
 
 class _BreakFastssState extends State<BreakFastss> {
+  var ListSearch = [];
+  Future getData() async {
+    var url =
+        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
+    var res =
+        await http.get(Uri.parse(url), headers: {"Accept": "application/json"});
+    var responceBody = json.decode(res.body);
+    for (int i = 0; i < responceBody.length; i++) {
+      ListSearch.add(responceBody[i]['Mealname']);
+    }
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   Future getMeals() async {
-    //Get Patients Data From Localhost API
     String theUrl =
-        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getMeals.php";
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
     var res = await http
         .get(Uri.parse(theUrl), headers: {"Accept": "application/json"});
     var responceBody = json.decode(res.body);
@@ -39,8 +54,10 @@ class _BreakFastssState extends State<BreakFastss> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("               BreakFasts"),
+          title: Text("BreakFasts"),
+          centerTitle: true,
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          elevation: 6,
         ),
         body: FutureBuilder(
           future: getBreakFasts(),
@@ -64,3 +81,43 @@ class _BreakFastssState extends State<BreakFastss> {
         ));
   }
 }
+
+
+  
+
+
+
+
+
+
+//  showDialog(
+//                       context: context,
+//                       builder: (context) {
+//                         return AlertDialog(
+//                           title: Text("Search"),
+//                           content: Container(
+//                             height: 120,
+//                             child: Column(
+//                               children: [
+//                                 Text(
+//                                     "Enter the name of the meal you want to search for"),
+//                                 TextFormField(
+//                                   decoration: InputDecoration(
+//                                     hintText: "Write here",
+//                                   ),
+//                                 )
+//                               ],
+//                             ),
+//                           ),
+//                           actions: <Widget>[
+//                             FlatButton(onPressed: () {}, child: Text("Ok")),
+//                             FlatButton(
+//                                 onPressed: () {
+//                                   Navigator.of(context).pop();
+//                                 },
+//                                 child: Text("Exit")),
+//                           ],
+//                         );
+//                       });
+//                 },
+ 

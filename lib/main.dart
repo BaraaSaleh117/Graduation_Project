@@ -9,7 +9,7 @@ import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
-import 'package:graduation_projectflutter/ui/mealsui/snak.dart';
+import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/resolution_list.dart';
 import 'package:http/http.dart' as http;
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: BreakFastss(),
+      home: PatientUi(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();
@@ -63,8 +63,8 @@ class MyApp extends StatelessWidget {
         "Lunch": (context) {
           return Lunch();
         },
-        "Snaks": (context) {
-          return Snaks();
+        "Snacks": (context) {
+          return Snacks();
         },
         "Dinner": (context) {
           return Dinner();

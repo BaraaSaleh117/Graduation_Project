@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 
-class mealsList extends StatelessWidget {
+class DinnersList extends StatelessWidget {
   late final String Id;
   late final String Mealname;
   late final String Mealtype;
@@ -10,7 +10,7 @@ class mealsList extends StatelessWidget {
   late final String Calories;
   late final String Description;
 
-  mealsList(
+  DinnersList(
       {required this.Id,
       required this.Mealname,
       required this.Mealtype,
@@ -29,7 +29,7 @@ class mealsList extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Image.asset(
-                  "lib/assets/BreakFastsPic/5.jpg",
+                  "lib/assets/111.jpg",
                   fit: BoxFit.fill,
                 ),
               ),

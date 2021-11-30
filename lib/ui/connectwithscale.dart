@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/scale/scaleapp.dart';
+import 'package:graduation_projectflutter/ui/patientUi.dart';
 
 class ConnectScale extends StatefulWidget {
   const ConnectScale({Key? key}) : super(key: key);
@@ -121,10 +122,8 @@ class _ConnectScaleState extends State<ConnectScale> {
                     minWidth: double.infinity,
                     height: 40,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FitnessAppHomeScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => PatientUi()));
                     },
                     color: Colors.teal,
                     elevation: 20,
