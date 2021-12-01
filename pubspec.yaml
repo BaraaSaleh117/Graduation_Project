@@ -72,6 +72,7 @@ flutter:
   - lib/assets/images/
   - lib/assets/images/
   - lib/assets/fitness_app/
+  - lib/assets/Foods/
        
   - lib/assets/BreakFastsPic/
       

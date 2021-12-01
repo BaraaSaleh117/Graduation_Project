@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+import 'package:graduation_projectflutter/ui/choosecountry.dart';
+import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
@@ -18,34 +20,10 @@ void main() {
   runApp(MyApp());
 }
 
-// Map<String, dynamic> data
-Future<String> PostRes(PatientResolution item) async {
-  String theUrl =
-      'http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getResolution.php';
-  try {
-    var res = await http.post(Uri.parse(Uri.encodeFull(theUrl)),
-        body: json.encode(item.toJson),
-        headers: {"Accept": "application/json"});
-    if (res.statusCode == 201) {
-      return "success";
-    } else {
-      print(res.body);
-      return "err";
-    }
-  } catch (SocketException) {
-    return "err";
-  }
-}
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    FetchApi fetchApi = new FetchApi();
-    TextEditingController _height = TextEditingController();
-    TextEditingController _age = TextEditingController();
-    TextEditingController _Drugs = TextEditingController();
-    TextEditingController _ChronicDiseases = TextEditingController();
     return MaterialApp(
       title: '',
       theme: ThemeData(

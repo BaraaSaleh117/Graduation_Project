@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
+import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
@@ -163,9 +164,7 @@ class _qusetionsState extends State<qusetions> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ResolutionA()));
-                      //   saveResolution();
-                      //  print("/////////////");
+                              builder: (context) => FoodListChosen()));
                     },
                     color: Colors.teal,
                     elevation: 20,

@@ -1,4 +1,6 @@
 // ignore: file_names
+// ignore_for_file: unnecessary_const, avoid_unnecessary_containers, import_of_legacy_library_into_null_safe
+
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
@@ -12,6 +14,7 @@ import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientUi extends StatefulWidget {
   const PatientUi({Key? key}) : super(key: key);
@@ -22,6 +25,18 @@ class PatientUi extends StatefulWidget {
 
 class _PatientUiState extends State<PatientUi> {
   var ListSearch = [];
+  // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
+  var country_pref;
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      country_pref = preferences.getString("country");
+    });
+
+    print(country_pref);
+  }
+
   Future getData() async {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
@@ -44,15 +59,16 @@ class _PatientUiState extends State<PatientUi> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Homepage",
             textAlign: TextAlign.center,
           ),
+          centerTitle: true,
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
           elevation: 6,
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: () {
                   showSearch(
                       context: context, delegate: DataSearch(list: ListSearch));
@@ -63,7 +79,7 @@ class _PatientUiState extends State<PatientUi> {
         body: ListView(
           children: <Widget>[
             Container(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.only(bottom: 20),
                 height: 250.0,
                 width: double.infinity,
                 child: Carousel(
@@ -100,14 +116,15 @@ class _PatientUiState extends State<PatientUi> {
 
             //Strart
             Container(
-              padding: EdgeInsets.all(20),
-              child: Text(
+              padding: const EdgeInsets.all(20),
+              child: const Text(
                 "Calories",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: FitnessAppTheme.white,
                 borderRadius: const BorderRadius.only(
@@ -128,16 +145,17 @@ class _PatientUiState extends State<PatientUi> {
 
             //Start Meals
             Container(
-              padding: EdgeInsets.all(20),
-              child: Text(
+              padding: const EdgeInsets.all(20),
+              child: const Text(
                 "Meals Today",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             //Start Meals Container
             Container(
               height: 160,
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -156,7 +174,7 @@ class _PatientUiState extends State<PatientUi> {
                         "lib/assets/fitness_app/breakfast.png",
                       ),
                       subtitle: Container(
-                          child: Text(
+                          child: const Text(
                         "BreakFast",
                         style: TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
@@ -166,7 +184,7 @@ class _PatientUiState extends State<PatientUi> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BreakFastss()));
+                                builder: (context) => const BreakFastss()));
                       },
                     ),
                   ),
@@ -185,14 +203,16 @@ class _PatientUiState extends State<PatientUi> {
                         "lib/assets/fitness_app/lunch.png",
                       ),
                       subtitle: Container(
-                          child: Text(
+                          child: const Text(
                         "Lunch",
                         style: TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Lunch()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Lunch()));
                       },
                     ),
                   ),
@@ -211,14 +231,16 @@ class _PatientUiState extends State<PatientUi> {
                         "lib/assets/fitness_app/snack.png",
                       ),
                       subtitle: Container(
-                          child: Text(
+                          child: const Text(
                         "Snack",
                         style: TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Snacks()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Snacks()));
                       },
                     ),
                   ),
@@ -237,14 +259,16 @@ class _PatientUiState extends State<PatientUi> {
                         "lib/assets/fitness_app/dinner.png",
                       ),
                       subtitle: Container(
-                          child: Text(
+                          child: const Text(
                         "Dinner",
                         style: TextStyle(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       )),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Dinner()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Dinner()));
                       },
                     ),
                   )
@@ -254,14 +278,15 @@ class _PatientUiState extends State<PatientUi> {
             //End Meals Container
 
             Container(
-              padding: EdgeInsets.all(20),
-              child: Text(
+              padding: const EdgeInsets.all(20),
+              child: const Text(
                 "Water",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                 color: FitnessAppTheme.white,
                 borderRadius: const BorderRadius.only(
@@ -288,6 +313,8 @@ class _PatientUiState extends State<PatientUi> {
 
 class DataSearch extends SearchDelegate<String> {
   List<dynamic> list;
+
+  var country_pref;
   DataSearch({required this.list});
 
   Future getSearchData() async {
@@ -307,7 +334,7 @@ class DataSearch extends SearchDelegate<String> {
         onPressed: () {
           query = "";
         },
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
       )
     ];
   }
@@ -318,7 +345,7 @@ class DataSearch extends SearchDelegate<String> {
       onPressed: () {
         close(context, "");
       },
-      icon: Icon(Icons.arrow_back_sharp),
+      icon: const Icon(Icons.arrow_back_sharp),
     );
   }
 
@@ -332,6 +359,7 @@ class DataSearch extends SearchDelegate<String> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) {
                   return mealsList(
+                      country: country_pref,
                       Id: snapshot.data[i]['Id']!,
                       Mealname: snapshot.data[i]['Mealname']!,
                       Mealtype: snapshot.data[i]['Mealtype']!,
@@ -340,7 +368,7 @@ class DataSearch extends SearchDelegate<String> {
                       Description: snapshot.data[i]['Description']!);
                 });
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         });
   }
 
@@ -352,7 +380,7 @@ class DataSearch extends SearchDelegate<String> {
         itemCount: searchList.length,
         itemBuilder: (context, i) {
           return ListTile(
-            leading: Icon(Icons.fastfood),
+            leading: const Icon(Icons.ramen_dining_rounded),
             title: Text(searchList[i]),
             onTap: () {
               query = searchList[i];

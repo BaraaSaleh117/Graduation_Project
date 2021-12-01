@@ -3,6 +3,8 @@ import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 
 class mealsList extends StatelessWidget {
+  var caloris;
+  late final String country;
   late final String Id;
   late final String Mealname;
   late final String Mealtype;
@@ -12,6 +14,7 @@ class mealsList extends StatelessWidget {
 
   mealsList(
       {required this.Id,
+      required this.country,
       required this.Mealname,
       required this.Mealtype,
       required this.Mealtime,

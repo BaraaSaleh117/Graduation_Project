@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/ui/doctorlogin.dart';
 import 'package:graduation_projectflutter/ui/patientlogin.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,7 +12,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var country;
   var _currentIndex = 0;
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    country = preferences.getString("country");
+    print(country);
+  }
+
+  @override
+  void initState() {
+    getPref();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

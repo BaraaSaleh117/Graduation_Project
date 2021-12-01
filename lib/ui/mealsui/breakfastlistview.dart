@@ -3,6 +3,7 @@ import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BreakFastss extends StatefulWidget {
   const BreakFastss({Key? key}) : super(key: key);
@@ -13,6 +14,23 @@ class BreakFastss extends StatefulWidget {
 
 class _BreakFastssState extends State<BreakFastss> {
   var ListSearch = [];
+  var country_pref;
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      country_pref = preferences.getString("country");
+    });
+
+    print(country_pref);
+  }
+
+  @override
+  void initState() {
+    //getPref();
+    getData();
+    super.initState();
+  }
+
   Future getData() async {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
@@ -22,12 +40,6 @@ class _BreakFastssState extends State<BreakFastss> {
     for (int i = 0; i < responceBody.length; i++) {
       ListSearch.add(responceBody[i]['Mealname']);
     }
-  }
-
-  @override
-  void initState() {
-    getData();
-    super.initState();
   }
 
   Future getMeals() async {
@@ -67,6 +79,7 @@ class _BreakFastssState extends State<BreakFastss> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) {
                   return mealsList(
+                      country: country_pref,
                       Id: snapshot.data[i]['Id']!,
                       Mealname: snapshot.data[i]['Mealname']!,
                       Mealtype: snapshot.data[i]['Mealtype']!,
