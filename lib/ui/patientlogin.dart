@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
 import 'package:graduation_projectflutter/ui/questions.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
@@ -13,14 +14,6 @@ class PatientLogin extends StatefulWidget {
 class _PatientLoginState extends State<PatientLogin> {
   @override
   Widget build(BuildContext context) {
-    final loading = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const <Widget>[
-        CircularProgressIndicator(),
-        Text(" Login ... Please wait")
-      ],
-    );
-
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -47,28 +40,22 @@ class _PatientLoginState extends State<PatientLogin> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          centerTitle: true,
           title: const Text(
             'Patient Login',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color: Colors.teal,
             ),
           ),
-          backgroundColor: Colors.white,
         ),
         body: SingleChildScrollView(
           child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("lib/assets/healthy.jpg"),
-                  fit: BoxFit.fill),
-            ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             padding: const EdgeInsets.all(40.0),
             child: Form(
-              //  key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -88,6 +75,7 @@ class _PatientLoginState extends State<PatientLogin> {
                   ),
                   TextFormField(
                     autofocus: false,
+
                     //  validator: validateEmail,
                     // onSaved: (value) => _userName = value!,
                     decoration:
@@ -126,7 +114,7 @@ class _PatientLoginState extends State<PatientLogin> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => qusetions()));
                     },
-                    color: Colors.white,
+                    color: Colors.black.withOpacity(0.4),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -134,9 +122,9 @@ class _PatientLoginState extends State<PatientLogin> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 19,
-                          color: Colors.teal),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 20,
+                          color: Colors.white),
                     ),
                   ),
                   forgotLabel
