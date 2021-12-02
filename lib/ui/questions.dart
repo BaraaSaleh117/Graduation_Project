@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/components/mydrawer.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/resolution_list.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class qusetions extends StatefulWidget {
   const qusetions({Key? key}) : super(key: key);
@@ -40,13 +43,42 @@ TextEditingController Drugs = TextEditingController();
 TextEditingController ChronicDiseases = TextEditingController();
 
 class _qusetionsState extends State<qusetions> {
+  var username;
+  bool isSignIn = false;
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    username = preferences.getString("username");
+    if (username != null) {
+      setState(() {
+        username = preferences.getString("username");
+        isSignIn = true;
+      });
+    }
+    print(username);
+  }
+
+  @override
+  initState() {
+    getPref();
+    super.initState();
+  }
+
+  saveqPref(
+      String Height, String Age, String Drugs, String ChronicDiseases) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("Height", Height);
+    preferences.setString("Age", Age);
+    preferences.setString("Drugs", Drugs);
+    preferences.setString("ChronicDiseases", ChronicDiseases);
+    print(preferences.getString("Height"));
+    print(preferences.getString("Age"));
+    print(preferences.getString("Drugs"));
+    print(preferences.getString("ChronicDiseases"));
+  }
+
   @override
   Widget build(BuildContext context) {
-    _height.text = resolution.height;
-    _age.text = resolution.age;
-    Drugs.text = resolution.Drugs;
-    ChronicDiseases.text = resolution.ChronicDiseases;
-
     return MaterialApp(
       title: '',
       theme: ThemeData(
@@ -54,6 +86,12 @@ class _qusetionsState extends State<qusetions> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
+        drawer: MyDrawer(),
+        appBar: AppBar(
+          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          centerTitle: true,
+          title: Text("Questionnaire Page"),
+        ),
         body: SingleChildScrollView(
           child: Container(
             decoration: const BoxDecoration(
@@ -65,8 +103,27 @@ class _qusetionsState extends State<qusetions> {
             padding: const EdgeInsets.only(top: 50.0),
             child: Form(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  isSignIn
+                      ? Text(
+                          "Welcome " + username,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 29,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                    color: Colors.red.shade300,
+                                    blurRadius: 7.0,
+                                    offset: Offset(2.0, 4.0))
+                              ]),
+                          textAlign: TextAlign.center,
+                        )
+                      : Text(""),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -161,12 +218,15 @@ class _qusetionsState extends State<qusetions> {
                     minWidth: double.infinity,
                     height: 40,
                     onPressed: () {
+                      saveqPref(_height.text, _age.text, Drugs.text,
+                          ChronicDiseases.text);
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => FoodListChosen()));
                     },
-                    color: Colors.teal,
+                    color: Colors.black.withOpacity(0.4),
                     elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/util/permissions.dart';
 import 'package:xiaomi_scale/src/mi_scale.dart';
 import 'package:xiaomi_scale/src/model/mi_scale_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RawDataPane extends StatefulWidget {
   @override
@@ -12,6 +13,29 @@ class RawDataPane extends StatefulWidget {
 }
 
 class _RawDataPaneState extends State<RawDataPane> {
+  savePref(String weight) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("weight", weight);
+
+    print(preferences.getString("weight"));
+  }
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var weight = preferences.getString("weight");
+    if (weight != null) {
+      print(preferences.getString("weight"));
+
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
+  }
+
+  @override
+  void initState() {
+    getPref();
+    super.initState();
+  }
+
   StreamSubscription? _dataSubscription;
   List<MiScaleData> scaleData = [];
   final _scale = MiScale.instance;
@@ -87,16 +111,39 @@ class _RawDataPaneState extends State<RawDataPane> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        backgroundColor: Colors.teal,
+                        backgroundColor: Colors.amber.withOpacity(0.4),
                         // Retrieve the text the that user has entered by using the
                         // TextEditingController.
-                        content: Text("your Weight is " +
-                            getweight() +
-                            " Kg " +
-                            "\n" +
-                            "\n" +
-                            "last weighing in : " +
-                            Date()),
+                        content: Container(
+                          height: 100,
+                          width: 200,
+                          child: ListView(
+                            children: <Widget>[
+                              ListTile(
+                                title: Text(
+                                    "your Weight is " + getweight() + " Kg "),
+                                onTap: () {
+                                  savePref(getweight());
+                                },
+                              ),
+                              ListTile(
+                                title: Text("last weighing in : " + Date()),
+                                onTap: () {
+                                  savePref(
+                                      getweight() + "" + "Date :" + Date());
+                                },
+                              ),
+                            ],
+                          ),
+
+                          // Text("your Weight is " +
+                          //   getweight() +
+                          //   " Kg " +
+                          //   "\n" +
+                          //   "\n" +
+                          //   "last weighing in : " +
+                          //   Date()),
+                        ),
                       );
                     },
                   );

@@ -4,6 +4,8 @@ import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 
 class mealsList extends StatelessWidget {
   var caloris;
+  bool flag = false;
+
   late final String country;
   late final String Id;
   late final String Mealname;
@@ -11,6 +13,7 @@ class mealsList extends StatelessWidget {
   late final String Mealtime;
   late final String Calories;
   late final String Description;
+  var intCalories;
 
   mealsList(
       {required this.Id,
@@ -20,6 +23,7 @@ class mealsList extends StatelessWidget {
       required this.Mealtime,
       required this.Calories,
       required this.Description});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -35,7 +39,15 @@ class mealsList extends StatelessWidget {
                   "lib/assets/BreakFastsPic/5.jpg",
                   fit: BoxFit.fill,
                 ),
-              ),
+              )
+              // , Expanded(
+              //     flex: 1,
+              //     child: Image.asset(
+              //       "lib/assets/BreakFastsPic/6.jpg",
+              //       fit: BoxFit.fill,
+              //     ),
+              //   ),
+              ,
               Expanded(
                 flex: 2,
                 child: Container(

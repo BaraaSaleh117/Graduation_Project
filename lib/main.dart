@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/home.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
 import 'package:graduation_projectflutter/ui/choosecountry.dart';
+import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: Background(),
+      home: Home(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

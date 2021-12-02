@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/doctorregistration.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
 
@@ -46,22 +47,19 @@ class _DoctorLoginState extends State<DoctorLogin> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          centerTitle: true,
           title: const Text(
             'Doctor Login',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
-              color: Colors.teal,
+              color: Colors.white,
             ),
           ),
-          backgroundColor: Colors.white,
         ),
         body: SingleChildScrollView(
           child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("lib/assets/dd.png"), fit: BoxFit.fill),
-            ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             padding: const EdgeInsets.all(40.0),
@@ -125,7 +123,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                       // Navigator.push(context, MaterialPageRoute(
                       //     builder: (context) => DropDownDemo()));
                     },
-                    color: Colors.white,
+                    color: Colors.black.withOpacity(0.4),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -133,9 +131,9 @@ class _DoctorLoginState extends State<DoctorLogin> {
                     child: const Text(
                       "Login",
                       style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w800,
                           fontSize: 19,
-                          color: Colors.teal),
+                          color: Colors.white),
                     ),
                   ),
                   forgotLabel

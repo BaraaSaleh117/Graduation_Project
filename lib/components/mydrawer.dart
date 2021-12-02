@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
+  const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  var username;
+  bool isSignIn = false;
+
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    username = preferences.getString("username");
+    if (username != null) {
+      setState(() {
+        username = preferences.getString("username");
+        isSignIn = true;
+      });
+    }
+    print(username);
+  }
+
+  @override
+  initState() {
+    getPref();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(
-              "Baraa Saleh",
-              style: TextStyle(color: Colors.black),
-            ),
+            accountName: isSignIn
+                ? Text(
+                    username,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  )
+                : Text(""),
             accountEmail: Text(
-              "BaraaSaleh@hotmai.com",
+              "",
               style: TextStyle(color: Colors.black),
             ),
             currentAccountPicture: CircleAvatar(
@@ -37,9 +68,7 @@ class MyDrawer extends StatelessWidget {
               color: Colors.teal,
               size: 35,
             ),
-            onTap: () {
-              Navigator.of(context).pushNamed("PatientsUi");
-            },
+            onTap: () {},
           ),
           ListTile(
             title: Text(

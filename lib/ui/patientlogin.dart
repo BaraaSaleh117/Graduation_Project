@@ -3,6 +3,7 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
 import 'package:graduation_projectflutter/ui/questions.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientLogin extends StatefulWidget {
   const PatientLogin({Key? key}) : super(key: key);
@@ -12,6 +13,17 @@ class PatientLogin extends StatefulWidget {
 }
 
 class _PatientLoginState extends State<PatientLogin> {
+  TextEditingController username = new TextEditingController();
+  TextEditingController Password = new TextEditingController();
+
+  savePref(String username) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("username", username);
+    //preferences.setString("email", email);
+    print(preferences.getString("username"));
+    //print(preferences.getString("email"));
+  }
+
   @override
   Widget build(BuildContext context) {
     final forgotLabel = Row(
@@ -63,7 +75,7 @@ class _PatientLoginState extends State<PatientLogin> {
                     height: 15.0,
                   ),
                   const Text(
-                    "Email",
+                    "Uesrname",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
@@ -75,11 +87,12 @@ class _PatientLoginState extends State<PatientLogin> {
                   ),
                   TextFormField(
                     autofocus: false,
+                    controller: username,
 
                     //  validator: validateEmail,
                     // onSaved: (value) => _userName = value!,
                     decoration:
-                        buildInputDecoration('Enter Email', Icons.email),
+                        buildInputDecoration('Enter Uesrname', Icons.email),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -111,6 +124,10 @@ class _PatientLoginState extends State<PatientLogin> {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
+                      if (username != null) {
+                        savePref(username.text);
+                      }
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => qusetions()));
                     },

@@ -26,15 +26,32 @@ class PatientUi extends StatefulWidget {
 class _PatientUiState extends State<PatientUi> {
   var ListSearch = [];
   // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
-  var country_pref;
+  var weight;
+  var Height;
+  var Age;
+  var Drugs;
+  var ChronicDiseases;
+
+  var Weight;
 
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      country_pref = preferences.getString("country");
+      weight = preferences.getString("weight");
     });
+    print(weight + "//////////////////");
+    return weight.toString();
+  }
 
-    print(country_pref);
+  getqPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      Height = preferences.getString("Height");
+      Age = preferences.getString("Age");
+      Drugs = preferences.getString("Drugs");
+      ChronicDiseases = preferences.getString("ChronicDiseases");
+    });
+    print(Height + Age + Drugs + ChronicDiseases);
   }
 
   Future getData() async {
@@ -51,11 +68,18 @@ class _PatientUiState extends State<PatientUi> {
   @override
   void initState() {
     getData();
+    getPref();
+    getqPref();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (weight != null) {
+      Weight = weight;
+    } else {
+      Weight = "";
+    }
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -124,24 +148,34 @@ class _PatientUiState extends State<PatientUi> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: FitnessAppTheme.white,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    bottomLeft: const Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
-                    topRight: const Radius.circular(60.0)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: FitnessAppTheme.grey.withOpacity(0.7),
-                      offset: const Offset(1.1, 15.1),
-                      blurRadius: 10.0),
-                ],
-              ),
-              height: 170,
-              width: double.infinity,
-            ),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: const Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                      topRight: const Radius.circular(60.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: FitnessAppTheme.grey.withOpacity(0.7),
+                        offset: const Offset(1.1, 15.1),
+                        blurRadius: 10.0),
+                  ],
+                ),
+                height: 170,
+                width: double.infinity,
+                child: ListView(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        Height + Age + Drugs + ChronicDiseases,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      onTap: () {},
+                    ),
+                  ],
+                )),
 
             //Start Meals
             Container(
