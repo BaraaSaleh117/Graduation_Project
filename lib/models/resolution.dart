@@ -4,7 +4,7 @@ class PatientResolution {
   late String ChronicDiseases;
   late String PatientRID;
 
-  PatientResolution(
+  PatientResolution(Type textEditingController,
       {required this.id,
       required this.height,
       required this.age,
