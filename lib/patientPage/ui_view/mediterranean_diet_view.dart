@@ -281,7 +281,7 @@ class MediterranesnDietView extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            '${(100 * animation!.value).toInt()}',
+                                            '${(100 * 1).toInt()}',
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
                                               fontFamily:
@@ -313,15 +313,11 @@ class MediterranesnDietView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: CustomPaint(
-                                      painter: CurvePainter(
-                                          colors: [
-                                            FitnessAppTheme.nearlyDarkBlue,
-                                            HexColor("#8A98E8"),
-                                            HexColor("#8A98E8")
-                                          ],
-                                          angle: 100 +
-                                              (360 - 140) *
-                                                  (1.0 - animation!.value)),
+                                      painter: CurvePainter(colors: [
+                                        FitnessAppTheme.nearlyDarkBlue,
+                                        HexColor("#8A98E8"),
+                                        HexColor("#8A98E8")
+                                      ], angle: 100 + (360 - 140) * (1.0 - 1)),
                                       child: const SizedBox(
                                         width: 108,
                                         height: 108,

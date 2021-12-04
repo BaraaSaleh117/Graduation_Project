@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/home.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
+import 'package:graduation_projectflutter/patientPage/my_diary/my_diary_screen.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+
 import 'package:graduation_projectflutter/ui/choosecountry.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
@@ -14,7 +16,6 @@ import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
-import 'package:graduation_projectflutter/ui/resolution_list.dart';
 import 'package:http/http.dart' as http;
 import 'fetch_api/fetchapi.dart';
 

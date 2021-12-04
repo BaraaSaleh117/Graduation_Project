@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ResolutionA extends StatefulWidget {
   const ResolutionA({Key? key}) : super(key: key);
@@ -8,7 +9,15 @@ class ResolutionA extends StatefulWidget {
   _ResolutionAState createState() => _ResolutionAState();
 }
 
+TextEditingController Suger = TextEditingController();
+
 class _ResolutionAState extends State<ResolutionA> {
+  savePrefSuger(String Sugerb) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("Sugerb", Sugerb);
+    print(preferences.getString("Sugerb"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,6 +71,7 @@ class _ResolutionAState extends State<ResolutionA> {
                     ),
                   ),
                   TextFormField(
+                    controller: Suger,
                     textAlign: TextAlign.center,
                     autofocus: false,
                   ),
@@ -90,6 +100,7 @@ class _ResolutionAState extends State<ResolutionA> {
                     minWidth: double.infinity,
                     height: 40,
                     onPressed: () {
+                      savePrefSuger(Suger.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

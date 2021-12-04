@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/scale/scaleapp.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConnectScale extends StatefulWidget {
   const ConnectScale({Key? key}) : super(key: key);
@@ -11,6 +12,14 @@ class ConnectScale extends StatefulWidget {
 }
 
 class _ConnectScaleState extends State<ConnectScale> {
+  TextEditingController weightc = TextEditingController();
+
+  savePrefWeight(String weightt) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("weightt", weightt);
+    print(preferences.getString("weightt"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,6 +60,7 @@ class _ConnectScaleState extends State<ConnectScale> {
                     ),
                   ),
                   TextFormField(
+                    controller: weightc,
                     textAlign: TextAlign.center,
                     autofocus: false,
                   ),
@@ -122,6 +132,10 @@ class _ConnectScaleState extends State<ConnectScale> {
                     minWidth: double.infinity,
                     height: 40,
                     onPressed: () {
+                      if (weightc.text != null || weightc.text != "") {
+                        savePrefWeight(weightc.text);
+                      }
+
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => PatientUi()));
                     },

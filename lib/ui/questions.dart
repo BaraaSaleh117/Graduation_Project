@@ -7,7 +7,7 @@ import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
-import 'package:graduation_projectflutter/ui/resolution_list.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

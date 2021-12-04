@@ -2,7 +2,7 @@
 require('connection.php');
 
 $mealtype = $_POST['mealtype'] ;
-$makeQuery =" SELECT * FROM meals WHERE Mealtype  = ? AND Calories > 50 ";
+$makeQuery =" SELECT * FROM meals WHERE Mealtype  = ? AND Calories <150 ";
 $stamement =$connection->prepare($makeQuery);
 $stamement->execute(array($mealtype));
 

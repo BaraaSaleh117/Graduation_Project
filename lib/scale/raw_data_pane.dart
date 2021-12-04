@@ -13,26 +13,26 @@ class RawDataPane extends StatefulWidget {
 }
 
 class _RawDataPaneState extends State<RawDataPane> {
-  savePref(String weight) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("weight", weight);
+  // savePref(String weight) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   preferences.setString("weight", weight);
 
-    print(preferences.getString("weight"));
-  }
+  //   print(preferences.getString("weight"));
+  // }
 
-  getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var weight = preferences.getString("weight");
-    if (weight != null) {
-      print(preferences.getString("weight"));
+  // getPref() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   var weight = preferences.getString("weight");
+  //   if (weight != null) {
+  //     print(preferences.getString("weight"));
 
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-    }
-  }
+  //     // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+  //   }
+  // }
 
   @override
   void initState() {
-    getPref();
+    // getPref();
     super.initState();
   }
 
@@ -123,14 +123,14 @@ class _RawDataPaneState extends State<RawDataPane> {
                                 title: Text(
                                     "your Weight is " + getweight() + " Kg "),
                                 onTap: () {
-                                  savePref(getweight());
+                                  //  savePref(getweight());
                                 },
                               ),
                               ListTile(
                                 title: Text("last weighing in : " + Date()),
                                 onTap: () {
-                                  savePref(
-                                      getweight() + "" + "Date :" + Date());
+                                  // savePref(
+                                  //    getweight() + "" + "Date :" + Date());
                                 },
                               ),
                             ],
