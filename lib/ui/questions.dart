@@ -143,8 +143,10 @@ class _qusetionsState extends State<qusetions> {
                     height: 5.0,
                   ),
                   TextField(
-                    controller: _height,
-                  ),
+                      controller: _height,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 30.0,
                   ),
@@ -160,8 +162,10 @@ class _qusetionsState extends State<qusetions> {
                     height: 5.0,
                   ),
                   TextField(
-                    controller: _age,
-                  ),
+                      controller: _age,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -175,8 +179,10 @@ class _qusetionsState extends State<qusetions> {
                     textAlign: TextAlign.center,
                   ),
                   TextField(
-                    controller: ChronicDiseases,
-                  ),
+                      controller: ChronicDiseases,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -192,10 +198,12 @@ class _qusetionsState extends State<qusetions> {
                     height: 5.0,
                   ),
                   TextField(
-                    controller: Drugs,
-                  ),
+                      controller: Drugs,
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(
-                    height: 20.0,
+                    height: 10.0,
                   ),
                   const SizedBox(
                     height: 20.0,

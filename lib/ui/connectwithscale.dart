@@ -74,6 +74,7 @@ class _ConnectScaleState extends State<ConnectScale> {
                   ),
                   TextFormField(
                     textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     autofocus: false,
                   ),
                   const SizedBox(

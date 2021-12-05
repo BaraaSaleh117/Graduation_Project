@@ -73,6 +73,7 @@ class _ResolutionAState extends State<ResolutionA> {
                   TextFormField(
                     controller: Suger,
                     textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     autofocus: false,
                   ),
                   const SizedBox(
