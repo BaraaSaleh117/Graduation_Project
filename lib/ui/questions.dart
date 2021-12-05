@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
+import 'package:graduation_projectflutter/ui/detcalview.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class qusetions extends StatefulWidget {
@@ -16,25 +16,6 @@ class qusetions extends StatefulWidget {
 
   @override
   _qusetionsState createState() => _qusetionsState();
-}
-
-PatientResolution resolution = new PatientResolution(
-    id: "",
-    height: "height",
-    age: "age",
-    Drugs: "Drugs",
-    ChronicDiseases: "ChronicDiseases",
-    PatientRID: "PatientRID");
-
-String theUrl =
-    'http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getResolution.php';
-
-Future<bool> PostResolution(PatientResolution item) async {
-  var myResolution = item.toJson();
-  var ResolutionBody = json.encode(myResolution);
-  var res = await http.post(Uri.parse(Uri.encodeFull(theUrl)),
-      headers: {"Accept": "application/json"}, body: ResolutionBody);
-  return Future.value(res.statusCode == 200 ? true : false);
 }
 
 TextEditingController _height = TextEditingController();
@@ -94,13 +75,9 @@ class _qusetionsState extends State<qusetions> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("lib/assets/Q.jpg"), fit: BoxFit.cover),
-            ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 20.0),
             child: Form(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +91,7 @@ class _qusetionsState extends State<qusetions> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 29,
-                              color: Colors.white,
+                              color: Colors.black,
                               shadows: [
                                 Shadow(
                                     color: Colors.red.shade300,
@@ -132,7 +109,7 @@ class _qusetionsState extends State<qusetions> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 29,
-                        color: Colors.white,
+                        color: Colors.black,
                         shadows: [
                           Shadow(
                               color: Colors.teal,
@@ -142,7 +119,16 @@ class _qusetionsState extends State<qusetions> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 50.0,
+                    height: 10.0,
+                    width: 30,
+                  ),
+                  Container(
+                    color: HexColor('#5C5EDD').withOpacity(0.5),
+                    width: double.infinity,
+                    height: 5,
+                  ),
+                  const SizedBox(
+                    height: 30.0,
                     width: 30,
                   ),
                   const Text(
@@ -150,7 +136,7 @@ class _qusetionsState extends State<qusetions> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(
@@ -158,14 +144,16 @@ class _qusetionsState extends State<qusetions> {
                   ),
                   TextField(
                     controller: _height,
-                    onChanged: (value) => updateheight(),
+                  ),
+                  const SizedBox(
+                    height: 30.0,
                   ),
                   const Text(
                     "Enter your age",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(
@@ -173,19 +161,21 @@ class _qusetionsState extends State<qusetions> {
                   ),
                   TextField(
                     controller: _age,
-                    onChanged: (value) => updateage(),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
                   ),
                   const Text(
                     "If you have any chronic diseases, please write it here ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   TextField(
                     controller: ChronicDiseases,
-                    onChanged: (value) => updatechronicdiseases(),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -195,7 +185,7 @@ class _qusetionsState extends State<qusetions> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(
@@ -203,7 +193,6 @@ class _qusetionsState extends State<qusetions> {
                   ),
                   TextField(
                     controller: Drugs,
-                    onChanged: (value) => updatedrugs(),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -211,32 +200,31 @@ class _qusetionsState extends State<qusetions> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 40,
-                    onPressed: () {
-                      saveqPref(_height.text, _age.text, Drugs.text,
-                          ChronicDiseases.text);
+                  Container(
+                    child: MaterialButton(
+                      minWidth: double.infinity,
+                      height: 40,
+                      onPressed: () {
+                        saveqPref(_height.text, _age.text, Drugs.text,
+                            ChronicDiseases.text);
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FoodListChosen()));
-                    },
-                    color: Colors.black.withOpacity(0.4),
-                    elevation: 20,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Text(
-                      "Next",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                          color: Colors.white),
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetCaloView()));
+                      },
+                      color: Colors.black.withOpacity(0.4),
+                      elevation: 20,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Text(
+                        "Next",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ],
@@ -246,26 +234,5 @@ class _qusetionsState extends State<qusetions> {
         ),
       ),
     );
-  }
-
-  void saveResolution() async {
-    var saveResponse = await PostResolution(resolution);
-    saveResponse == true ? Navigator.pop(context, true) : null;
-  }
-
-  void updateheight() {
-    resolution.height = _height.text;
-  }
-
-  void updateage() {
-    resolution.age = _age.text;
-  }
-
-  void updatechronicdiseases() {
-    resolution.ChronicDiseases = ChronicDiseases.text;
-  }
-
-  void updatedrugs() {
-    resolution.Drugs = Drugs.text;
   }
 }

@@ -8,6 +8,7 @@ import 'package:graduation_projectflutter/ui/background.dart';
 
 import 'package:graduation_projectflutter/ui/choosecountry.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
+import 'package:graduation_projectflutter/ui/detcalview.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
@@ -16,6 +17,7 @@ import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
+import 'package:graduation_projectflutter/ui/questions.dart';
 import 'package:http/http.dart' as http;
 import 'fetch_api/fetchapi.dart';
 
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: Home(),
+      home: DetCaloView(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

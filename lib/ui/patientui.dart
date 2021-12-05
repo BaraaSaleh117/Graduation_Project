@@ -1,6 +1,3 @@
-// ignore: file_names
-// ignore_for_file: unnecessary_const, avoid_unnecessary_containers, import_of_legacy_library_into_null_safe
-
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
@@ -32,8 +29,57 @@ class _PatientUiState extends State<PatientUi> {
   var Drugs;
   var ChronicDiseases;
   var Sugerb;
-
   var Weight;
+  var Active;
+
+  late double _bmi = 0.0;
+  late String comments = "";
+  bool ismale = true;
+  double POFat = 0.0;
+  var now = DateTime.now();
+
+  getPHPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      Active = preferences.getString("Active");
+    });
+    print("Your are : " + Active);
+  }
+
+  getBMI(weightt, Height) {
+    if (weightt != null && Height != null) {
+      double _weightOfUser = double.parse(weightt);
+      double _heightOfUser = double.parse(Height);
+      _bmi = _weightOfUser / ((_heightOfUser / 100) * (_heightOfUser / 100));
+
+      if (_bmi >= 18.5 && _bmi <= 25) {
+        comments = "Fit";
+      } else if (_bmi < 18.5) {
+        comments = "Underweighted";
+      } else if (_bmi > 25 && _bmi <= 30) {
+        comments = "Overweighted";
+      } else {
+        comments = "Obesed";
+      }
+    }
+    _bmi = double.parse(_bmi.toStringAsFixed(2));
+
+    print(_bmi);
+  }
+
+  getFat(_bmi, Age, ismale) {
+    if (Age != null) {
+      int age = int.parse(Age);
+
+      if (ismale) {
+        POFat = (((_bmi * 1.20) + (0.23 * age)) - 16.2);
+      } else if (!ismale) {
+        POFat = (((_bmi * 1.20) + (0.23 * age)) - 5.4);
+      }
+    }
+
+    POFat = double.parse(POFat.toStringAsFixed(2));
+  }
 
   getweightPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -76,14 +122,19 @@ class _PatientUiState extends State<PatientUi> {
   @override
   void initState() {
     getData();
-    getweightPref();
+
     getqPref();
     getSugerPref();
+    getPHPref();
+    getweightPref();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    getBMI(weightt, Height);
+    getFat(_bmi, Age, true);
+
     late AnimationController? animationController;
     late Animation<double>? animation;
     if (weightt != null) {
@@ -728,7 +779,7 @@ class _PatientUiState extends State<PatientUi> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 4, bottom: 3),
                                   child: Text(
-                                    Weight! + " ",
+                                    Weight != null ? Weight : "",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
@@ -770,7 +821,7 @@ class _PatientUiState extends State<PatientUi> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        'Today 8:26 AM',
+                                        '$now',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -827,7 +878,7 @@ class _PatientUiState extends State<PatientUi> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                Height,
+                                Height != null ? Height : "",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
@@ -854,11 +905,11 @@ class _PatientUiState extends State<PatientUi> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
                                 child: Text(
-                                  '20%',
+                                  '$POFat' + "%",
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     letterSpacing: -0.2,
                                     color: FitnessAppTheme.darkText,
                                   ),
@@ -891,34 +942,50 @@ class _PatientUiState extends State<PatientUi> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    '27.3 BMI',
+                                    "BMI",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: FitnessAppTheme.fontName,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      letterSpacing: 2,
+                                      color:
+                                          FitnessAppTheme.grey.withOpacity(0.5),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    '$_bmi',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       letterSpacing: -0.2,
                                       color: FitnessAppTheme.darkText,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 6),
-                                    child: Text(
-                                      'Overweight',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: FitnessAppTheme.fontName,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: FitnessAppTheme.grey
-                                            .withOpacity(0.5),
-                                      ),
+                                    padding: EdgeInsets.only(top: 6),
+                                    child: Container(
+                                      child: RichText(
+                                          text: TextSpan(children: <TextSpan>[
+                                        TextSpan(
+                                          text: comments,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            color: FitnessAppTheme.grey
+                                                .withOpacity(0.5),
+                                          ),
+                                        ),
+                                      ])),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 20),
                                     child: Text(
-                                      Age,
+                                      Age != null ? Age : "",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -930,7 +997,7 @@ class _PatientUiState extends State<PatientUi> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 6),
+                                    padding: const EdgeInsets.only(top: 8),
                                     child: Text(
                                       'Age',
                                       textAlign: TextAlign.center,
@@ -958,7 +1025,7 @@ class _PatientUiState extends State<PatientUi> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Text(
-                                    Sugerb,
+                                    Sugerb != null ? Sugerb : "",
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
