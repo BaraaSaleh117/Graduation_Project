@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
+import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
+import 'package:graduation_projectflutter/ui/resolution_a.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:http/http.dart' as http;
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -18,7 +22,11 @@ class DiabetesReg extends StatefulWidget {
   _DiabetesRegState createState() => _DiabetesRegState();
 }
 
+var Sugerb;
+late String Sucomments = "";
 var ListSearch = [];
+var date = DateTime.now();
+var lastcheck;
 List<SalesData> _chartData = [];
 Future getData() async {
   var url =
@@ -32,15 +40,40 @@ Future getData() async {
 }
 
 class _DiabetesRegState extends State<DiabetesReg> {
+  getSugerPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      Sugerb = preferences.getString("Sugerb");
+    });
+    print("Your blood sugar level is : " + Sugerb);
+  }
+
+  detSugerLevel(Sugerb) {
+    double Sugerv = double.parse(Sugerb);
+    if (Sugerv <= 90) {
+      Sucomments = "Low";
+    } else if (Sugerv > 90 && Sugerv <= 120) {
+      Sucomments = "Normal";
+    } else if (Sugerv > 120 && Sugerv <= 160) {
+      Sucomments = "High";
+    } else {
+      Sucomments = "Very dangerous";
+    }
+  }
+
   @override
   void initState() {
     getData();
+    getSugerPref();
+
     _chartData = getChartData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    lastcheck = (DateFormat('EEEE , h:mm a').format(date));
+    detSugerLevel(Sugerb);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -147,11 +180,443 @@ class _DiabetesRegState extends State<DiabetesReg> {
                 ))),
             Container(
                 padding: const EdgeInsets.all(20),
-                child: const Text("Blood Suger Levels",
+                child: const Text("Blood Sugar Status",
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
                         color: Colors.teal))),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      bottomLeft: const Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                      topRight: const Radius.circular(68.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: FitnessAppTheme.grey.withOpacity(0.2),
+                        offset: const Offset(1.1, 1.1),
+                        blurRadius: 10.0),
+                  ],
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 16, left: 16, right: 16),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8, right: 8, top: 4),
+                              child: Column(children: <Widget>[]),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 24, right: 24, top: 8, bottom: 16),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                const Text(
+                                  'Low ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: FitnessAppTheme.fontName,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    letterSpacing: -0.2,
+                                    color: FitnessAppTheme.darkText,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Container(
+                                    height: 4,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          HexColor('#87A0E5').withOpacity(0.2),
+                                      borderRadius: const BorderRadius.all(
+                                          const Radius.circular(4.0)),
+                                    ),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          width: ((80 / 1.2) * 1),
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors: [
+                                              Colors.amber,
+                                              Colors.amber.withOpacity(0.5),
+                                            ]),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(9.0)),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 6),
+                                  child: Text(
+                                    ' < 90 ' + 'mg/dL',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: FitnessAppTheme.fontName,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                      color:
+                                          FitnessAppTheme.grey.withOpacity(0.5),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    const Text(
+                                      'Normal',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        letterSpacing: -0.2,
+                                        color: FitnessAppTheme.darkText,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Container(
+                                        height: 4,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          color: HexColor('#F56E98')
+                                              .withOpacity(0.2),
+                                          borderRadius: const BorderRadius.all(
+                                              const Radius.circular(4.0)),
+                                        ),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                              width: ((135 / 2) * 1),
+                                              height: 4,
+                                              decoration: BoxDecoration(
+                                                gradient:
+                                                    LinearGradient(colors: [
+                                                  Colors.green,
+                                                  Colors.green,
+                                                ]),
+                                                borderRadius: const BorderRadius
+                                                        .all(
+                                                    const Radius.circular(4.0)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        '90 - 120 mg/dL',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: FitnessAppTheme.fontName,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                          color: FitnessAppTheme.grey
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    const Text(
+                                      'High',
+                                      style: const TextStyle(
+                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        letterSpacing: -0.2,
+                                        color: FitnessAppTheme.darkText,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 0, top: 4),
+                                      child: Container(
+                                        height: 4,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          color: HexColor('#F1B440')
+                                              .withOpacity(0.2),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(4.0)),
+                                        ),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                              width: ((160 / 2.5) * 1),
+                                              height: 4,
+                                              decoration: BoxDecoration(
+                                                gradient:
+                                                    LinearGradient(colors: [
+                                                  Colors.red.withOpacity(0.5),
+                                                  Colors.red.withOpacity(0.5),
+                                                ]),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(4.0)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        '120 - 160 mg/dL',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: FitnessAppTheme.fontName,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                          color: FitnessAppTheme.grey
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    const Text(
+                                      'Dangerous !',
+                                      style: const TextStyle(
+                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        letterSpacing: -0.2,
+                                        color: FitnessAppTheme.darkText,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 0, top: 4),
+                                      child: Container(
+                                        height: 4,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          color: HexColor('#F1B440')
+                                              .withOpacity(0.2),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(4.0)),
+                                        ),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                              width: ((160 / 2.5) * 1),
+                                              height: 4,
+                                              decoration: BoxDecoration(
+                                                gradient:
+                                                    LinearGradient(colors: [
+                                                  Colors.red.shade900,
+                                                  Colors.red.shade900,
+                                                ]),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(4.0)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 6),
+                                      child: Text(
+                                        ' > 160  mg/dL',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: FitnessAppTheme.fontName,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                          color: FitnessAppTheme.grey
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6),
+                              child: Text(
+                                ' Your Last measurement was ',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                  color: FitnessAppTheme.nearlyBlack
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              Sugerb != null ? Sugerb : "",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontFamily: FitnessAppTheme.fontName,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                letterSpacing: -0.2,
+                                color: FitnessAppTheme.nearlyDarkBlue,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6),
+                              child: Text(
+                                lastcheck != null ? lastcheck : "",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                  color: FitnessAppTheme.nearlyBlack
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6),
+                              child: Text(
+                                "Your Status is : " + Sucomments,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 19,
+                                  color: FitnessAppTheme.nearlyBlack
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                )),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, left: 15),
+                    child: Text(
+                      'To do a new check  ',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: FitnessAppTheme.fontName,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 1, left: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: MaterialButton(
+                      minWidth: 40,
+                      height: 30,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResolutionA()));
+                      },
+                      color: HexColor('#5C5EDD').withOpacity(0.9),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Text(
+                        "Check ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]),
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),

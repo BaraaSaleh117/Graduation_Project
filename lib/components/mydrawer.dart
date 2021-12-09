@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/patientlogin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -88,7 +89,10 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.teal,
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DiabetesReg()));
+            },
           ),
           ListTile(
             title: Text(

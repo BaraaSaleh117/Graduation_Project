@@ -32,6 +32,7 @@ class _PatientUiState extends State<PatientUi> {
   var Sugerb;
   var Weight;
   var Active;
+  late String Sucomments;
 
   late double _bmi = 0.0;
   late String comments = "";
@@ -972,45 +973,6 @@ class _PatientUiState extends State<PatientUi> {
                                     padding: const EdgeInsets.only(top: 8),
                                     child: Text(
                                       'Age',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: FitnessAppTheme.fontName,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: FitnessAppTheme.nearlyBlack
-                                            .withOpacity(0.7),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    Sugerb != null ? Sugerb : "",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: FitnessAppTheme.fontName,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30,
-                                      letterSpacing: -0.2,
-                                      color: FitnessAppTheme.nearlyDarkBlue,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 6),
-                                    child: Text(
-                                      'Today s blood sugar ',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
