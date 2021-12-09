@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
 import 'package:graduation_projectflutter/ui/questions.dart';
@@ -15,6 +16,23 @@ class PatientLogin extends StatefulWidget {
 class _PatientLoginState extends State<PatientLogin> {
   TextEditingController username = new TextEditingController();
   TextEditingController Password = new TextEditingController();
+  GlobalKey<FormState> Formstate = new GlobalKey<FormState>();
+
+  signin() {
+    var formdata = Formstate.currentState;
+    if (formdata!.validate()) {
+      print("Valid");
+    } else {
+      print("Not Valid");
+    }
+  }
+
+  String validGloal(String val) {
+    if (val.isEmpty) {
+      return "feild can't be Empty";
+    }
+    return "Good";
+  }
 
   savePref(String username) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -32,7 +50,8 @@ class _PatientLoginState extends State<PatientLogin> {
         FlatButton(
           padding: const EdgeInsets.all(0.0),
           child: const Text("   Don't have an account?",
-              style: const TextStyle(fontWeight: FontWeight.w400)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.w400, color: Colors.white)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
@@ -40,7 +59,8 @@ class _PatientLoginState extends State<PatientLogin> {
         FlatButton(
           padding: const EdgeInsets.only(left: 0.0),
           child: const Text("Sign up",
-              style: TextStyle(fontWeight: FontWeight.w400)),
+              style:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.white)),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => PatientsRegister()));
@@ -51,23 +71,18 @@ class _PatientLoginState extends State<PatientLogin> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
-          centerTitle: true,
-          title: const Text(
-            'Patient Login',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
         body: SingleChildScrollView(
           child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("lib/assets/login_bg.png"),
+                  fit: BoxFit.fill),
+            ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             padding: const EdgeInsets.all(40.0),
             child: Form(
+              key: Formstate,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -78,8 +93,8 @@ class _PatientLoginState extends State<PatientLogin> {
                     "Uesrname",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Colors.black,
+                      fontSize: 19,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -88,8 +103,13 @@ class _PatientLoginState extends State<PatientLogin> {
                   TextFormField(
                     autofocus: false,
                     controller: username,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
 
-                    //  validator: validateEmail,
+                    //validator: validateusername,
                     // onSaved: (value) => _userName = value!,
                     decoration:
                         buildInputDecoration('Enter Uesrname', Icons.email),
@@ -101,8 +121,8 @@ class _PatientLoginState extends State<PatientLogin> {
                     "Password",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Colors.black,
+                      fontSize: 19,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(
@@ -111,9 +131,11 @@ class _PatientLoginState extends State<PatientLogin> {
                   TextFormField(
                     autofocus: false,
                     obscureText: true,
-                    validator: (value) =>
-                        value!.isEmpty ? "Please enter password" : null,
-                    // onSaved: (value) => _password = value!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                     decoration:
                         buildInputDecoration('Enter Password', Icons.lock),
                   ),
@@ -131,7 +153,7 @@ class _PatientLoginState extends State<PatientLogin> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => qusetions()));
                     },
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.white.withOpacity(0.4),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -141,7 +163,7 @@ class _PatientLoginState extends State<PatientLogin> {
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 20,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
                   ),
                   forgotLabel

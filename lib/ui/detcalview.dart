@@ -167,6 +167,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                                   "Maintain weight",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.green,
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),
@@ -194,6 +195,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                                   " Gain weight",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.teal,
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),
@@ -217,9 +219,10 @@ class _DetCaloViewState extends State<DetCaloView> {
                             subtitle: Container(
                                 padding: EdgeInsets.only(top: 30),
                                 child: Text(
-                                  "lose weight",
+                                  "Lose weight",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.amber,
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),

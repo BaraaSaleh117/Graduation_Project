@@ -15,7 +15,8 @@ class _BackgroundState extends State<Background> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("lib/assets/H.png"), fit: BoxFit.fill),
+              image: AssetImage("lib/assets/register_bg.png"),
+              fit: BoxFit.fill),
         ),
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
@@ -104,7 +105,7 @@ class _BackgroundState extends State<Background> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: const Text(
-                        "Let's Start ♥ ",
+                        "Let's Start  ",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,

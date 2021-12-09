@@ -4,19 +4,25 @@ import 'package:graduation_projectflutter/home.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/patientPage/my_diary/my_diary_screen.dart';
+import 'package:graduation_projectflutter/patientPage/training/training_screen.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
+import 'package:graduation_projectflutter/ui/calender.dart';
 
 import 'package:graduation_projectflutter/ui/choosecountry.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/detcalview.dart';
+import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
+import 'package:graduation_projectflutter/ui/line.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
+import 'package:graduation_projectflutter/ui/mealsui/mealst.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
+import 'package:graduation_projectflutter/ui/patientlogin.dart';
 import 'package:graduation_projectflutter/ui/questions.dart';
 import 'package:http/http.dart' as http;
 import 'fetch_api/fetchapi.dart';
@@ -34,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: qusetions(),
+      home: DiabetesReg(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

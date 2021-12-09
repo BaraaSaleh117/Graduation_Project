@@ -61,21 +61,12 @@ class _ConnectScaleState extends State<ConnectScale> {
                   ),
                   TextFormField(
                     controller: weightc,
-                    textAlign: TextAlign.center,
-                    autofocus: false,
-                  ),
-                  const Text(
-                    "And the last date you weighed",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextFormField(
-                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                     autofocus: false,
+                  ),
+                  const SizedBox(
+                    height: 50.0,
                   ),
                   const SizedBox(
                     height: 90.0,
@@ -84,7 +75,7 @@ class _ConnectScaleState extends State<ConnectScale> {
                     height: 50.0,
                   ),
                   const Text(
-                    " Or Easier for you Via Bluetooth from here",
+                    " Or you can enter it Via Bluetooth from here",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

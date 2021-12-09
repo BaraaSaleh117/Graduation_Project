@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/ui/patientUi.dart';
+import 'package:graduation_projectflutter/ui/patientlogin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -56,7 +58,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             title: Text(
-              "My Diry",
+              "Home",
               style: TextStyle(
                 color: Colors.teal,
                 fontSize: 17,
@@ -68,7 +70,10 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.teal,
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PatientUi()));
+            },
           ),
           ListTile(
             title: Text(
@@ -94,7 +99,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
             leading: Icon(
-              Icons.sync_problem_sharp,
+              Icons.fitness_center,
               color: Colors.teal,
               size: 35,
             ),
@@ -109,7 +114,7 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
             leading: Icon(
-              Icons.hdr_enhanced_select_sharp,
+              Icons.assignment,
               color: Colors.teal,
               size: 35,
             ),
@@ -151,7 +156,10 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.blueAccent,
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PatientLogin()));
+            },
           ),
         ],
       ),

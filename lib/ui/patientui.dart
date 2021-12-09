@@ -14,6 +14,7 @@ import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class PatientUi extends StatefulWidget {
   @override
@@ -36,7 +37,8 @@ class _PatientUiState extends State<PatientUi> {
   late String comments = "";
   bool ismale = true;
   double POFat = 0.0;
-  var now = DateTime.now();
+  var date = DateTime.now();
+  // String day = DateFormat('EEEE').format(date);
 
   getPHPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -63,8 +65,6 @@ class _PatientUiState extends State<PatientUi> {
       }
     }
     _bmi = double.parse(_bmi.toStringAsFixed(2));
-
-    print(_bmi);
   }
 
   getFat(_bmi, Age, ismale) {
@@ -108,6 +108,22 @@ class _PatientUiState extends State<PatientUi> {
     print(Height + Age + Drugs + ChronicDiseases);
   }
 
+  ///
+  ///
+  ///
+
+  DateTime toDateMonthYear(DateTime dateTime) {
+    DateTime date = DateTime(dateTime.year, dateTime.month, dateTime.day);
+    print(date);
+    return date;
+  }
+
+  int daysCount(DateTime first, DateTime last) =>
+      last.difference(first).inDays + 1;
+//
+  ///
+//////
+  ///
   Future getData() async {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
@@ -122,7 +138,7 @@ class _PatientUiState extends State<PatientUi> {
   @override
   void initState() {
     getData();
-
+    print(DateFormat('EEEE, d MMM, yyyy').format(date));
     getqPref();
     getSugerPref();
     getPHPref();
@@ -152,55 +168,10 @@ class _PatientUiState extends State<PatientUi> {
           centerTitle: true,
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
           elevation: 6,
-          actions: <Widget>[
-            IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  showSearch(
-                      context: context, delegate: DataSearch(list: ListSearch));
-                }),
-          ],
         ),
         drawer: MyDrawer(),
         body: ListView(
           children: <Widget>[
-            Container(
-                padding: const EdgeInsets.only(bottom: 20),
-                height: 250.0,
-                width: double.infinity,
-                child: Carousel(
-                  images: [
-                    Image.asset(
-                      "lib/assets/a1.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      "lib/assets/a2.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      "lib/assets/a3.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      "lib/assets/a4.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      "lib/assets/a6.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                      "lib/assets/a7.jpg",
-                      fit: BoxFit.fill,
-                    ),
-                  ],
-                  dotColor: Colors.amber,
-                  //dotBgColor: Colors.amber.withOpacity(0.5),
-                  //  showIndicator: false,
-                )),
-
-            //End Carousel
             Container(
               padding: const EdgeInsets.all(20),
               child: const Text(
@@ -821,7 +792,8 @@ class _PatientUiState extends State<PatientUi> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 4.0),
                                       child: Text(
-                                        '$now',
+                                        (DateFormat('EEEE , h:mm a')
+                                            .format(date)),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -1061,140 +1033,6 @@ class _PatientUiState extends State<PatientUi> {
               ),
             ),
 
-            //Start Meals
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: const Text(
-                "Meals Today",
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            //Start Meals Container
-            Container(
-              height: 160,
-              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      color: HexColor('#FA7D82').withOpacity(0.5),
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
-                    ),
-                    height: 120,
-                    width: 150,
-                    child: ListTile(
-                      title: Image.asset(
-                        "lib/assets/fitness_app/breakfast.png",
-                      ),
-                      subtitle: Container(
-                          child: const Text(
-                        "BreakFast",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      )),
-                      onTap: () {
-                        //  Navigator.of(context).pushNamed("BreakFast");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BreakFastss()));
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 120,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: HexColor('#5C5EDD').withOpacity(0.5),
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
-                    ),
-                    child: ListTile(
-                      title: Image.asset(
-                        "lib/assets/fitness_app/lunch.png",
-                      ),
-                      subtitle: Container(
-                          child: const Text(
-                        "Lunch",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      )),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Lunch()));
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 120,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: HexColor('#FA7D82').withOpacity(0.5),
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
-                    ),
-                    child: ListTile(
-                      title: Image.asset(
-                        "lib/assets/fitness_app/snack.png",
-                      ),
-                      subtitle: Container(
-                          child: const Text(
-                        "Snack",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      )),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Snacks()));
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 120,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: HexColor('#5C5EDD').withOpacity(0.5),
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40)),
-                    ),
-                    child: ListTile(
-                      title: Image.asset(
-                        "lib/assets/fitness_app/dinner.png",
-                      ),
-                      subtitle: Container(
-                          child: const Text(
-                        "Dinner",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      )),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Dinner()));
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-            //End Meals Container
-
             Container(
               padding: const EdgeInsets.all(20),
               child: const Text(
@@ -1431,7 +1269,7 @@ class _PatientUiState extends State<PatientUi> {
                             ],
                           ),
                           child: WaveView(
-                            percentageValue: 70.0,
+                            percentageValue: 40.0,
                           ),
                         ),
                       )
@@ -1444,85 +1282,5 @@ class _PatientUiState extends State<PatientUi> {
         ),
       ),
     );
-  }
-}
-
-class DataSearch extends SearchDelegate<String> {
-  List<dynamic> list;
-
-  var country_pref;
-  DataSearch({required this.list});
-
-  Future getSearchData() async {
-    var url =
-        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/searchmeals.php";
-    var data = {'searchmeal': query};
-    var res = await http.post(Uri.parse(url),
-        body: data, headers: {"Accept": "application/json"});
-    var responceBody = jsonDecode(res.body);
-    return responceBody;
-  }
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          query = "";
-        },
-        icon: const Icon(Icons.clear),
-      )
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        close(context, "");
-      },
-      icon: const Icon(Icons.arrow_back_sharp),
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return FutureBuilder(
-        future: getSearchData(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, i) {
-                  return mealsList(
-                      country: country_pref,
-                      Id: snapshot.data[i]['Id']!,
-                      Mealname: snapshot.data[i]['Mealname']!,
-                      Mealtype: snapshot.data[i]['Mealtype']!,
-                      Mealtime: snapshot.data[i]['Mealtime']!,
-                      Calories: snapshot.data[i]['Calories']!,
-                      Description: snapshot.data[i]['Description']!);
-                });
-          }
-          return const Center(child: CircularProgressIndicator());
-        });
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    var searchList =
-        query.isEmpty ? list : list.where((p) => p.startsWith(query)).toList();
-    return ListView.builder(
-        itemCount: searchList.length,
-        itemBuilder: (context, i) {
-          return ListTile(
-            leading: const Icon(Icons.ramen_dining_rounded),
-            title: Text(searchList[i]),
-            onTap: () {
-              query = searchList[i];
-              showResults(context);
-            },
-          );
-        });
   }
 }
