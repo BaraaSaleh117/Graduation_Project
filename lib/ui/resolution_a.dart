@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -105,7 +106,7 @@ class _ResolutionAState extends State<ResolutionA> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ConnectScale()));
+                              builder: (context) => AllPatientContentPage()));
                     },
                     color: Colors.teal,
                     elevation: 20,

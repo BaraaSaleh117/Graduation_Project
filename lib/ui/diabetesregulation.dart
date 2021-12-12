@@ -7,6 +7,9 @@ import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
+import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +17,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:http/http.dart' as http;
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
+import 'mealsui/lunch.dart';
 
 class DiabetesReg extends StatefulWidget {
   const DiabetesReg({Key? key}) : super(key: key);
@@ -77,7 +82,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Diations",
+          "Health Condition",
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
@@ -150,34 +155,6 @@ class _DiabetesRegState extends State<DiabetesReg> {
                 dataSource: MeetingDataSource(getAppointments()),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: const Text(
-                "Chart",
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal),
-              ),
-            ),
-            Container(
-                width: 500,
-                height: 250,
-                child: Scaffold(
-                    body: SfCartesianChart(
-                  title: ChartTitle(text: 'analysis'),
-                  //legend: Legend(isVisible: true),
-                  series: <ChartSeries>[
-                    LineSeries<SalesData, double>(
-                        dataSource: _chartData,
-                        xValueMapper: (SalesData sales, _) => sales.year,
-                        yValueMapper: (SalesData sales, _) => sales.sales,
-                        color: HexColor('#5C5EDD').withOpacity(0.5),
-                        dataLabelSettings: DataLabelSettings(isVisible: true)),
-                  ],
-                  primaryXAxis:
-                      NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift),
-                ))),
             Container(
                 padding: const EdgeInsets.all(20),
                 child: const Text("Blood Sugar Status",
@@ -568,52 +545,344 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   ],
                 )),
             Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12, left: 15),
-                    child: Text(
-                      'To do a new check  ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: FitnessAppTheme.fontName,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
                   Container(
-                    padding: const EdgeInsets.only(top: 1, left: 10),
+                    padding: const EdgeInsets.only(top: 1, left: 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: MaterialButton(
-                      minWidth: 40,
-                      height: 30,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ResolutionA()));
-                      },
-                      color: HexColor('#5C5EDD').withOpacity(0.9),
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Text(
-                        "Check ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
-                          color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(top: 26),
+                              child: Text(
+                                'You should do a checkup at least once a day in the normal case',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                  color: FitnessAppTheme.nearlyBlack
+                                      .withOpacity(0.7),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6),
+                              child: Text(
+                                'To do another blood sugar test, click here',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                  color: FitnessAppTheme.nearlyBlue
+                                      .withOpacity(0.9),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: new Image.asset('lib/assets/wws.png'),
+                              iconSize: 40,
+                              tooltip: 'New Check',
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResolutionA()));
+                              },
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ]),
+            Container(
+              decoration: BoxDecoration(
+                color: FitnessAppTheme.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    bottomLeft: const Radius.circular(8.0),
+                    bottomRight: Radius.circular(8.0),
+                    topRight: const Radius.circular(6.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: FitnessAppTheme.grey.withOpacity(0.3),
+                      offset: const Offset(1.1, 1.1),
+                      blurRadius: 4.0),
+                ],
+              ),
+              padding: const EdgeInsets.only(top: 30, left: 20),
+              child: const Text(
+                "Meals Today",
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: FitnessAppTheme.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    bottomLeft: const Radius.circular(8.0),
+                    bottomRight: Radius.circular(8.0),
+                    topRight: const Radius.circular(3.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: FitnessAppTheme.grey.withOpacity(0.1),
+                      offset: const Offset(1.1, 1.1),
+                      blurRadius: 4.0),
+                ],
+              ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(top: 1, left: 0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  'Here we provide you with some healthy meals ',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: FitnessAppTheme.fontName,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Text(
+                                  'based on your health condition',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: FitnessAppTheme.fontName,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.orange),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 6, bottom: 20),
+                                child: Text(
+                                  'Help us maintain your health, to achieve the desired goal',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: FitnessAppTheme.fontName,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: FitnessAppTheme.nearlyBlue
+                                        .withOpacity(0.9),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: FitnessAppTheme.white,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    bottomLeft: const Radius.circular(8.0),
+                    bottomRight: Radius.circular(8.0),
+                    topRight: const Radius.circular(68.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: FitnessAppTheme.grey.withOpacity(0.1),
+                      offset: const Offset(1.1, 1.1),
+                      blurRadius: 4.0),
+                ],
+              ),
+              height: 160,
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: HexColor('#FA7D82').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(40.0),
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                    ),
+                    height: 120,
+                    width: 150,
+                    child: ListTile(
+                      title: Image.asset(
+                        "lib/assets/fitness_app/breakfast.png",
+                      ),
+                      subtitle: Container(
+                          child: const Text(
+                        "BreakFast",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      )),
+                      onTap: () {
+                        //  Navigator.of(context).pushNamed("BreakFast");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const BreakFastss()));
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 120,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: HexColor('#5C5EDD').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(40.0),
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                    ),
+                    child: ListTile(
+                      title: Image.asset(
+                        "lib/assets/fitness_app/lunch.png",
+                      ),
+                      subtitle: Container(
+                          child: const Text(
+                        "Lunch",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Lunch()));
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 120,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: HexColor('#FA7D82').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(40.0),
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                    ),
+                    child: ListTile(
+                      title: Image.asset(
+                        "lib/assets/fitness_app/snack.png",
+                      ),
+                      subtitle: Container(
+                          child: const Text(
+                        "Snack",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Snacks()));
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 120,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: HexColor('#5C5EDD').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(40.0),
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                    ),
+                    child: ListTile(
+                      title: Image.asset(
+                        "lib/assets/fitness_app/dinner.png",
+                      ),
+                      subtitle: Container(
+                          child: const Text(
+                        "Dinner",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Dinner()));
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: const Text(
+                "Chart",
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                'Your blood sugar level during the week',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: FitnessAppTheme.fontName,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  color: FitnessAppTheme.grey.withOpacity(0.6),
+                ),
+              ),
+            ),
+            Container(
+                width: 500,
+                height: 250,
+                child: Scaffold(
+                    body: SfCartesianChart(
+                  title: ChartTitle(text: ''),
+                  //legend: Legend(isVisible: true),
+                  series: <ChartSeries>[
+                    LineSeries<SalesData, double>(
+                        dataSource: _chartData,
+                        xValueMapper: (SalesData sales, _) => sales.year,
+                        yValueMapper: (SalesData sales, _) => sales.sales,
+                        color: HexColor('#5C5EDD').withOpacity(0.9),
+                        dataLabelSettings: DataLabelSettings(isVisible: true)),
+                  ],
+                  primaryXAxis:
+                      NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift),
+                ))),
             SizedBox(
               height: 50,
             )
@@ -626,12 +895,13 @@ class _DiabetesRegState extends State<DiabetesReg> {
 
 List<SalesData> getChartData() {
   final List<SalesData> chartData = [
-    SalesData(2017, 25),
-    SalesData(2018, 26),
-    SalesData(2019, 20),
-    SalesData(2020, 6),
-    SalesData(2021, 19),
-    SalesData(2022, 3),
+    SalesData(1, 120),
+    SalesData(2, 140),
+    SalesData(3, 180),
+    SalesData(4, 140),
+    SalesData(5, 100),
+    SalesData(6, 120),
+    SalesData(7, 150),
   ];
   return chartData;
 }

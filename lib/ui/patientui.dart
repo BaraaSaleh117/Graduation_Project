@@ -6,6 +6,8 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/wave_view.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
+import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
@@ -33,11 +35,18 @@ class _PatientUiState extends State<PatientUi> {
   var Weight;
   var Active;
   late String Sucomments;
+  var parpase;
 
   late double _bmi = 0.0;
   late String comments = "";
   bool ismale = true;
   double POFat = 0.0;
+  double _Cal = 0.0;
+  double Waterneeded = 0.0;
+  double bound = 0.0;
+  double carbs = 0.0;
+  double proten = 0.0;
+  double fat = 0.0;
   var date = DateTime.now();
   // String day = DateFormat('EEEE').format(date);
 
@@ -47,6 +56,91 @@ class _PatientUiState extends State<PatientUi> {
       Active = preferences.getString("Active");
     });
     print("Your are : " + Active);
+  }
+
+  getPearpespref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      parpase = preferences.getString("parpase");
+    });
+    print("Your are : " + parpase);
+  }
+
+  double CalculateWater() {
+    double _weightOfUser = double.parse(weightt);
+    bound = _weightOfUser / 0.4536;
+    Waterneeded = bound / 50;
+    Waterneeded = double.parse(Waterneeded.toStringAsFixed(1));
+    return Waterneeded;
+  }
+
+  double getCaloris() {
+    double _weightOfUser = double.parse(weightt);
+    double _heightOfUser = double.parse(Height);
+    int _Age = int.parse(Age);
+    double Ac = getActiveSituation(Active);
+    double p = getparpus(parpase);
+
+    if (ismale) {
+      _Cal = 66 + (_weightOfUser * 13.7) + (_heightOfUser * 5) - (_Age * 6.8);
+      _Cal = (_Cal * Ac) + p;
+    } else {
+      _Cal = 655 + (_weightOfUser * 9.6) + (_heightOfUser * 1.8) - (_Age * 4.7);
+      _Cal = (_Cal * Ac) + p;
+    }
+
+    return _Cal;
+  }
+
+  double getActiveSituation(Active) {
+    double Ac = 0.0;
+    if (Active == "Very active") {
+      Ac = 1.725;
+    } else if (Active == "Energetic") {
+      Ac = 1.550;
+    } else if (Active == "Active_From") {
+      Ac = 1.375;
+    } else {
+      Ac = 1.25;
+    }
+    return Ac;
+  }
+
+  double calculateCarbs() {
+    carbs = _Cal * 0.45;
+    carbs = double.parse(carbs.toStringAsFixed(1));
+    return carbs;
+  }
+
+  double calculateProten() {
+    double _weightOfUser = double.parse(weightt);
+    proten = _weightOfUser * 0.9;
+    proten = double.parse(proten.toStringAsFixed(1));
+    return proten;
+  }
+
+  double calculateFat() {
+    double _weightOfUser = double.parse(weightt);
+    if (ismale) {
+      fat = (_weightOfUser * 1.082) + 94.42;
+    } else {
+      fat = (_weightOfUser * 0.732) + 8.987;
+    }
+    fat = double.parse(fat.toStringAsFixed(1));
+    return fat;
+  }
+
+  double getparpus(parpase) {
+    double Ac = 0.0;
+    if (parpase == "Maintain") {
+      Ac = 0;
+    } else if (parpase == "Gain") {
+      Ac = 500;
+    } else if (parpase == "Lose") {
+      Ac = (-1 * 500);
+    }
+
+    return Ac;
   }
 
   getBMI(weightt, Height) {
@@ -87,7 +181,6 @@ class _PatientUiState extends State<PatientUi> {
     setState(() {
       weightt = preferences.getString("weightt");
     });
-    print("Your Weight is :" + weightt);
   }
 
   getSugerPref() async {
@@ -143,6 +236,7 @@ class _PatientUiState extends State<PatientUi> {
     getqPref();
     getSugerPref();
     getPHPref();
+    getPearpespref();
     getweightPref();
     super.initState();
   }
@@ -151,6 +245,13 @@ class _PatientUiState extends State<PatientUi> {
   Widget build(BuildContext context) {
     getBMI(weightt, Height);
     getFat(_bmi, Age, true);
+    getCaloris();
+    CalculateWater();
+    calculateCarbs();
+
+    calculateProten();
+
+    calculateFat();
 
     late AnimationController? animationController;
     late Animation<double>? animation;
@@ -163,14 +264,13 @@ class _PatientUiState extends State<PatientUi> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Homepage",
+            "Body Measurements",
             textAlign: TextAlign.center,
           ),
           centerTitle: true,
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
           elevation: 6,
         ),
-        drawer: MyDrawer(),
         body: ListView(
           children: <Widget>[
             Container(
@@ -261,7 +361,7 @@ class _PatientUiState extends State<PatientUi> {
                                               padding: const EdgeInsets.only(
                                                   left: 4, bottom: 3),
                                               child: Text(
-                                                '${(1200 * 1).toInt()}',
+                                                '${(_Cal * 1).toInt()}',
                                                 textAlign: TextAlign.center,
                                                 style: const TextStyle(
                                                   fontFamily:
@@ -505,7 +605,7 @@ class _PatientUiState extends State<PatientUi> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 4),
                                 child: Container(
-                                  height: 4,
+                                  height: 7,
                                   width: 70,
                                   decoration: BoxDecoration(
                                     color: HexColor('#87A0E5').withOpacity(0.2),
@@ -516,7 +616,7 @@ class _PatientUiState extends State<PatientUi> {
                                     children: <Widget>[
                                       Container(
                                         width: ((70 / 1.2) * 1),
-                                        height: 4,
+                                        height: 7,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(colors: [
                                             HexColor('#87A0E5'),
@@ -534,12 +634,12 @@ class _PatientUiState extends State<PatientUi> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 6),
                                 child: Text(
-                                  '12g left',
+                                  '$carbs kcal',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 12,
+                                    fontSize: 14,
                                     color:
                                         FitnessAppTheme.grey.withOpacity(0.5),
                                   ),
@@ -571,7 +671,7 @@ class _PatientUiState extends State<PatientUi> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 4),
                                     child: Container(
-                                      height: 4,
+                                      height: 7,
                                       width: 70,
                                       decoration: BoxDecoration(
                                         color: HexColor('#F56E98')
@@ -583,7 +683,7 @@ class _PatientUiState extends State<PatientUi> {
                                         children: <Widget>[
                                           Container(
                                             width: ((70 / 2) * 1),
-                                            height: 4,
+                                            height: 7,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 HexColor('#F56E98')
@@ -602,12 +702,12 @@ class _PatientUiState extends State<PatientUi> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 6),
                                     child: Text(
-                                      '30g left',
+                                      '$proten Kcal',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         color: FitnessAppTheme.grey
                                             .withOpacity(0.5),
                                       ),
@@ -641,7 +741,7 @@ class _PatientUiState extends State<PatientUi> {
                                     padding:
                                         const EdgeInsets.only(right: 0, top: 4),
                                     child: Container(
-                                      height: 4,
+                                      height: 7,
                                       width: 70,
                                       decoration: BoxDecoration(
                                         color: HexColor('#F1B440')
@@ -652,8 +752,8 @@ class _PatientUiState extends State<PatientUi> {
                                       child: Row(
                                         children: <Widget>[
                                           Container(
-                                            width: ((70 / 2.5) * 1),
-                                            height: 4,
+                                            width: ((60 / 2.5) * 1),
+                                            height: 7,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 HexColor('#F1B440')
@@ -672,12 +772,12 @@ class _PatientUiState extends State<PatientUi> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 6),
                                     child: Text(
-                                      '10g left',
+                                      '$fat Kcal',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 12,
+                                        fontSize: 14,
                                         color: FitnessAppTheme.grey
                                             .withOpacity(0.5),
                                       ),
@@ -697,7 +797,7 @@ class _PatientUiState extends State<PatientUi> {
             Container(
               padding: const EdgeInsets.all(20),
               child: const Text(
-                "Body Measurements",
+                "Body Details",
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -851,7 +951,7 @@ class _PatientUiState extends State<PatientUi> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                Height != null ? Height : "",
+                                Height + " cm",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
@@ -1032,15 +1132,45 @@ class _PatientUiState extends State<PatientUi> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        width: 24,
+                                        height: 24,
+                                        child: Image.asset(
+                                            'lib/assets/fitness_app/bell.png'),
+                                      ),
+                                      Flexible(
+                                        child: Text(
+                                          "Your body's daily need for water ",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontFamily:
+                                                FitnessAppTheme.fontName,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                            letterSpacing: 0.4,
+                                            color: HexColor('#F65283'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 4, bottom: 3),
                                       child: Text(
-                                        '2100',
+                                        '$Waterneeded',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -1054,7 +1184,7 @@ class _PatientUiState extends State<PatientUi> {
                                       padding: const EdgeInsets.only(
                                           left: 8, bottom: 8),
                                       child: Text(
-                                        'ml',
+                                        'Letter',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -1067,26 +1197,11 @@ class _PatientUiState extends State<PatientUi> {
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 4, top: 2, bottom: 14),
-                                  child: Text(
-                                    'of daily goal 3.5L',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: FitnessAppTheme.fontName,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      letterSpacing: 0.0,
-                                      color: FitnessAppTheme.darkText,
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 4, right: 4, top: 8, bottom: 16),
+                                  left: 4, right: 4, top: 8, bottom: 5),
                               child: Container(
                                 height: 2,
                                 decoration: BoxDecoration(
@@ -1097,7 +1212,7 @@ class _PatientUiState extends State<PatientUi> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 16),
+                              padding: const EdgeInsets.only(top: 5),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -1108,19 +1223,20 @@ class _PatientUiState extends State<PatientUi> {
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 4),
+                                        padding: const EdgeInsets.only(
+                                            left: 4, bottom: 8),
                                         child: Icon(
-                                          Icons.access_time,
+                                          Icons.water_rounded,
                                           color: FitnessAppTheme.grey
                                               .withOpacity(0.5),
                                           size: 16,
                                         ),
                                       ),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 4.0, bottom: 10),
                                         child: Text(
-                                          'Last drink 8:26 AM',
+                                          'Benefits of sticking to drinking water',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontFamily:
@@ -1129,41 +1245,32 @@ class _PatientUiState extends State<PatientUi> {
                                             fontSize: 14,
                                             letterSpacing: 0.0,
                                             color: FitnessAppTheme.grey
-                                                .withOpacity(0.5),
+                                                .withOpacity(0.8),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: 24,
-                                          height: 24,
-                                          child: Image.asset(
-                                              'lib/assets/fitness_app/bell.png'),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            'Your bottle is empty, refill it!.',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              fontFamily:
-                                                  FitnessAppTheme.fontName,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 12,
-                                              letterSpacing: 0.0,
-                                              color: HexColor('#F65283'),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: Text(
+                                      '1. Helps lower blood sugar levels' +
+                                          "\n" +
+                                          "2. Helps prevent dehydration" +
+                                          "\n" +
+                                          "3. Prevents skin infection" +
+                                          "\n" +
+                                          "4. Helps Prevent Fatigue:" +
+                                          "\n",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        letterSpacing: 0.0,
+                                        color: FitnessAppTheme.grey
+                                            .withOpacity(0.5),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1230,11 +1337,11 @@ class _PatientUiState extends State<PatientUi> {
                                   blurRadius: 4),
                             ],
                           ),
-                          child: WaveView(
-                            percentageValue: 40.0,
-                          ),
+                          //child: WaveView(
+                          //  percentageValue: 80.0,
                         ),
-                      )
+                      ),
+                      //  )
                     ],
                   ),
                 ),

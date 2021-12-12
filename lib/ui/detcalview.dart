@@ -18,6 +18,12 @@ class _DetCaloViewState extends State<DetCaloView> {
     print(preferences.getString("Active"));
   }
 
+  savepearpusref(String parpase) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("parpase", parpase);
+    print(preferences.getString("parpase"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,7 +177,9 @@ class _DetCaloViewState extends State<DetCaloView> {
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),
-                            onTap: () {},
+                            onTap: () {
+                              savepearpusref("Maintain");
+                            },
                           ),
                         ),
                         Container(
@@ -199,7 +207,9 @@ class _DetCaloViewState extends State<DetCaloView> {
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),
-                            onTap: () {},
+                            onTap: () {
+                              savepearpusref("Gain");
+                            },
                           ),
                         ),
                         Container(
@@ -226,7 +236,9 @@ class _DetCaloViewState extends State<DetCaloView> {
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 )),
-                            onTap: () {},
+                            onTap: () {
+                              savepearpusref("Lose");
+                            },
                           ),
                         ),
                       ])),

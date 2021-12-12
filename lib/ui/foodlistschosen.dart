@@ -790,7 +790,7 @@ class _FoodListChosenState extends State<FoodListChosen> {
                 height: 40,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ResolutionA()));
+                      MaterialPageRoute(builder: (context) => ConnectScale()));
                 },
                 color: Colors.black.withOpacity(0.4),
                 elevation: 20,
