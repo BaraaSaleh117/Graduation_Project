@@ -12,6 +12,7 @@ while($resultsForm = $stamement ->fetch()){
         $myarray,array(
             "id" => $resultsForm['id'],
             "height" => $resultsForm['height'],
+            "weight" => $resultsForm['weight'],
             "age" => $resultsForm['age'],
             "Drugs" => $resultsForm['Drugs'],
             "ChronicDiseases" => $resultsForm['ChronicDiseases'],

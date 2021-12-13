@@ -47,8 +47,18 @@ class _PatientUiState extends State<PatientUi> {
   double carbs = 0.0;
   double proten = 0.0;
   double fat = 0.0;
+
   var date = DateTime.now();
-  // String day = DateFormat('EEEE').format(date);
+
+  int getHeightint() {
+    int _heightOfUser = int.parse(Height);
+    return _heightOfUser;
+  }
+
+  int getweightint() {
+    int _weightOfUser = int.parse(weightt);
+    return _weightOfUser;
+  }
 
   getPHPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -67,26 +77,32 @@ class _PatientUiState extends State<PatientUi> {
   }
 
   double CalculateWater() {
-    double _weightOfUser = double.parse(weightt);
-    bound = _weightOfUser / 0.4536;
-    Waterneeded = bound / 50;
-    Waterneeded = double.parse(Waterneeded.toStringAsFixed(1));
+    if (weightt != null) {
+      double _weightOfUser = double.parse(weightt);
+      bound = _weightOfUser / 0.4536;
+      Waterneeded = bound / 50;
+      Waterneeded = double.parse(Waterneeded.toStringAsFixed(1));
+    }
+
     return Waterneeded;
   }
 
   double getCaloris() {
-    double _weightOfUser = double.parse(weightt);
-    double _heightOfUser = double.parse(Height);
-    int _Age = int.parse(Age);
-    double Ac = getActiveSituation(Active);
-    double p = getparpus(parpase);
+    if (weightt != null && Height != null) {
+      double _weightOfUser = double.parse(weightt);
+      double _heightOfUser = double.parse(Height);
+      int _Age = int.parse(Age);
+      double Ac = getActiveSituation(Active);
+      double p = getparpus(parpase);
 
-    if (ismale) {
-      _Cal = 66 + (_weightOfUser * 13.7) + (_heightOfUser * 5) - (_Age * 6.8);
-      _Cal = (_Cal * Ac) + p;
-    } else {
-      _Cal = 655 + (_weightOfUser * 9.6) + (_heightOfUser * 1.8) - (_Age * 4.7);
-      _Cal = (_Cal * Ac) + p;
+      if (ismale) {
+        _Cal = 66 + (_weightOfUser * 13.7) + (_heightOfUser * 5) - (_Age * 6.8);
+        _Cal = (_Cal * Ac) + p;
+      } else {
+        _Cal =
+            655 + (_weightOfUser * 9.6) + (_heightOfUser * 1.8) - (_Age * 4.7);
+        _Cal = (_Cal * Ac) + p;
+      }
     }
 
     return _Cal;
@@ -227,6 +243,19 @@ class _PatientUiState extends State<PatientUi> {
     for (int i = 0; i < responceBody.length; i++) {
       ListSearch.add(responceBody[i]['Mealname']);
     }
+  }
+
+  Future PostResolutios() async {
+    var url =
+        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/AddResolution.php";
+    var data = {
+      "UserName": "Baraaa",
+      "Email": "Emall",
+      "Password": "Drugs",
+    };
+    var responce = await http.post(Uri.parse(url), body: data);
+    print("////////");
+    print(responce.body.toString());
   }
 
   @override
@@ -397,7 +426,11 @@ class _PatientUiState extends State<PatientUi> {
                                   )
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              IconButton(
+                                  icon: new Image.asset('lib/assets/wws.png'),
+                                  iconSize: 5,
+                                  tooltip: 'New Check',
+                                  onPressed: PostResolutios),
                               Row(
                                 children: <Widget>[
                                   Container(

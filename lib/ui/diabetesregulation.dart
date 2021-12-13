@@ -54,15 +54,17 @@ class _DiabetesRegState extends State<DiabetesReg> {
   }
 
   detSugerLevel(Sugerb) {
-    double Sugerv = double.parse(Sugerb);
-    if (Sugerv <= 90) {
-      Sucomments = "Low";
-    } else if (Sugerv > 90 && Sugerv <= 120) {
-      Sucomments = "Normal";
-    } else if (Sugerv > 120 && Sugerv <= 160) {
-      Sucomments = "High";
-    } else {
-      Sucomments = "Very dangerous";
+    if (Sugerb != null) {
+      double Sugerv = double.parse(Sugerb);
+      if (Sugerv <= 90) {
+        Sucomments = "Low";
+      } else if (Sugerv > 90 && Sugerv <= 120) {
+        Sucomments = "Normal";
+      } else if (Sugerv > 120 && Sugerv <= 160) {
+        Sucomments = "High";
+      } else {
+        Sucomments = "Very dangerous";
+      }
     }
   }
 

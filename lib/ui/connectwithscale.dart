@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/scale/scaleapp.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
+import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConnectScale extends StatefulWidget {
@@ -128,8 +129,10 @@ class _ConnectScaleState extends State<ConnectScale> {
                         savePrefWeight(weightc.text);
                       }
 
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => PatientUi()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResolutionA()));
                     },
                     color: Colors.teal,
                     elevation: 20,
