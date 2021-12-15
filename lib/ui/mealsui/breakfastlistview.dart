@@ -54,7 +54,7 @@ class _BreakFastssState extends State<BreakFastss> {
   Future getBreakFasts() async {
     //Get Patients Data From Localhost API
     String theUrl =
-        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getMeals.php";
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetBreakFasts.php";
     var data = {"mealtype": "Breakfast"};
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
