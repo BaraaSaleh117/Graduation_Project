@@ -10,7 +10,7 @@ while($resultsForm = $stamement ->fetch()){
 
     array_push(
         $myarray,array(
-            "id" => $resultsForm['id'],
+            "ResId" => $resultsForm['ResId'],
             "height" => $resultsForm['height'],
             "weight" => $resultsForm['weight'],
             "age" => $resultsForm['age'],

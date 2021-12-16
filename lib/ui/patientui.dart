@@ -110,39 +110,49 @@ class _PatientUiState extends State<PatientUi> {
 
   double getActiveSituation(Active) {
     double Ac = 0.0;
-    if (Active == "Very active") {
-      Ac = 1.725;
-    } else if (Active == "Energetic") {
-      Ac = 1.550;
-    } else if (Active == "Active_From") {
-      Ac = 1.375;
-    } else {
-      Ac = 1.25;
+    if (Active != null) {
+      if (Active == "Very active") {
+        Ac = 1.725;
+      } else if (Active == "Energetic") {
+        Ac = 1.550;
+      } else if (Active == "Active_From") {
+        Ac = 1.375;
+      } else {
+        Ac = 1.25;
+      }
     }
     return Ac;
   }
 
   double calculateCarbs() {
-    carbs = _Cal * 0.45;
-    carbs = double.parse(carbs.toStringAsFixed(1));
+    if (carbs != null) {
+      carbs = _Cal * 0.45;
+      carbs = double.parse(carbs.toStringAsFixed(1));
+    }
+
     return carbs;
   }
 
   double calculateProten() {
-    double _weightOfUser = double.parse(weightt);
-    proten = _weightOfUser * 0.9;
-    proten = double.parse(proten.toStringAsFixed(1));
+    if (_Cal != null) {
+      double _weightOfUser = double.parse(weightt);
+      proten = _Cal * 0.35;
+      proten = double.parse(proten.toStringAsFixed(1));
+    }
+
     return proten;
   }
 
   double calculateFat() {
-    double _weightOfUser = double.parse(weightt);
-    if (ismale) {
-      fat = (_weightOfUser * 1.082) + 94.42;
-    } else {
-      fat = (_weightOfUser * 0.732) + 8.987;
+    if (weightt != null) {
+      double _weightOfUser = double.parse(weightt);
+      if (ismale) {
+        fat = (_weightOfUser * 1.082) + 94.42;
+      } else {
+        fat = (_weightOfUser * 0.732) + 8.987;
+      }
+      fat = double.parse(fat.toStringAsFixed(1));
     }
-    fat = double.parse(fat.toStringAsFixed(1));
     return fat;
   }
 
@@ -245,6 +255,22 @@ class _PatientUiState extends State<PatientUi> {
     }
   }
 
+  Future PostData() async {
+    var url =
+        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/PostPatientdata.php";
+    var data = {
+      "height": Height,
+      "weight": weightt,
+      "age": Age,
+      "Drugs": Drugs,
+      "ChronicDiseases": ChronicDiseases,
+      "BloodSugerLevel": Sugerb,
+    };
+    var responce = await http.post(Uri.parse(url), body: data);
+
+    print(responce.body.toString());
+  }
+
   Future PostResolutios() async {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/AddResolution.php";
@@ -281,6 +307,7 @@ class _PatientUiState extends State<PatientUi> {
     calculateProten();
 
     calculateFat();
+    //PostData();
 
     late AnimationController? animationController;
     late Animation<double>? animation;
@@ -430,7 +457,7 @@ class _PatientUiState extends State<PatientUi> {
                                   icon: new Image.asset('lib/assets/wws.png'),
                                   iconSize: 5,
                                   tooltip: 'New Check',
-                                  onPressed: PostResolutios),
+                                  onPressed: PostData),
                               Row(
                                 children: <Widget>[
                                   Container(

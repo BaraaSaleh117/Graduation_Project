@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/DoctorUi/doctorhome.dart';
 import 'package:graduation_projectflutter/ui/doctorregistration.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
 
@@ -119,9 +120,10 @@ class _DoctorLoginState extends State<DoctorLogin> {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
-                      //
-                      // Navigator.push(context, MaterialPageRoute(
-                      //     builder: (context) => DropDownDemo()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => docHomePage()));
                     },
                     color: Colors.black.withOpacity(0.4),
                     elevation: 0,

@@ -5,6 +5,8 @@ import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.da
 import 'package:graduation_projectflutter/models/resolution.dart';
 import 'package:graduation_projectflutter/patientPage/my_diary/my_diary_screen.dart';
 import 'package:graduation_projectflutter/patientPage/training/training_screen.dart';
+import 'package:graduation_projectflutter/ui/DoctorUi/doctorhome.dart';
+import 'package:graduation_projectflutter/ui/DoctorUi/doctorui.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
 import 'package:graduation_projectflutter/ui/calender.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: AllPatientContentPage(),
+      home: Home(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

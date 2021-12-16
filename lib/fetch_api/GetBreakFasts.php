@@ -1,8 +1,10 @@
 <?php 
 require('connection.php');
-$makeQuery =" SELECT * FROM meals ";
+
+$mealtype = $_POST['mealtype'] ;
+$makeQuery =" SELECT * FROM meals WHERE Mealtype  = ? AND carbohydrate = 0 ";
 $stamement =$connection->prepare($makeQuery);
-$stamement->execute();
+$stamement->execute(array($mealtype));
 
 $myarray=array();
 
