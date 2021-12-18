@@ -18,7 +18,6 @@ class docHomePage extends StatefulWidget {
 }
 
 class _docHomePage extends State<docHomePage> {
-  var country;
   var _currentIndex = 0;
 
   @override

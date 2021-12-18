@@ -3,12 +3,22 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/DoctorUi/doctorhome.dart';
 import 'package:graduation_projectflutter/ui/doctorregistration.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorLogin extends StatefulWidget {
   const DoctorLogin({Key? key}) : super(key: key);
 
   @override
   _DoctorLoginState createState() => _DoctorLoginState();
+}
+
+TextEditingController Username = new TextEditingController();
+savePref(String Username) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setString("Username", Username);
+  //preferences.setString("email", email);
+  print(preferences.getString("Username"));
+  //print(preferences.getString("email"));
 }
 
 class _DoctorLoginState extends State<DoctorLogin> {
@@ -73,7 +83,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                     height: 15.0,
                   ),
                   const Text(
-                    "Email",
+                    "Username",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
@@ -84,11 +94,12 @@ class _DoctorLoginState extends State<DoctorLogin> {
                     height: 5.0,
                   ),
                   TextFormField(
+                    controller: Username,
                     autofocus: false,
                     //  validator: validateEmail,
                     // onSaved: (value) => _userName = value!,
                     decoration:
-                        buildInputDecoration('Enter Email', Icons.email),
+                        buildInputDecoration('Enter Username', Icons.email),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -120,6 +131,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
+                      savePref(Username.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -179,36 +179,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   //dotBgColor: Colors.amber.withOpacity(0.5),
                   //  showIndicator: false,
                 )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: const Text(
-                "Important events ",
-                style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal),
-              ),
-            ), ////////
-            Container(
-              /////
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                "getCData ",
-                style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal),
-              ),
-            ),
-            Container(
-              child: SfCalendar(
-                view: CalendarView.week,
-                firstDayOfWeek: 6,
-                // initialDisplayDate: DateTime(2021, 12, 09, 08, 30),
-                // initialSelectedDate: DateTime(2021, 12, 09, 08, 30),
-                dataSource: MeetingDataSource(getAppointments()),
-              ),
-            ),
+
             Container(
                 padding: const EdgeInsets.all(20),
                 child: const Text("Blood Sugar Status",
@@ -1163,29 +1134,6 @@ class SalesData {
   final double year;
   final double sales;
   SalesData(this.year, this.sales);
-}
-
-List<Appointment> getAppointments() {
-  List<Appointment> meeting = <Appointment>[];
-  final DateTime today = DateTime.now();
-  final DateTime starTime =
-      DateTime(today.year, today.month, today.day, 1, 0, 0);
-  final DateTime endtime = starTime.add(const Duration(hours: 1));
-
-  meeting.add(Appointment(
-      startTime: starTime,
-      endTime: endtime,
-      subject: "First Check ",
-      color: Colors.red.withOpacity(0.4),
-      recurrenceRule: 'FREQ=DAILY;COUNT=1'));
-
-  return meeting;
-}
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Appointment> source) {
-    appointments = source;
-  }
 }
 
 class DataSearch extends SearchDelegate<String> {

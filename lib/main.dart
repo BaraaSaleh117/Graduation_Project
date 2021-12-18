@@ -9,7 +9,6 @@ import 'package:graduation_projectflutter/ui/DoctorUi/doctorhome.dart';
 import 'package:graduation_projectflutter/ui/DoctorUi/doctorui.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/background.dart';
-import 'package:graduation_projectflutter/ui/calender.dart';
 
 import 'package:graduation_projectflutter/ui/choosecountry.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
@@ -43,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: Home(),
+      home: docHomePage(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

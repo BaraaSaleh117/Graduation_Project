@@ -15,7 +15,12 @@ class PatientsList extends StatelessWidget {
   late final String Drugs;
   late final String ChronicDiseases;
   late final String BloodSugerLevel;
+
   String status = "Low";
+  double Sugerv = 0.0;
+  double ss = 0.0;
+  bool msg = false;
+  var List = [];
   PatientsList({
     required this.Id,
     required this.ResId,
@@ -30,7 +35,7 @@ class PatientsList extends StatelessWidget {
 
   detSugerLevel() {
     if (BloodSugerLevel != null) {
-      double Sugerv = double.parse(BloodSugerLevel);
+      Sugerv = double.parse(BloodSugerLevel);
       if (Sugerv <= 90) {
         status = "Low";
       } else if (Sugerv > 90 && Sugerv <= 120) {
@@ -43,19 +48,30 @@ class PatientsList extends StatelessWidget {
     }
   }
 
-  savePref(String status) async {
+  savePref(String BloodSugerLevel) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("status", status);
-    print(preferences.getString("status"));
+    preferences.setString("BloodSugerLevel", BloodSugerLevel);
+    String? s = preferences.getString("BloodSugerLevel");
+    ss = double.parse(s!);
+    if (ss > 180) {
+      msg = true;
+      savemsgPref(msg);
+    }
+  }
+
+  savemsgPref(bool msg) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool("msg", msg);
+    // print(preferences.getString("msg"));
+    print(msg);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (status == "Dangerous!") {
-      savePref(status);
-    }
+    savePref(BloodSugerLevel);
 
     detSugerLevel();
+
     return InkWell(
       child: Container(
           decoration: BoxDecoration(
