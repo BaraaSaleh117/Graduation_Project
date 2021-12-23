@@ -67,6 +67,7 @@ class DataSearch extends SearchDelegate<String> {
                   return mealsList(
                       country: country_pref,
                       Id: snapshot.data[i]['Id']!,
+                      url: snapshot.data[i]['url']!,
                       Mealname: snapshot.data[i]['Mealname']!,
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,

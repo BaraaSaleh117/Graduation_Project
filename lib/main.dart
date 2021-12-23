@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: docHomePage(),
+      home: AllPatientContentPage(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

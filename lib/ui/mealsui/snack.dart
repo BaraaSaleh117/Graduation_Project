@@ -21,7 +21,7 @@ class _SnacksState extends State<Snacks> {
   Future getSnacks() async {
     //Get Patients Data From Localhost API
     String theUrl =
-        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/getMeals.php";
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetSnack.php";
     var data = {"mealtype": "Snack"};
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
@@ -47,6 +47,7 @@ class _SnacksState extends State<Snacks> {
                 itemBuilder: (context, i) {
                   return SnacksList(
                       Id: snapshot.data[i]['Id']!,
+                      url: snapshot.data[i]['url']!,
                       Mealname: snapshot.data[i]['Mealname']!,
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,

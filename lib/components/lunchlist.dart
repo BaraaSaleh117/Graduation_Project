@@ -4,6 +4,7 @@ import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 
 class LunchsList extends StatelessWidget {
   late final String Id;
+  late final String url;
   late final String Mealname;
   late final String Mealtype;
   late final String Mealtime;
@@ -12,6 +13,7 @@ class LunchsList extends StatelessWidget {
 
   LunchsList(
       {required this.Id,
+      required this.url,
       required this.Mealname,
       required this.Mealtype,
       required this.Mealtime,
@@ -29,7 +31,7 @@ class LunchsList extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Image.asset(
-                  "lib/assets/a8.jpg",
+                  url,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -106,6 +108,7 @@ class LunchsList extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (contex) {
           return Details(
             Idd: Id,
+            url: url,
             Mealnamed: Mealname,
             Mealtyped: Mealtype,
             Mealtimed: Mealtime,

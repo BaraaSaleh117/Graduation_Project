@@ -8,15 +8,18 @@ class mealsList extends StatelessWidget {
 
   late final String country;
   late final String Id;
+  late final String url;
   late final String Mealname;
   late final String Mealtype;
   late final String Mealtime;
   late final String Calories;
   late final String Description;
+
   var intCalories;
 
   mealsList(
       {required this.Id,
+      required this.url,
       required this.country,
       required this.Mealname,
       required this.Mealtype,
@@ -36,7 +39,7 @@ class mealsList extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Image.asset(
-                  "lib/assets/BreakFastsPic/5.jpg",
+                  url,
                   fit: BoxFit.fill,
                 ),
               )
@@ -121,6 +124,7 @@ class mealsList extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (contex) {
           return Details(
             Idd: Id,
+            url: url,
             Mealnamed: Mealname,
             Mealtyped: Mealtype,
             Mealtimed: Mealtime,

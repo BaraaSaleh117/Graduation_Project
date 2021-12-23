@@ -5,6 +5,7 @@ import 'package:graduation_projectflutter/main.dart';
 
 class Details extends StatefulWidget {
   late final String Idd;
+  late final String url;
   late final String Mealnamed;
   late final String Mealtyped;
   late final String Mealtimed;
@@ -13,6 +14,7 @@ class Details extends StatefulWidget {
 
   Details(
       {required this.Idd,
+      required this.url,
       required this.Mealnamed,
       required this.Mealtyped,
       required this.Mealtimed,
@@ -35,7 +37,10 @@ class _Details extends State<Details> {
             Container(
                 height: 300,
                 child: GridTile(
-                  child: Image.asset("lib/assets/BreakFastsPic/2.jpg"),
+                  child: Image.asset(
+                    widget.url,
+                    fit: BoxFit.fill,
+                  ),
                   footer: Container(
                     height: 50,
                     color: Colors.black.withOpacity(0.4),

@@ -17,6 +17,8 @@ class PatientDetails extends StatefulWidget {
   late final String ChronicDiseases;
   late final String BloodSugerLevel;
 
+  String DocMessage = " ";
+
   PatientDetails({
     required this.Idd,
     required this.ResId,
@@ -34,6 +36,14 @@ class PatientDetails extends StatefulWidget {
 }
 
 class _PatientDetails extends State<PatientDetails> {
+  TextEditingController Message = new TextEditingController();
+  saveMessagePref(String DocMessage) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("DocMessage", DocMessage);
+    print(preferences.getString("DocMessage"));
+    print(DocMessage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -745,11 +755,34 @@ class _PatientDetails extends State<PatientDetails> {
                     ),
                   ),
                   TextField(
+                    controller: Message,
                     maxLines: 8,
                     decoration: InputDecoration.collapsed(
                         hintText: "Enter your notes here"),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              width: 30,
+              child: MaterialButton(
+                height: 40,
+                onPressed: () {
+                  saveMessagePref(Message.text);
+                },
+                color: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(70),
+                ),
+                child: const Text(
+                  "Send ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 17,
+                    color: Colors.blue,
+                  ),
+                ),
               ),
             ),
             SizedBox(

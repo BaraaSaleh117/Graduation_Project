@@ -1397,11 +1397,11 @@ class _PatientUiState extends State<PatientUi> {
                                   blurRadius: 4),
                             ],
                           ),
-                          //child: WaveView(
-                          //  percentageValue: 80.0,
+                          child: WaveView(
+                            percentageValue: 80.0,
+                          ),
                         ),
-                      ),
-                      //  )
+                      )
                     ],
                   ),
                 ),

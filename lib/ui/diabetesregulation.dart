@@ -33,6 +33,10 @@ var ListSearch = [];
 var date = DateTime.now();
 var lastcheck;
 var Days;
+bool Ismessage = false;
+var DocMessage = "";
+var Username;
+bool isSign = false;
 
 bool isEmargincy = true;
 List<SalesData> _chartData = [];
@@ -46,6 +50,15 @@ void _showToast(BuildContext context) {
           label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
     ),
   );
+}
+
+Future getmsgFromDoctorPref() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  DocMessage = preferences.getString("DocMessage")!;
+  if (DocMessage != null) {
+    Ismessage = true;
+    print(DocMessage);
+  }
 }
 
 Future getData() async {
@@ -83,6 +96,18 @@ Future getCData() async {
 }
 
 class _DiabetesRegState extends State<DiabetesReg> {
+  getDoctorUseNamePref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    Username = preferences.getString("Username");
+    if (Username != null) {
+      setState(() {
+        Username = preferences.getString("Username");
+        isSign = true;
+      });
+    }
+    print(Username);
+  }
+
   getSugerPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -101,7 +126,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
       } else if (Sugerv > 120 && Sugerv <= 160) {
         Sucomments = "High";
       } else {
-        Sucomments = "High";
+        Sucomments = "High"; //Dangerous!
       }
     }
   }
@@ -110,6 +135,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
   void initState() {
     getData();
     getSugerPref();
+    getmsgFromDoctorPref();
+    getDoctorUseNamePref();
 
     _chartData = getChartData();
     super.initState();
@@ -179,6 +206,89 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   //dotBgColor: Colors.amber.withOpacity(0.5),
                   //  showIndicator: false,
                 )),
+
+            Sucomments == "Dangerous!" && Ismessage
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: FitnessAppTheme.white,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(68.0),
+                          bottomLeft: const Radius.circular(68.0),
+                          bottomRight: Radius.circular(68.0),
+                          topRight: const Radius.circular(68.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: FitnessAppTheme.nearlyBlack.withOpacity(0.7),
+                            offset: const Offset(1.1, 1.1),
+                            blurRadius: 10.0),
+                      ],
+                    ),
+                    padding: EdgeInsets.only(
+                        top: 30, bottom: 30, left: 10, right: 10),
+                    // color: Colors.red.shade100,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Image.asset(
+                                  'lib/assets/fitness_app/bell.png'),
+                            ),
+                            Text(
+                              "1",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 20, bottom: 5),
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Dr ." + Username,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                            )),
+                            Flexible(
+                              child: Text(
+                                DocMessage,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontFamily: FitnessAppTheme.fontName,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 20,
+                                  letterSpacing: 0.4,
+                                  color: HexColor('#F65283'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ))
+                : Container(
+                    child: Text(""),
+                  ),
 
             Container(
                 padding: const EdgeInsets.all(20),
@@ -1186,6 +1296,7 @@ class DataSearch extends SearchDelegate<String> {
                   return mealsList(
                       country: country_pref,
                       Id: snapshot.data[i]['Id']!,
+                      url: snapshot.data[i]['url']!,
                       Mealname: snapshot.data[i]['Mealname']!,
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,
