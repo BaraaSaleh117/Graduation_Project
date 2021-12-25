@@ -36,6 +36,7 @@ class mealsList extends StatelessWidget {
         child: Card(
           child: Row(
             children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 20, bottom: 20)),
               Expanded(
                 flex: 1,
                 child: Image.asset(

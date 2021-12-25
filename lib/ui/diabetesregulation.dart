@@ -37,6 +37,7 @@ bool Ismessage = false;
 var DocMessage = "";
 var Username;
 bool isSign = false;
+var carbs;
 
 bool isEmargincy = true;
 List<SalesData> _chartData = [];
@@ -58,6 +59,14 @@ Future getmsgFromDoctorPref() async {
   if (DocMessage != null) {
     Ismessage = true;
     print(DocMessage);
+  }
+}
+
+Future getCarbsPref() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  carbs = preferences.getString("carbss")!;
+  if (carbs != null) {
+    print("Your Carbs is :" + carbs);
   }
 }
 
@@ -137,6 +146,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
     getSugerPref();
     getmsgFromDoctorPref();
     getDoctorUseNamePref();
+    getCarbsPref();
 
     _chartData = getChartData();
     super.initState();
@@ -149,6 +159,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
 
     // PostChart();
     detSugerLevel(Sugerb);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(

@@ -13,6 +13,7 @@ while($resultsForm = $stamement ->fetch()){
     array_push(
         $myarray,array(
             "Id" => $resultsForm['Id'],
+            "url" => $resultsForm['url'],
             "Mealname" => $resultsForm['Mealname'],
             "Mealtype" => $resultsForm['Mealtype'],
             "Mealtime" => $resultsForm['Mealtime'],

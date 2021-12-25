@@ -15,6 +15,57 @@ class BreakFastss extends StatefulWidget {
 class _BreakFastssState extends State<BreakFastss> {
   var ListSearch = [];
   var country_pref;
+  var carbs;
+  var Cals;
+  var Sugerb;
+  late String Sucomments = "";
+  double breakFastCalories = 0.0;
+  double breakFastCarbs = 0.0;
+  String mealType = "breakfast";
+  double calorieLeft = 0.0;
+  double carbsPercentag = 0.0;
+
+  Future getCarbsPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    carbs = preferences.getString("carbss")!;
+    if (carbs != null) {
+      print("Your Carbs is :" + carbs.toStringAsFixed(2));
+    }
+  }
+
+  Future getCals() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    Cals = preferences.getString("Cals")!;
+    if (Cals != null) {
+      print("Your Carbs is :" + Cals.toStringAsFixed(2));
+    }
+  }
+
+  getSugerPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      Sugerb = preferences.getString("Sugerb");
+    });
+    print("Your blood sugar level is : " + Sugerb.toStringAsFixed(2));
+  }
+
+  detSugerLevel(Sugerb) {
+    if (Sugerb != null) {
+      double Sugerv = double.parse(Sugerb);
+      if (Sugerv <= 90) {
+        Sucomments = "Low";
+      } else if (Sugerv > 90 && Sugerv <= 120) {
+        Sucomments = "Normal";
+      } else if (Sugerv > 120 && Sugerv <= 160) {
+        Sucomments = "High";
+      } else {
+        Sucomments = "High";
+        print(
+            Sucomments + "///////888888888888888888888888888888"); //Dangerous!
+      }
+    }
+  }
+
   getPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -24,8 +75,37 @@ class _BreakFastssState extends State<BreakFastss> {
     print(country_pref);
   }
 
+  void calculateMeal(Sucomments, mealType) {
+    carbsPercentag = double.parse(carbs);
+    calorieLeft = double.parse(Cals);
+
+    if (mealType == "breakfast") {
+      if (Sucomments == "Low") {
+        carbsPercentag += (carbsPercentag * 0.03);
+      }
+      if (Sucomments == "Normal") {
+        carbsPercentag += 0;
+      }
+      if (Sucomments == "High") {
+        carbsPercentag -= (carbsPercentag * 0.03);
+      }
+      breakFastCalories = calorieLeft * (28 / 100);
+      breakFastCarbs = carbsPercentag * (28 / 100);
+      calorieLeft = calorieLeft - breakFastCalories;
+    }
+    print("********//********");
+    print("BreakFast Calories = " + breakFastCalories.toStringAsFixed(2));
+    print("BreakFast Carps = " + breakFastCarbs.toStringAsFixed(2));
+    print("Calorie Left = " + calorieLeft.toStringAsFixed(2));
+    print("********//********");
+  }
+
   @override
   void initState() {
+    getCarbsPref();
+    getCals();
+    getSugerPref();
+
     //getPref();
     getData();
     super.initState();
@@ -55,7 +135,12 @@ class _BreakFastssState extends State<BreakFastss> {
     //Get Patients Data From Localhost API
     String theUrl =
         "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetBreakFasts.php";
-    var data = {"mealtype": "Breakfast"};
+    var data = {
+      "Calories": breakFastCalories.toString(),
+      "lessCalories": (breakFastCalories - 50).toString(),
+      "mealtype": "Breakfast",
+      "carbohydrate": breakFastCarbs.toString()
+    }; //
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
     var responceBody = json.decode(res.body);
@@ -64,6 +149,8 @@ class _BreakFastssState extends State<BreakFastss> {
 
   @override
   Widget build(BuildContext context) {
+    detSugerLevel(Sugerb);
+    calculateMeal(Sucomments, mealType);
     return Scaffold(
         appBar: AppBar(
           title: Text("BreakFasts"),

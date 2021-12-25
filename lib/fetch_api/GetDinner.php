@@ -1,7 +1,7 @@
 <?php 
 require('connection.php');
 
-$mealtype = $_POST['mealtype'] ;
+$mealtype = $_POST['Mealtype'] ;
 $makeQuery =" SELECT * FROM meals WHERE Mealtype  = ?";
 $stamement =$connection->prepare($makeQuery);
 $stamement->execute(array($mealtype));

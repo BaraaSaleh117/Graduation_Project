@@ -50,8 +50,21 @@ class _PatientUiState extends State<PatientUi> {
 
   var date = DateTime.now();
 
+  SavecarbsCal(String carbs) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("carbss", carbs);
+    print(preferences.getString("carbss"));
+  }
+
+  SaveCal(String Cal) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("Cals", Cal);
+    print(preferences.getString("Cals"));
+  }
+
   int getHeightint() {
     int _heightOfUser = int.parse(Height);
+
     return _heightOfUser;
   }
 
@@ -307,6 +320,10 @@ class _PatientUiState extends State<PatientUi> {
     calculateProten();
 
     calculateFat();
+
+    SavecarbsCal(carbs.toString());
+    SaveCal(_Cal.toString());
+
     //PostData();
 
     late AnimationController? animationController;
