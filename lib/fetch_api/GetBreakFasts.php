@@ -4,9 +4,10 @@ $Calories = $_POST['Calories'] ;
 $lessCalories = $_POST['lessCalories'] ;
 $mealtype = $_POST['mealtype'] ;
 $carbohydrate = $_POST['carbohydrate'] ;
-$makeQuery =" SELECT * FROM meals WHERE Calories  < ? AND Calories > ? AND  mealtype = ? AND carbohydrate < ? ";
+$lesscarbohydrate = $_POST['lesscarbohydrate'] ;
+$makeQuery =" SELECT * FROM meals WHERE Calories  < ? AND Calories > ? AND  mealtype = ? AND carbohydrate < ?  AND carbohydrate > ?";
 $stamement =$connection->prepare($makeQuery);
-$stamement->execute(array($Calories,$lessCalories,$mealtype , $carbohydrate));
+$stamement->execute(array($Calories,$lessCalories,$mealtype , $carbohydrate ,$lesscarbohydrate));
 
 //WHERE Mealtype  = ? AND Calories <200  AND carbohydrate <88  
 

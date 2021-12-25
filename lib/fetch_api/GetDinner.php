@@ -1,11 +1,13 @@
 <?php 
 require('connection.php');
-
-$mealtype = $_POST['Mealtype'] ;
-$makeQuery =" SELECT * FROM meals WHERE Mealtype  = ?";
+$Calories = $_POST['Calories'] ;
+$lessCalories = $_POST['lessCalories'] ;
+$mealtype = $_POST['mealtype'] ;
+$carbohydrate = $_POST['carbohydrate'] ;
+$lesscarbohydrate = $_POST['lesscarbohydrate'] ;
+$makeQuery =" SELECT * FROM meals WHERE Calories  < ? AND Calories > ? AND  mealtype = ? AND carbohydrate < ?  AND carbohydrate > ?";
 $stamement =$connection->prepare($makeQuery);
-$stamement->execute(array($mealtype));
-
+$stamement->execute(array($Calories,$lessCalories,$mealtype , $carbohydrate ,$lesscarbohydrate));
 $myarray=array();
 
 while($resultsForm = $stamement ->fetch()){

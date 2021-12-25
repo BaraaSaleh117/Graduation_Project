@@ -24,6 +24,7 @@ class _BreakFastssState extends State<BreakFastss> {
   String mealType = "breakfast";
   double calorieLeft = 0.0;
   double carbsPercentag = 0.0;
+  double CarbsLeft = 0.0;
 
   Future getCarbsPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -37,7 +38,7 @@ class _BreakFastssState extends State<BreakFastss> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     Cals = preferences.getString("Cals")!;
     if (Cals != null) {
-      print("Your Carbs is :" + Cals.toStringAsFixed(2));
+      print("Your Cals is :" + Cals.toStringAsFixed(2));
     }
   }
 
@@ -92,12 +93,26 @@ class _BreakFastssState extends State<BreakFastss> {
       breakFastCalories = calorieLeft * (28 / 100);
       breakFastCarbs = carbsPercentag * (28 / 100);
       calorieLeft = calorieLeft - breakFastCalories;
+      CarbsLeft = carbsPercentag - breakFastCarbs;
     }
     print("********//********");
     print("BreakFast Calories = " + breakFastCalories.toStringAsFixed(2));
     print("BreakFast Carps = " + breakFastCarbs.toStringAsFixed(2));
     print("Calorie Left = " + calorieLeft.toStringAsFixed(2));
+    print("Carbs Left = " + CarbsLeft.toStringAsFixed(2));
     print("********//********");
+  }
+
+  SavecarbsCal(String carbs) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("Carpsleft", carbs);
+    print(preferences.getString("Carpsleft"));
+  }
+
+  SaveCal(String Cal) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("Calories", Cal);
+    print(preferences.getString("Calories"));
   }
 
   @override
@@ -139,7 +154,8 @@ class _BreakFastssState extends State<BreakFastss> {
       "Calories": breakFastCalories.toString(),
       "lessCalories": (breakFastCalories - 50).toString(),
       "mealtype": "Breakfast",
-      "carbohydrate": breakFastCarbs.toString()
+      "carbohydrate": breakFastCarbs.toString(),
+      "lesscarbohydrate": (breakFastCarbs - 20).toString(),
     }; //
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
@@ -151,6 +167,10 @@ class _BreakFastssState extends State<BreakFastss> {
   Widget build(BuildContext context) {
     detSugerLevel(Sugerb);
     calculateMeal(Sucomments, mealType);
+
+    SavecarbsCal(CarbsLeft.toString());
+    SaveCal(calorieLeft.toString());
+
     return Scaffold(
         appBar: AppBar(
           title: Text("BreakFasts"),

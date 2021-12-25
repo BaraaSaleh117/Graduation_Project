@@ -1,10 +1,14 @@
 <?php 
 require('connection.php');
 
+$Calories = $_POST['Calories'] ;
+$lessCalories = $_POST['lessCalories'] ;
 $mealtype = $_POST['mealtype'] ;
-$makeQuery =" SELECT * FROM meals WHERE Mealtype  = ?";
+$carbohydrate = $_POST['carbohydrate'] ;
+$lesscarbohydrate = $_POST['lesscarbohydrate'] ;
+$makeQuery =" SELECT * FROM meals WHERE Calories  < ? AND Calories > ? AND  mealtype = ? AND carbohydrate < ?  AND carbohydrate > ?";
 $stamement =$connection->prepare($makeQuery);
-$stamement->execute(array($mealtype));
+$stamement->execute(array($Calories,$lessCalories,$mealtype , $carbohydrate ,$lesscarbohydrate));
 
 $myarray=array();
 
@@ -17,6 +21,7 @@ while($resultsForm = $stamement ->fetch()){
             "Mealname" => $resultsForm['Mealname'],
             "Mealtype" => $resultsForm['Mealtype'],
             "Mealtime" => $resultsForm['Mealtime'],
+            "carbohydrate" => $resultsForm['carbohydrate'],
             "Calories" => $resultsForm['Calories'],
             "Description" => $resultsForm['Description'],
             
