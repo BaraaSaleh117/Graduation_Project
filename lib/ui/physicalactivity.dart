@@ -2,6 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/aqla.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/bikeriding.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/cardio.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/pushup.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/skippingrope.dart';
+import 'package:graduation_projectflutter/ui/physicalactivitypages/stomach.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PhysicalActivity extends StatefulWidget {
   const PhysicalActivity({Key? key}) : super(key: key);
@@ -17,6 +24,7 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
         appBar: AppBar(
           title: Text("Physical Activity"),
           backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          centerTitle: true,
         ),
         body: Container(
             child: GridView(
@@ -24,7 +32,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           children: <Widget>[
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SkippingRope()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[
@@ -52,7 +63,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cardio()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[
@@ -80,7 +94,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Aqla()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[
@@ -93,7 +110,7 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
                     Container(
                       child: Column(children: <Widget>[
                         Text(
-                          "Aqla",
+                          "Pull up",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w700),
                         ),
@@ -108,7 +125,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => PushUp()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[
@@ -136,35 +156,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               ),
             ),
             InkWell(
-              onTap: () {},
-              child: Card(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Image.asset(
-                        "lib/assets/fitness_app/runner.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      child: Column(children: <Widget>[
-                        Text(
-                          "Jogging",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          "",
-                          style: TextStyle(fontSize: 13, color: Colors.blue),
-                        )
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Stomach()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[
@@ -192,35 +187,10 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
               ),
             ),
             InkWell(
-              onTap: () {},
-              child: Card(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Image.asset(
-                        "lib/assets/fitness_app/38.jpg",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      child: Column(children: <Widget>[
-                        Text(
-                          "jumping",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          "",
-                          style: TextStyle(fontSize: 13, color: Colors.blue),
-                        )
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BikeRiding()));
+              },
               child: Card(
                 child: Column(
                   children: <Widget>[

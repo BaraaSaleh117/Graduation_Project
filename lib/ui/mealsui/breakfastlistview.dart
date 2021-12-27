@@ -33,6 +33,9 @@ class _BreakFastssState extends State<BreakFastss> {
       print("Your Carbs is :" + carbs.toStringAsFixed(2));
     }
   }
+  // double getEaten (){
+
+  // }
 
   Future getCals() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

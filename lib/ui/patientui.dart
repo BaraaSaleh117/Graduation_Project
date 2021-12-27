@@ -241,22 +241,6 @@ class _PatientUiState extends State<PatientUi> {
     print(Height + Age + Drugs + ChronicDiseases);
   }
 
-  ///
-  ///
-  ///
-
-  DateTime toDateMonthYear(DateTime dateTime) {
-    DateTime date = DateTime(dateTime.year, dateTime.month, dateTime.day);
-    print(date);
-    return date;
-  }
-
-  int daysCount(DateTime first, DateTime last) =>
-      last.difference(first).inDays + 1;
-//
-  ///
-//////
-  ///
   Future getData() async {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/fetch_api/getmealss.php";
@@ -470,11 +454,11 @@ class _PatientUiState extends State<PatientUi> {
                                   )
                                 ],
                               ),
-                              IconButton(
-                                  icon: new Image.asset('lib/assets/wws.png'),
-                                  iconSize: 5,
-                                  tooltip: 'New Check',
-                                  onPressed: PostData),
+                              // IconButton(
+                              //     icon: new Image.asset('lib/assets/wws.png'),
+                              //     iconSize: 5,
+                              //     tooltip: 'New Check',
+                              //     onPressed: PostData),
                               Row(
                                 children: <Widget>[
                                   Container(

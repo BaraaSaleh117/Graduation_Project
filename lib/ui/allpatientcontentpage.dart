@@ -31,8 +31,8 @@ class _AllPatientContentPage extends State<AllPatientContentPage> {
         body: IndexedStack(
           index: _currentIndex,
           children: [
-            PatientUi(),
             DiabetesReg(),
+            PatientUi(),
             PhysicalActivity(),
           ],
         ),
@@ -46,18 +46,18 @@ class _AllPatientContentPage extends State<AllPatientContentPage> {
           unselectedFontSize: 13,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite_border_outlined,
-                  size: 30,
-                ),
-                label: 'Measurements'),
-            BottomNavigationBarItem(
               icon: ImageIcon(
                 AssetImage("lib/assets/blood-test.png"),
                 size: 30,
               ),
               label: 'Health condition',
             ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.favorite_border_outlined,
+                  size: 30,
+                ),
+                label: 'Measurements'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.fitness_center,

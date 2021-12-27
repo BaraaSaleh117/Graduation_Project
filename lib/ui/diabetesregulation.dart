@@ -7,6 +7,7 @@ import 'package:graduation_projectflutter/components/meallist.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
@@ -38,6 +39,10 @@ var DocMessage = "";
 var Username;
 bool isSign = false;
 var carbs;
+bool ok = true;
+var hour = (DateFormat('h:mm a').format(date));
+bool hourtime = false;
+bool ques = true;
 
 bool isEmargincy = true;
 List<SalesData> _chartData = [];
@@ -131,12 +136,21 @@ class _DiabetesRegState extends State<DiabetesReg> {
       if (Sugerv <= 90) {
         Sucomments = "Low";
       } else if (Sugerv > 90 && Sugerv <= 120) {
-        Sucomments = "Normal";
+        Sucomments = "High";
       } else if (Sugerv > 120 && Sugerv <= 160) {
         Sucomments = "High";
       } else {
-        Sucomments = "High"; //Dangerous!
+        Sucomments = "Dangerous!"; //Dangerous!
       }
+    }
+  }
+
+  void dethour() {
+    if (hour == "9:00 AM" || hour == "2:00 PM" || hour == "7:00 PM") {
+      hourtime = true;
+      print(hour);
+    } else {
+      print("Not Mached");
     }
   }
 
@@ -156,6 +170,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
   Widget build(BuildContext context) {
     Days = (DateFormat('EEEE').format(date));
     lastcheck = (DateFormat('EEEE , h:mm a').format(date));
+    dethour();
 
     // PostChart();
     detSugerLevel(Sugerb);
@@ -218,7 +233,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   //  showIndicator: false,
                 )),
 
-            Sucomments == "Dangerous!" && Ismessage
+            Sucomments == "Dangerous!" && Ismessage && ok
                 ? Container(
                     decoration: BoxDecoration(
                       color: FitnessAppTheme.white,
@@ -234,8 +249,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
                             blurRadius: 10.0),
                       ],
                     ),
-                    padding: EdgeInsets.only(
-                        top: 30, bottom: 30, left: 10, right: 10),
+                    padding:
+                        EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 5),
                     // color: Colors.red.shade100,
                     child: Column(
                       children: [
@@ -260,7 +275,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.only(left: 20, bottom: 5),
+                          padding: EdgeInsets.only(left: 5, bottom: 5),
                           alignment: Alignment.topLeft,
                           child: Text(
                             "Dr ." + Username,
@@ -277,8 +292,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(
-                              left: 10,
-                              right: 10,
+                              left: 5,
+                              right: 5,
                             )),
                             Flexible(
                               child: Text(
@@ -287,7 +302,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
                                   fontWeight: FontWeight.w800,
-                                  fontSize: 20,
+                                  fontSize: 15,
                                   letterSpacing: 0.4,
                                   color: HexColor('#F65283'),
                                 ),
@@ -295,11 +310,106 @@ class _DiabetesRegState extends State<DiabetesReg> {
                             ),
                           ],
                         ),
+                        IconButton(
+                          icon: new Image.asset('lib/assets/ok.jpg'),
+                          iconSize: 40,
+                          tooltip: 'New Check',
+                          onPressed: () {
+                            ok = false;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        AllPatientContentPage()));
+                          },
+                        ),
                       ],
                     ))
                 : Container(
                     child: Text(""),
-                  ),
+                  ), ////////////////////////////////////////////////////////////
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(68.0),
+                      bottomLeft: const Radius.circular(68.0),
+                      bottomRight: Radius.circular(68.0),
+                      topRight: const Radius.circular(68.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: FitnessAppTheme.nearlyBlack.withOpacity(0.7),
+                        offset: const Offset(1.1, 1.1),
+                        blurRadius: 10.0),
+                  ],
+                ),
+
+                // color: Colors.red.shade100,
+                child: Column(
+                  children: [
+                    ok && Sucomments != "Dangerous!" && hourtime
+                        ? Container(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: 40,
+                                      height: 40,
+                                      child: Image.asset(
+                                          'lib/assets/fitness_app/bell.png'),
+                                    ),
+                                    Text(
+                                      "1",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      left: 20, bottom: 17, right: 5, top: 10),
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "Please commitment to the medication schedule prescribed by the doctor",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      icon:
+                                          new Image.asset('lib/assets/ok.jpg'),
+                                      iconSize: 50,
+                                      tooltip: 'New Check',
+                                      onPressed: () {
+                                        ok = false;
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AllPatientContentPage()));
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                  ],
+                )),
 
             Container(
                 padding: const EdgeInsets.all(20),
@@ -728,6 +838,9 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                     : Sucomments == "High"
                                         ? Column(
                                             children: [
+                                              Row(
+                                                children: [],
+                                              ),
                                               ListTile(
                                                 title: Text(
                                                   Sucomments,
@@ -742,40 +855,6 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                                   Icons.mood_bad_sharp,
                                                   color: Colors.red,
                                                   size: 40,
-                                                ),
-                                              ),
-                                              ListTile(
-                                                title: Text(
-                                                  "Enter here the last thing you ate",
-                                                  style: TextStyle(
-                                                    color: Colors.red.shade900,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                              TextField(
-                                                  controller: Eten,
-                                                  textAlign: TextAlign.center,
-                                                  decoration: InputDecoration(
-                                                    border:
-                                                        OutlineInputBorder(),
-                                                    hintText: 'Enter Meal Name',
-                                                  ),
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              ListTile(
-                                                title: Text(
-                                                  "Please check again in 8 hours",
-                                                  style: TextStyle(
-                                                    color: Colors.red.shade900,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  textAlign: TextAlign.center,
                                                 ),
                                               ),
                                             ],
@@ -841,11 +920,127 @@ class _DiabetesRegState extends State<DiabetesReg> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     )
                   ],
                 )),
             //////////////////////////
+            ///
+            SizedBox(
+              height: 20,
+            ),
+            ques && Sucomments == "High"
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: FitnessAppTheme.white,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          bottomLeft: const Radius.circular(8.0),
+                          bottomRight: Radius.circular(8.0),
+                          topRight: const Radius.circular(40.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: FitnessAppTheme.nearlyBlack.withOpacity(0.7),
+                            offset: const Offset(1.1, 1.1),
+                            blurRadius: 10.0),
+                      ],
+                    ),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                    // color: Colors.red.shade100,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              child: Image.asset("lib/assets/EN.png"),
+                              width: 40,
+                              height: 40,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "The reason for the high level of sugar in your blood is that you may have experienced a difficult psychological condition today or that you ate something that contains large amounts of sugar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            "If the reason is from eating",
+                            style: TextStyle(
+                              color: Colors.red.shade900,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            "Enter here the last thing you ate And please commit to the suggested healthy meals",
+                            style: TextStyle(
+                              color: Colors.red.shade900,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TextField(
+                            controller: Eten,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter Meal Name',
+                            ),
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold)),
+                        ListTile(
+                          title: Text(
+                            "Please check again in 8 hours",
+                            style: TextStyle(
+                              color: Colors.red.shade900,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Ok"),
+                            IconButton(
+                              icon: Icon(Icons.offline_pin_outlined),
+                              iconSize: 40,
+                              tooltip: 'New Check',
+                              onPressed: () {
+                                ques = false;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AllPatientContentPage()));
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ))
+                : Container(),
+            SizedBox(
+              height: 20,
+            ),
+
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
