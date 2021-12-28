@@ -172,8 +172,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
     lastcheck = (DateFormat('EEEE , h:mm a').format(date));
     dethour();
 
-    // PostChart();
     detSugerLevel(Sugerb);
+    PostChart();
 
     return Scaffold(
       appBar: AppBar(
