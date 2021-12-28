@@ -66,6 +66,12 @@ class _DinnerState extends State<Dinner> {
     }
   }
 
+  SaveCalAfterdinner(String Cal) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("C", Cal);
+    print(preferences.getString("C"));
+  }
+
   getSugerPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -123,9 +129,10 @@ class _DinnerState extends State<Dinner> {
   @override
   void initState() {
     getCarbsPref();
+    print("NNNNNNNNNNNNNNNNNNNNNNNNNNN");
     getCals();
     getSugerPref();
-    // print("NNNNNNNNNNNNNNNNNNNNNNNNNNN");
+
     getCalsAfterSnack();
     getCarbsAfterSnack();
 
@@ -153,6 +160,7 @@ class _DinnerState extends State<Dinner> {
   Widget build(BuildContext context) {
     detSugerLevel(Sugerb);
     calculateMeal(Sucomments, mealType);
+    SaveCalAfterdinner(calorieLeft.toString());
     return Scaffold(
         appBar: AppBar(
           title: Text("Dinners"),

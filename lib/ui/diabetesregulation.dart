@@ -47,6 +47,12 @@ bool ques = true;
 bool isEmargincy = true;
 
 TextEditingController Eten = TextEditingController();
+savePref(String status) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setString("status", status);
+  print(preferences.getString("status"));
+}
+
 void _showToast(BuildContext context) {
   final scaffold = ScaffoldMessenger.of(context);
   scaffold.showSnackBar(
@@ -136,7 +142,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
       if (Sugerv <= 90) {
         Sucomments = "Low";
       } else if (Sugerv > 90 && Sugerv <= 120) {
-        Sucomments = "High";
+        Sucomments = "Normal";
       } else if (Sugerv > 120 && Sugerv <= 160) {
         Sucomments = "High";
       } else {
@@ -151,6 +157,31 @@ class _DiabetesRegState extends State<DiabetesReg> {
       print(hour);
     } else {
       print("Not Mached");
+    }
+  }
+
+  void detChecker() {
+    if (hour == "9:00 AM" ||
+        hour == "9:01 AM" ||
+        hour == "9:02 AM" ||
+        hour == "9:03 AM" ||
+        hour == "9:04 AM" ||
+        hour == "9:05 AM" ||
+        hour == "2:00 PM" ||
+        hour == "2:01 PM" ||
+        hour == "2:02 PM" ||
+        hour == "2:03 PM" ||
+        hour == "2:04 PM" ||
+        hour == "2:05 PM" ||
+        hour == "10:00 PM" ||
+        hour == "10:01 PM" ||
+        hour == "10:02 PM" ||
+        hour == "10:03 PM" ||
+        hour == "10:04 PM" ||
+        hour == "10:05 PM") {
+      PostChart();
+    } else {
+      print("Open agin in 9 or 2 or 10 PM");
     }
   }
 
@@ -171,9 +202,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
     Days = (DateFormat('EEEE').format(date));
     lastcheck = (DateFormat('EEEE , h:mm a').format(date));
     dethour();
-
+    detChecker();
     detSugerLevel(Sugerb);
-    PostChart();
 
     return Scaffold(
       appBar: AppBar(
@@ -1037,6 +1067,84 @@ class _DiabetesRegState extends State<DiabetesReg> {
                       ],
                     ))
                 : Container(),
+            ques && Sucomments == "Low"
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: FitnessAppTheme.white,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          bottomLeft: const Radius.circular(8.0),
+                          bottomRight: Radius.circular(8.0),
+                          topRight: const Radius.circular(40.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: FitnessAppTheme.nearlyBlack.withOpacity(0.7),
+                            offset: const Offset(1.1, 1.1),
+                            blurRadius: 10.0),
+                      ],
+                    ),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                    // color: Colors.red.shade100,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              child: Image.asset("lib/assets/EN.png"),
+                              width: 40,
+                              height: 40,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Your diabetes level is very low, please adhere to the suggested meals",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        ListTile(
+                          title: Text(
+                            "Please check again in 8 hours",
+                            style: TextStyle(
+                              color: Colors.red.shade900,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Ok"),
+                            IconButton(
+                              icon: Icon(Icons.offline_pin_outlined),
+                              iconSize: 40,
+                              tooltip: 'New Check',
+                              onPressed: () {
+                                ques = false;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AllPatientContentPage()));
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ))
+                : Container(),
+
             SizedBox(
               height: 20,
             ),
@@ -1281,6 +1389,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                   textAlign: TextAlign.center,
                                 )),
                                 onTap: () {
+                                  savePref("BreakFast");
                                   //  Navigator.of(context).pushNamed("BreakFast");
                                   Navigator.push(
                                       context,
@@ -1311,6 +1420,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                   textAlign: TextAlign.center,
                                 )),
                                 onTap: () {
+                                  savePref("Lunch");
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -1339,6 +1449,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                   textAlign: TextAlign.center,
                                 )),
                                 onTap: () {
+                                  savePref("Snack");
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -1368,6 +1479,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                   textAlign: TextAlign.center,
                                 )),
                                 onTap: () {
+                                  savePref("Dinner");
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
