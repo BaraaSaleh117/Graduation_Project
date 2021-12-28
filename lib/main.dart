@@ -16,7 +16,6 @@ import 'package:graduation_projectflutter/ui/detcalview.dart';
 import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/line.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';

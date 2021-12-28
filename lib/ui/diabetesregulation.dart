@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/meallist.dart';
@@ -16,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:http/http.dart' as http;
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
@@ -45,7 +45,7 @@ bool hourtime = false;
 bool ques = true;
 
 bool isEmargincy = true;
-List<SalesData> _chartData = [];
+
 TextEditingController Eten = TextEditingController();
 void _showToast(BuildContext context) {
   final scaffold = ScaffoldMessenger.of(context);
@@ -161,8 +161,8 @@ class _DiabetesRegState extends State<DiabetesReg> {
     getmsgFromDoctorPref();
     getDoctorUseNamePref();
     getCarbsPref();
+    getdata().then((value) => suger = value);
 
-    _chartData = getChartData();
     super.initState();
   }
 
@@ -1406,23 +1406,12 @@ class _DiabetesRegState extends State<DiabetesReg> {
               ),
             ),
             Container(
-                width: 500,
-                height: 250,
-                child: Scaffold(
-                    body: SfCartesianChart(
-                  title: ChartTitle(text: ''),
-                  //legend: Legend(isVisible: true),
-                  series: <ChartSeries>[
-                    LineSeries<SalesData, double>(
-                        dataSource: _chartData,
-                        xValueMapper: (SalesData sales, _) => sales.year,
-                        yValueMapper: (SalesData sales, _) => sales.sales,
-                        color: HexColor('#5C5EDD').withOpacity(0.9),
-                        dataLabelSettings: DataLabelSettings(isVisible: true)),
-                  ],
-                  primaryXAxis:
-                      NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift),
-                ))),
+              height: 300,
+              child: charts.BarChart(
+                chartData(suger),
+                animate: true,
+              ),
+            ),
             SizedBox(
               height: 50,
             ),
@@ -1433,24 +1422,45 @@ class _DiabetesRegState extends State<DiabetesReg> {
   }
 }
 
-List<SalesData> getChartData() {
-  final List<SalesData> chartData = [
-    SalesData(1, 120),
-    SalesData(2, 140),
-    SalesData(3, 180),
-    SalesData(4, 140),
-    SalesData(5, 100),
-    SalesData(6, 120),
-    SalesData(7, 150),
-  ];
-  return chartData;
+//***************************************************** */
+List<Suger> fromJson(String strJson) {
+  final data = jsonDecode(strJson);
+  return List<Suger>.from(data.map((i) => Suger.fromMap(i)));
 }
 
-class SalesData {
-  final double year;
-  final double sales;
-  SalesData(this.year, this.sales);
+List<Suger> suger = [];
+Future<List<Suger>> getdata() async {
+  List<Suger> list = [];
+  final response = await http.get(Uri.parse(
+      "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/chart.php"));
+  if (response.statusCode == 200) {
+    list = fromJson(response.body);
+  }
+  return list;
 }
+
+List<charts.Series<Suger, String>> chartData(List<Suger> data) {
+  return [
+    charts.Series<Suger, String>(
+        id: 'Suger',
+        domainFn: (Suger s, _) => s.Days,
+        measureFn: (Suger s, _) => s.SugerLevel,
+        data: data)
+  ];
+}
+
+class Suger {
+  late final String Days;
+  late final int SugerLevel;
+
+  Suger({required this.Days, required this.SugerLevel});
+
+  factory Suger.fromMap(Map<String, dynamic> map) {
+    return Suger(Days: map["Days"], SugerLevel: int.parse(map["SugerLevel"]));
+  }
+}
+
+////***************************************************** */
 
 class DataSearch extends SearchDelegate<String> {
   List<dynamic> list;

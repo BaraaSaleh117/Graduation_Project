@@ -42,6 +42,7 @@ dependencies:
   syncfusion_flutter_calendar: ^19.3.57
   table_calendar: ^3.0.0
   url_launcher: ^6.0.17
+  charts_flutter: ^0.12.0
 
   
   

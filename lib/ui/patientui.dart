@@ -8,7 +8,6 @@ import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet
 import 'package:graduation_projectflutter/patientPage/ui_view/wave_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
