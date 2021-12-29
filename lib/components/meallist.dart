@@ -12,8 +12,11 @@ class mealsList extends StatelessWidget {
   late final String Mealname;
   late final String Mealtype;
   late final String Mealtime;
+  late final String carbohydrate;
   late final String Calories;
   late final String Description;
+  late final String Nutrients;
+  late final String Howtoprepare;
 
   var intCalories;
 
@@ -25,7 +28,10 @@ class mealsList extends StatelessWidget {
       required this.Mealtype,
       required this.Mealtime,
       required this.Calories,
-      required this.Description});
+      required this.carbohydrate,
+      required this.Description,
+      required this.Nutrients,
+      required this.Howtoprepare});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +136,10 @@ class mealsList extends StatelessWidget {
             Mealtyped: Mealtype,
             Mealtimed: Mealtime,
             Caloriesd: Calories,
+            carbohydrate: carbohydrate,
             Descriptiond: Description,
+            Nutrients: Nutrients,
+            Howtoprepare: Howtoprepare,
           );
         }));
       },

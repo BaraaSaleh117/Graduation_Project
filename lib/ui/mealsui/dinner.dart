@@ -148,7 +148,7 @@ class _DinnerState extends State<Dinner> {
       "lessCalories": (DinnerCalories - 50).toString(),
       "mealtype": "Dinner",
       "carbohydrate": DinnerCarbs.toString(),
-      "lesscarbohydrate": (DinnerCarbs - 20).toString(),
+      "lesscarbohydrate": (DinnerCarbs - 30).toString(),
     };
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
@@ -182,7 +182,10 @@ class _DinnerState extends State<Dinner> {
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,
                       Calories: snapshot.data[i]['Calories']!,
-                      Description: snapshot.data[i]['Description']!);
+                      carbohydrate: snapshot.data[i]['carbohydrate']!,
+                      Description: snapshot.data[i]['Description']!,
+                      Nutrients: snapshot.data[i]['Nutrients']!,
+                      Howtoprepare: snapshot.data[i]['Howtoprepare']!);
                 },
               );
             }

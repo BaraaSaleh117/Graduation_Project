@@ -9,7 +9,10 @@ class SnacksList extends StatelessWidget {
   late final String Mealtype;
   late final String Mealtime;
   late final String Calories;
+  late final String carbohydrate;
   late final String Description;
+  late final String Nutrients;
+  late final String Howtoprepare;
 
   SnacksList(
       {required this.Id,
@@ -18,7 +21,10 @@ class SnacksList extends StatelessWidget {
       required this.Mealtype,
       required this.Mealtime,
       required this.Calories,
-      required this.Description});
+      required this.carbohydrate,
+      required this.Description,
+      required this.Nutrients,
+      required this.Howtoprepare});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -113,7 +119,10 @@ class SnacksList extends StatelessWidget {
             Mealtyped: Mealtype,
             Mealtimed: Mealtime,
             Caloriesd: Calories,
+            carbohydrate: carbohydrate,
             Descriptiond: Description,
+            Nutrients: Nutrients,
+            Howtoprepare: Howtoprepare,
           );
         }));
       },

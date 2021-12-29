@@ -17,7 +17,7 @@ import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:graduation_projectflutter/ui/line.dart';
 import 'package:graduation_projectflutter/ui/mealsui/details.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
 import 'package:graduation_projectflutter/ui/mealsui/mealst.dart';
@@ -37,6 +37,9 @@ import 'fetch_api/fetchapi.dart';
 void main() {
   runApp(MyApp());
 }
+//1. 511/0.28 = totcals
+//2. totcals * 0.45 =totcarbs
+//3.
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

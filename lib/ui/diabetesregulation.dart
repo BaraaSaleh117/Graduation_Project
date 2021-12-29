@@ -7,7 +7,7 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
 import 'package:graduation_projectflutter/ui/resolution_a.dart';
@@ -235,7 +235,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   images: [
                     Image.asset(
                       "lib/assets/a1.jpg",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     Image.asset(
                       "lib/assets/a2.jpg",
@@ -243,19 +243,27 @@ class _DiabetesRegState extends State<DiabetesReg> {
                     ),
                     Image.asset(
                       "lib/assets/a3.jpg",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     Image.asset(
                       "lib/assets/a4.jpg",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     Image.asset(
                       "lib/assets/a6.jpg",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     Image.asset(
                       "lib/assets/a7.jpg",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      "lib/assets/meals/14.jpg",
+                      fit: BoxFit.cover,
+                    ),
+                    Image.asset(
+                      "lib/assets/meals/18.jpg",
+                      fit: BoxFit.cover,
                     ),
                   ],
                   dotColor: Colors.amber,
@@ -445,9 +453,9 @@ class _DiabetesRegState extends State<DiabetesReg> {
                 padding: const EdgeInsets.all(20),
                 child: const Text("Blood Sugar Status",
                     style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold,
-                        color: Colors.teal))),
+                        color: Colors.black))),
             Container(
                 decoration: BoxDecoration(
                   color: FitnessAppTheme.white,
@@ -627,7 +635,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    const Text(
+                                    Text(
                                       'High',
                                       style: const TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -828,21 +836,24 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                 Sucomments == "Dangerous!"
                                     ? Column(
                                         children: [
-                                          ListTile(
-                                            title: Text(
-                                              Sucomments,
-                                              style: TextStyle(
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.medical_services,
                                                 color: Colors.red.shade900,
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
+                                                size: 40,
                                               ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            leading: Icon(
-                                              Icons.medical_services,
-                                              color: Colors.red,
-                                              size: 40,
-                                            ),
+                                              Text(
+                                                " " + Sucomments,
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 21,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                           ListTile(
                                             title: Text(
@@ -869,77 +880,76 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                         ? Column(
                                             children: [
                                               Row(
-                                                children: [],
-                                              ),
-                                              ListTile(
-                                                title: Text(
-                                                  Sucomments,
-                                                  style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontSize: 21,
-                                                    fontWeight: FontWeight.bold,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.mood_bad_outlined,
+                                                    color: Colors.black,
+                                                    size: 40,
                                                   ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                                leading: Icon(
-                                                  Icons.mood_bad_sharp,
-                                                  color: Colors.red,
-                                                  size: 40,
-                                                ),
+                                                  Text(
+                                                    "  " + Sucomments + " !",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 21,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           )
                                         : Sucomments == "Normal"
                                             ? Column(
                                                 children: [
-                                                  ListTile(
-                                                    title: Text(
-                                                      Sucomments,
-                                                      style: TextStyle(
-                                                        color: Colors.green,
-                                                        fontSize: 22,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.mood,
+                                                        color: Colors.black,
+                                                        size: 40,
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                    leading: Icon(
-                                                      Icons
-                                                          .sentiment_very_satisfied_rounded,
-                                                      color: Colors.green,
-                                                      size: 40,
-                                                    ),
-                                                    onTap: () {
-                                                      // Navigator.push(context,
-                                                      //     MaterialPageRoute(builder: (context) => PatientUi()));
-                                                    },
-                                                  )
+                                                      Text(
+                                                        " " + Sucomments,
+                                                        style: TextStyle(
+                                                          color: Colors.green,
+                                                          fontSize: 21,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ],
                                               )
                                             : Column(
                                                 children: [
-                                                  ListTile(
-                                                    title: Text(
-                                                      Sucomments,
-                                                      style: TextStyle(
-                                                        color: Colors.amber,
-                                                        fontSize: 22,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.mood_bad_rounded,
+                                                        color: Colors.black,
+                                                        size: 40,
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                    leading: Icon(
-                                                      Icons.mood_bad_sharp,
-                                                      color: Colors.amber,
-                                                      size: 40,
-                                                    ),
-                                                    onTap: () {
-                                                      // Navigator.push(context,
-                                                      //     MaterialPageRoute(builder: (context) => PatientUi()));
-                                                    },
+                                                      Text(
+                                                        " " + Sucomments,
+                                                        style: TextStyle(
+                                                          color: Colors
+                                                              .amber.shade700,
+                                                          fontSize: 21,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
@@ -1495,13 +1505,13 @@ class _DiabetesRegState extends State<DiabetesReg> {
                   ),
 
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.only(top: 25, left: 20),
               child: const Text(
                 "Chart",
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 19,
                     fontWeight: FontWeight.bold,
-                    color: Colors.teal),
+                    color: Colors.black),
               ),
             ),
             Padding(
@@ -1629,7 +1639,10 @@ class DataSearch extends SearchDelegate<String> {
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,
                       Calories: snapshot.data[i]['Calories']!,
-                      Description: snapshot.data[i]['Description']!);
+                      carbohydrate: snapshot.data[i]['carbohydrate']!,
+                      Description: snapshot.data[i]['Description']!,
+                      Nutrients: snapshot.data[i]['Nutrients']!,
+                      Howtoprepare: snapshot.data[i]['Howtoprepare']!);
                 });
           }
           return const Center(child: CircularProgressIndicator());

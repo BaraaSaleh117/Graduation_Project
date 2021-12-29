@@ -159,7 +159,7 @@ class _BreakFastssState extends State<BreakFastss> {
       "lessCalories": (breakFastCalories - 50).toString(),
       "mealtype": "Breakfast",
       "carbohydrate": breakFastCarbs.toString(),
-      "lesscarbohydrate": (breakFastCarbs - 20).toString(),
+      "lesscarbohydrate": (breakFastCarbs - 30).toString(),
     }; //
     var res = await http.post(Uri.parse(theUrl),
         body: data, headers: {"Accept": "application/json"});
@@ -197,7 +197,10 @@ class _BreakFastssState extends State<BreakFastss> {
                       Mealtype: snapshot.data[i]['Mealtype']!,
                       Mealtime: snapshot.data[i]['Mealtime']!,
                       Calories: snapshot.data[i]['Calories']!,
-                      Description: snapshot.data[i]['Description']!);
+                      carbohydrate: snapshot.data[i]['carbohydrate']!,
+                      Description: snapshot.data[i]['Description']!,
+                      Nutrients: snapshot.data[i]['Nutrients']!,
+                      Howtoprepare: snapshot.data[i]['Howtoprepare']!);
                 },
               );
             }

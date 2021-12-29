@@ -20,7 +20,10 @@ while($resultsForm = $stamement ->fetch()){
             "Mealtype" => $resultsForm['Mealtype'],
             "Mealtime" => $resultsForm['Mealtime'],
             "Calories" => $resultsForm['Calories'],
+            "carbohydrate" => $resultsForm['carbohydrate'],
             "Description" => $resultsForm['Description'],
+            "Nutrients" => $resultsForm['Nutrients'],
+            "Howtoprepare" => $resultsForm['Howtoprepare'],
             
             
 

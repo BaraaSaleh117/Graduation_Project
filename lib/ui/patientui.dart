@@ -8,7 +8,7 @@ import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet
 import 'package:graduation_projectflutter/patientPage/ui_view/wave_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
-import 'package:graduation_projectflutter/ui/mealsui/breakfastlistview.dart';
+import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
 import 'package:graduation_projectflutter/ui/mealsui/snack.dart';
@@ -404,7 +404,7 @@ class _PatientUiState extends State<PatientUi> {
     calculateCarbs();
     inbodycheck = (DateFormat('EEEE, h:mm a').format(date));
     detetenfood();
-    //getPref();
+    //getPref(); ///////////////////////////////////////////////////////////////////////////////////
 
     calculateProten();
 
@@ -1341,17 +1341,29 @@ class _PatientUiState extends State<PatientUi> {
                                         TextSpan(
                                           text: comments,
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w700,
-                                            color: FitnessAppTheme.grey
-                                                .withOpacity(0.5),
+                                            color: Colors.brown.shade600,
                                           ),
                                         ),
                                       ])),
                                     ),
                                   ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 4, top: 16),
+                                    child: Text(
+                                      'Age',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontFamily: FitnessAppTheme.fontName,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          letterSpacing: -0.1,
+                                          color: FitnessAppTheme.darkText),
+                                    ),
+                                  ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 20),
+                                    padding: const EdgeInsets.only(top: 4),
                                     child: Text(
                                       Age != null ? Age : "",
                                       textAlign: TextAlign.center,

@@ -9,7 +9,7 @@ $makeQuery =" SELECT * FROM meals WHERE Calories  < ? AND Calories > ? AND  meal
 $stamement =$connection->prepare($makeQuery);
 $stamement->execute(array($Calories,$lessCalories,$mealtype , $carbohydrate ,$lesscarbohydrate));
 
-//WHERE Mealtype  = ? AND Calories <200  AND carbohydrate <88  
+
 
 
 $myarray=array();
@@ -26,6 +26,8 @@ while($resultsForm = $stamement ->fetch()){
             "Calories" => $resultsForm['Calories'],
             "carbohydrate" => $resultsForm['carbohydrate'],
             "Description" => $resultsForm['Description'],
+            "Nutrients" => $resultsForm['Nutrients'],
+            "Howtoprepare" => $resultsForm['Howtoprepare'],
             
             
 
