@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/main.dart';
 
 import 'package:graduation_projectflutter/utility/widgets.dart';
 
@@ -15,21 +16,26 @@ class _PatientsRegisterState extends State<PatientsRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leadingWidth: 20.0,
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
         title: const Text(
           "Patients Registration",
           textAlign: TextAlign.left,
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 20,
-            color: Colors.teal,
+            color: Colors.white,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(70.0),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("lib/assets/dee.jpg"), fit: BoxFit.cover),
+          ),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Form(
             //  key: formKey,
             child: Column(
@@ -166,49 +172,9 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 const SizedBox(
                   height: 20.0,
                 ),
-                const Text(
-                  'Responsible phone number',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-
-                TextFormField(
-                  autofocus: false,
-                  validator: (value) => value!.isEmpty
-                      ? 'Please enter your responsible Phone Number'
-                      : null,
-                  onSaved: (value) => _password = value!,
-                  decoration: buildInputDecoration(
-                      "Enter Responsible phone number", Icons.phone_callback),
-                ),
 
                 const SizedBox(
-                  height: 20.0,
-                ),
-                const Text(
-                  'Gender',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(
                   height: 5.0,
-                ),
-                TextFormField(
-                  autofocus: false,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Male Or Female ?' : null,
-                  onSaved: (value) => _password = value!,
-                  decoration: buildInputDecoration(
-                      "Enter your gender", Icons.favorite_border),
                 ),
 
                 const SizedBox(
@@ -218,12 +184,12 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 //     ?loading
                 MaterialButton(
                   minWidth: double.infinity,
-                  height: 60,
+                  height: 40,
                   onPressed: () {
                     //  Navigator.push(context, MaterialPageRoute(
                     // builder: (context) => Login()));
                   },
-                  color: Colors.lightGreen,
+                  color: HexColor('#FA7D82').withOpacity(0.8),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
@@ -233,9 +199,12 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
-                      color: Colors.teal,
+                      color: Colors.white,
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 20.0,
                 ),
               ],
             ),

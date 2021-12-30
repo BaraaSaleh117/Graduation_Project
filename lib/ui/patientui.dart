@@ -38,7 +38,7 @@ class _PatientUiState extends State<PatientUi> {
 
   late double _bmi = 0.0;
   late String comments = "";
-  bool ismale = true;
+  bool ismale = false;
   double POFat = 0.0;
   double _Cal = 0.0;
   double Waterneeded = 0.0;
@@ -404,7 +404,7 @@ class _PatientUiState extends State<PatientUi> {
     calculateCarbs();
     inbodycheck = (DateFormat('EEEE, h:mm a').format(date));
     detetenfood();
-    //getPref(); ///////////////////////////////////////////////////////////////////////////////////
+    // getPref(); ///////////////////////////////////////////////////////////////////////////////////
 
     calculateProten();
 

@@ -19,7 +19,7 @@ class _FoodListChosenState extends State<FoodListChosen> {
       padding: EdgeInsets.all(5),
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+            backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
             centerTitle: true,
             title: Text("Choosen List Food"),
           ),
@@ -785,26 +785,34 @@ class _FoodListChosenState extends State<FoodListChosen> {
               SizedBox(
                 height: 50,
               ),
-              MaterialButton(
-                minWidth: double.infinity,
-                height: 40,
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ConnectScale()));
-                },
-                color: Colors.black.withOpacity(0.4),
-                elevation: 20,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: const Text(
-                  "Next",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                      color: Colors.white),
+              Container(
+                width: 200,
+                child: MaterialButton(
+                  minWidth: 200,
+                  height: 40,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ConnectScale()));
+                  },
+                  color: HexColor('#FA7D82').withOpacity(0.8),
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: Colors.white),
+                  ),
                 ),
               ),
+              SizedBox(
+                height: 40,
+              )
             ],
           )),
     );

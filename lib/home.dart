@@ -38,11 +38,11 @@ class _HomeState extends State<Home> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.black54,
+          backgroundColor: Colors.white70,
           currentIndex: _currentIndex,
           onTap: _bottomTapped,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white38,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black38,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Patient'),
             BottomNavigationBarItem(

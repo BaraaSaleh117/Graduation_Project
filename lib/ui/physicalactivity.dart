@@ -23,7 +23,7 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Physical Activity"),
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
           centerTitle: true,
         ),
         body: Container(

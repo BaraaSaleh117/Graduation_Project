@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
 
 class DoctorRegistration extends StatefulWidget {
@@ -15,20 +16,25 @@ class _DoctorRegistrationState extends State<DoctorRegistration> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 20.0,
-        backgroundColor: Colors.teal,
+        backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+        centerTitle: true,
         title: const Text(
           "Doctor Registration",
           textAlign: TextAlign.left,
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 20,
-            color: Colors.lightGreen,
+            color: Colors.white,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(70.0),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("lib/assets/doc3.jpg"), fit: BoxFit.cover),
+          ),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Form(
             //  key: formKey,
             child: Column(
@@ -198,12 +204,12 @@ class _DoctorRegistrationState extends State<DoctorRegistration> {
                 //     ?loading
                 MaterialButton(
                   minWidth: double.infinity,
-                  height: 60,
+                  height: 40,
                   onPressed: () {
                     //  Navigator.push(context, MaterialPageRoute(
                     // builder: (context) => Login()));
                   },
-                  color: Colors.teal,
+                  color: HexColor('#5C5EDD').withOpacity(0.8),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
@@ -213,10 +219,13 @@ class _DoctorRegistrationState extends State<DoctorRegistration> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
-                      color: Colors.lightGreen,
+                      color: Colors.white,
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 30,
+                )
               ],
             ),
           ),

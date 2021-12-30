@@ -3,7 +3,7 @@ import 'package:graduation_projectflutter/ui/pallete.dart';
 
 InputDecoration buildInputDecoration(String hintText, IconData icon) {
   return InputDecoration(
-    prefixIcon: Icon(icon, size: 28, color: kWhite),
+    prefixIcon: Icon(icon, size: 28, color: Colors.white),
     hintText: hintText,
     contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),

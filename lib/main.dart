@@ -39,7 +39,7 @@ void main() {
 }
 //1. 511/0.28 = totcals
 //2. totcals * 0.45 =totcarbs
-//3.
+//3. totcarbs*0.28 =...
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: AllPatientContentPage(),
+      home: Background(),
       routes: {
         "PatientsUi": (context) {
           return PatientUi();

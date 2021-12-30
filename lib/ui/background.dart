@@ -15,8 +15,7 @@ class _BackgroundState extends State<Background> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("lib/assets/register_bg.png"),
-              fit: BoxFit.fill),
+              image: AssetImage("lib/assets/Dite.jpg"), fit: BoxFit.cover),
         ),
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
@@ -32,9 +31,9 @@ class _BackgroundState extends State<Background> {
                     Text(
                       " Welcome to ",
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 27,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     Text(
                       " BHA Diabetics Macros ",
@@ -43,7 +42,7 @@ class _BackgroundState extends State<Background> {
                           wordSpacing: 7,
                           letterSpacing: 3,
                           fontWeight: FontWeight.bold,
-                          color: Colors.teal),
+                          color: Colors.orange),
                     ),
                     SizedBox(
                       height: 20,
@@ -53,12 +52,12 @@ class _BackgroundState extends State<Background> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                           shadows: [
                             Shadow(
-                                color: Colors.red,
+                                color: Colors.orange,
                                 blurRadius: 5.0,
-                                offset: Offset(2.0, 10.0))
+                                offset: Offset(2.0, 7.0))
                           ]),
                     ),
                     SizedBox(
@@ -74,12 +73,12 @@ class _BackgroundState extends State<Background> {
                       " Organizing your meals organizes your life ",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.teal,
+                          color: Colors.orange,
                           shadows: [
                             Shadow(
                                 color: Colors.black,
-                                blurRadius: 10.0,
-                                offset: Offset(0.0, 10.0))
+                                blurRadius: 1.0,
+                                offset: Offset(1.0, 5.0))
                           ],
                           fontWeight: FontWeight.bold),
                     ),
@@ -109,7 +108,7 @@ class _BackgroundState extends State<Background> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
-                          color: Colors.teal,
+                          color: Colors.white,
                         ),
                       ),
                     ),

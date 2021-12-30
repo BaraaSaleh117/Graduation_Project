@@ -57,20 +57,12 @@ class _DoctorLoginState extends State<DoctorLogin> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
-          centerTitle: true,
-          title: const Text(
-            'Doctor Login',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-        ),
         body: SingleChildScrollView(
           child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("lib/assets/docc.jpg"), fit: BoxFit.fill),
+            ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             padding: const EdgeInsets.all(40.0),

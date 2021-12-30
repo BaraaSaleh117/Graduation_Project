@@ -40,7 +40,7 @@ class _docHomePage extends State<docHomePage> {
           backgroundColor: Colors.white,
           currentIndex: _currentIndex,
           onTap: _bottomTapped,
-          selectedItemColor: Colors.red,
+          selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.black54,
           selectedFontSize: 18,
           unselectedFontSize: 13,

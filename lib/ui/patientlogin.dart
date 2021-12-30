@@ -75,8 +75,7 @@ class _PatientLoginState extends State<PatientLogin> {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("lib/assets/login_bg.png"),
-                  fit: BoxFit.fill),
+                  image: AssetImage("lib/assets/TT.jpg"), fit: BoxFit.cover),
             ),
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
@@ -125,7 +124,7 @@ class _PatientLoginState extends State<PatientLogin> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 5.0,
                   ),
                   TextFormField(

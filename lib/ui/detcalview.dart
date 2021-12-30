@@ -28,7 +28,7 @@ class _DetCaloViewState extends State<DetCaloView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+        backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
         centerTitle: true,
         title: Text("Physical Activity Level"),
       ),
@@ -143,7 +143,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.teal),
+                    color: Colors.black),
                 textAlign: TextAlign.center,
               ),
               Container(
@@ -165,7 +165,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                           ),
                           child: ListTile(
                             title: Image.asset(
-                              "lib/assets/m.gif",
+                              "lib/assets/e.gif",
                             ),
                             subtitle: Container(
                                 padding: EdgeInsets.only(top: 30),
@@ -258,7 +258,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                       MaterialPageRoute(
                           builder: (context) => FoodListChosen()));
                 },
-                color: Colors.black.withOpacity(0.4),
+                color: HexColor('#FA7D82').withOpacity(0.8),
                 elevation: 20,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),

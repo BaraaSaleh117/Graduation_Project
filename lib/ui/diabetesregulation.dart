@@ -1164,9 +1164,24 @@ class _DiabetesRegState extends State<DiabetesReg> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.only(top: 1, left: 0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
+                      color: FitnessAppTheme.white,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(68.0),
+                          bottomLeft: const Radius.circular(68.0),
+                          bottomRight: Radius.circular(68.0),
+                          topRight: const Radius.circular(68.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: HexColor('#FA7D82').withOpacity(0.8),
+                            offset: const Offset(1.8, 1.9),
+                            blurRadius: 18.0),
+                      ],
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 1,
+                      left: 15,
+                      right: 15,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -1183,7 +1198,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 12,
+                                  fontSize: 13,
                                   color: FitnessAppTheme.nearlyBlack
                                       .withOpacity(0.7),
                                 ),
@@ -1197,7 +1212,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                 style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   color: FitnessAppTheme.nearlyBlue
                                       .withOpacity(0.9),
                                 ),
@@ -1270,7 +1285,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                           style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.orange),
+                              color: Colors.black),
                         ),
                       ),
                       Container(
@@ -1317,7 +1332,9 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                                     FitnessAppTheme.fontName,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15,
-                                                color: Colors.black),
+                                                color: FitnessAppTheme
+                                                    .nearlyBlue
+                                                    .withOpacity(0.9)),
                                           ),
                                         ),
                                         Padding(
@@ -1331,7 +1348,9 @@ class _DiabetesRegState extends State<DiabetesReg> {
                                                     FitnessAppTheme.fontName,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15,
-                                                color: Colors.orange),
+                                                color: FitnessAppTheme
+                                                    .nearlyBlue
+                                                    .withOpacity(0.9)),
                                           ),
                                         ),
                                         Padding(
