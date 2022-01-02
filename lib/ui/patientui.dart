@@ -8,6 +8,7 @@ import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet
 import 'package:graduation_projectflutter/patientPage/ui_view/wave_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
+import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/mealsui/breakfast.dart';
 import 'package:graduation_projectflutter/ui/mealsui/dinner.dart';
 import 'package:graduation_projectflutter/ui/mealsui/lunch.dart';
@@ -18,6 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 
 class PatientUi extends StatefulWidget {
+  late final String? Id;
+  PatientUi({this.Id});
   @override
   _PatientUiState createState() => _PatientUiState();
 }
@@ -32,6 +35,7 @@ class _PatientUiState extends State<PatientUi> {
   var ChronicDiseases;
   var Sugerb;
   var Weight;
+  var Id;
   var Active;
   late String Sucomments;
   var parpase;
@@ -57,6 +61,52 @@ class _PatientUiState extends State<PatientUi> {
   double _cals = 0.0;
   double eaten = 0.0;
   var status;
+  var gender;
+  var username;
+  bool isSignIn = false;
+
+  Future getPatientID() async {
+    //Get Patients Data From Localhost API
+    String theUrl =
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetID.php";
+    var data = {
+      "UserName": username.toString(),
+    };
+    var res = await http.post(Uri.parse(theUrl),
+        body: data, headers: {"Accept": "application/json"});
+    var responceBody = json.decode(res.body);
+    print("THIS IS HASAN ID :");
+    print(responceBody);
+    return responceBody;
+  }
+
+  getId() {}
+
+  getusername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    username = preferences.getString("username");
+    if (username != null) {
+      setState(() {
+        username = preferences.getString("username");
+        isSignIn = true;
+      });
+    }
+    print(username);
+  }
+
+  getGender() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var gender = preferences.getString("gender");
+    if (gender != null) {
+      if (gender == "Male") {
+        ismale = true;
+      } else if (gender == "Female") {
+        ismale = false;
+      } else {
+        print("");
+      }
+    }
+  }
 
   void detetenfood() {
     eaten = _Cal - _cals;
@@ -101,6 +151,14 @@ class _PatientUiState extends State<PatientUi> {
       Active = preferences.getString("Active");
     });
     print("Your are : " + Active);
+  }
+
+  getAgePref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    Active = preferences.getString("aage");
+
+    print("Your age is : " + Active);
   }
 
   getPearpespref() async {
@@ -259,7 +317,7 @@ class _PatientUiState extends State<PatientUi> {
     _bmi = double.parse(_bmi.toStringAsFixed(2));
   }
 
-  getFat(_bmi, Age, ismale) {
+  getFat(_bmi, Age) {
     if (Age != null) {
       int age = int.parse(Age);
 
@@ -291,8 +349,9 @@ class _PatientUiState extends State<PatientUi> {
   getqPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
+      Id = preferences.getString("Id");
       Height = preferences.getString("Height");
-      Age = preferences.getString("Age");
+      Age = preferences.getString("aage");
       Drugs = preferences.getString("Drugs");
       ChronicDiseases = preferences.getString("ChronicDiseases");
     });
@@ -314,28 +373,19 @@ class _PatientUiState extends State<PatientUi> {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/PostPatientdata.php";
     var data = {
-      "height": Height,
-      "weight": weightt,
-      "age": Age,
-      "Drugs": Drugs,
-      "ChronicDiseases": ChronicDiseases,
-      "BloodSugerLevel": Sugerb,
+      "ResId": Id.toString(),
+      "height": Height.toString(),
+      "weight": weightt.toString(),
+      "age": Age.toString(),
+      "gender": gender.toString(),
+      "Drugs": Drugs.toString(),
+      "ChronicDiseases": ChronicDiseases.toString(),
+      "BloodSugerLevel": Sugerb.toString(),
+      "Active": Active.toString(),
+      "parpase": parpase.toString(),
     };
     var responce = await http.post(Uri.parse(url), body: data);
 
-    print(responce.body.toString());
-  }
-
-  Future PostResolutios() async {
-    var url =
-        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/AddResolution.php";
-    var data = {
-      "UserName": "Baraaa",
-      "Email": "Emall",
-      "Password": "Drugs",
-    };
-    var responce = await http.post(Uri.parse(url), body: data);
-    print("////////");
     print(responce.body.toString());
   }
 
@@ -348,6 +398,7 @@ class _PatientUiState extends State<PatientUi> {
         idealw = 45 + 0.9 * (_heightOfUser - 150);
       }
     }
+    idealw = double.parse(idealw.toStringAsFixed(2));
     return idealw;
   }
 
@@ -380,13 +431,16 @@ class _PatientUiState extends State<PatientUi> {
 
   @override
   void initState() {
+    getGender();
     getData();
+    getusername();
     print(DateFormat('EEEE, d MMM, yyyy').format(date));
     getqPref();
     getSugerPref();
     getPHPref();
     getPearpespref();
     getweightPref();
+    getAgePref();
     setState(() {
       eaten = 0.0;
       _cals = _Cal;
@@ -397,14 +451,15 @@ class _PatientUiState extends State<PatientUi> {
 
   @override
   Widget build(BuildContext context) {
+    getPatientID();
     getBMI(weightt, Height);
-    getFat(_bmi, Age, true);
+    getFat(_bmi, Age);
     getCaloris();
     CalculateWater();
     calculateCarbs();
     inbodycheck = (DateFormat('EEEE, h:mm a').format(date));
     detetenfood();
-    // getPref(); ///////////////////////////////////////////////////////////////////////////////////
+    //getPref(); ///////////////////////////////////////////////////////////////////////////////////
 
     calculateProten();
 
@@ -413,10 +468,10 @@ class _PatientUiState extends State<PatientUi> {
     SavecarbsCal(carbs.toString());
     SaveCal(_Cal.toString());
     CalcIdelWeight();
+    print("123456789987654311");
 
-    //
-
-    //PostData();
+    PostData();
+    print("patient Data  was Posted");
 
     late AnimationController? animationController;
     late Animation<double>? animation;
@@ -433,10 +488,11 @@ class _PatientUiState extends State<PatientUi> {
             textAlign: TextAlign.center,
           ),
           centerTitle: true,
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
           elevation: 6,
         ),
         body: ListView(
+          shrinkWrap: true,
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(20),
@@ -1630,9 +1686,9 @@ class _PatientUiState extends State<PatientUi> {
                                   blurRadius: 4),
                             ],
                           ),
-                          // child: WaveView(
-                          //   percentageValue: 80.0,
-                          // ),
+                          child: WaveView(
+                            percentageValue: 80.0,
+                          ),
                         ),
                       )
                     ],

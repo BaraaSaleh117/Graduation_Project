@@ -212,7 +212,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
-        backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+        backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
         elevation: 6,
         actions: <Widget>[
           IconButton(

@@ -5,6 +5,7 @@ import 'package:graduation_projectflutter/ui/doctorlogin.dart';
 import 'package:graduation_projectflutter/ui/patientlogin.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
 import 'package:graduation_projectflutter/ui/patientui.dart';
+import 'package:graduation_projectflutter/ui/patientui1.dart';
 import 'package:graduation_projectflutter/ui/physicalactivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

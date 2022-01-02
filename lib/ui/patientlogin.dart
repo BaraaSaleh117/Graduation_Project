@@ -1,10 +1,15 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/patientsregister.dart';
+import 'package:graduation_projectflutter/ui/patientui1.dart';
 import 'package:graduation_projectflutter/ui/questions.dart';
 import 'package:graduation_projectflutter/utility/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PatientLogin extends StatefulWidget {
   const PatientLogin({Key? key}) : super(key: key);
@@ -17,29 +22,39 @@ class _PatientLoginState extends State<PatientLogin> {
   TextEditingController username = new TextEditingController();
   TextEditingController Password = new TextEditingController();
   GlobalKey<FormState> Formstate = new GlobalKey<FormState>();
-
-  signin() {
-    var formdata = Formstate.currentState;
-    if (formdata!.validate()) {
-      print("Valid");
-    } else {
-      print("Not Valid");
-    }
-  }
-
-  String validGloal(String val) {
-    if (val.isEmpty) {
-      return "feild can't be Empty";
-    }
-    return "Good";
-  }
+  bool showsginin = true;
+  late TapGestureRecognizer _changesign;
+  bool isuser = false;
 
   savePref(String username) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("username", username);
-    //preferences.setString("email", email);
-    print(preferences.getString("username"));
-    //print(preferences.getString("email"));
+  }
+
+  signin() async {
+    var formdata = Formstate.currentState;
+
+    if (formdata!.validate()) {
+      formdata.save();
+      var data = {"UserName": username.text, "Password": Password.text};
+      var url =
+          "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/loginp.php";
+      var responce = await http.post(Uri.parse(url), body: data);
+      var resbody = jsonDecode(responce.body);
+
+      if (resbody['status'] == "yes") {
+        print(resbody['UserName']);
+
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PatientUi1()));
+      } else {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      }
+    } else {
+      isuser = true;
+    }
   }
 
   @override
@@ -88,55 +103,113 @@ class _PatientLoginState extends State<PatientLogin> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  const Text(
-                    "Uesrname",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.email,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "UesrName",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 5.0,
                   ),
                   TextFormField(
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(fontSize: 18.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      hintText: 'Enter Username ',
+                    ),
+                    cursorColor: Colors.white,
                     autofocus: false,
                     controller: username,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "User Name can't be Empty ";
+                      } else if (value.trim().length < 4) {
+                        return "User Name can't be less than 4 letter ";
+                      } else if (value.trim().length > 20) {
+                        return "User Name can't be greater than 20 letter";
+                      } else if (isuser == true) {
+                        return "Username or password is incorrect";
+                      }
+                    },
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
-
-                    //validator: validateusername,
-                    // onSaved: (value) => _userName = value!,
-                    decoration:
-                        buildInputDecoration('Enter Uesrname', Icons.email),
                   ),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const Text(
-                    "Password",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.lock_rounded,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Password",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5.0,
                   ),
                   TextFormField(
                     autofocus: false,
                     obscureText: true,
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(fontSize: 18.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      hintText: 'Enter Password ',
+                    ),
+                    cursorColor: Colors.white,
+                    controller: Password,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password can't be Empty ";
+                      } else if (value.trim().length < 4) {
+                        return "Password can't be less than 4 letter ";
+                      } else if (value.trim().length > 20) {
+                        return "Password can't be greater than 20 letter";
+                      }
+                    },
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
-                    decoration:
-                        buildInputDecoration('Enter Password', Icons.lock),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -148,9 +221,7 @@ class _PatientLoginState extends State<PatientLogin> {
                       if (username != null) {
                         savePref(username.text);
                       }
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => qusetions()));
+                      signin();
                     },
                     color: Colors.white.withOpacity(0.4),
                     elevation: 0,

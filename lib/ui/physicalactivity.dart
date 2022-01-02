@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/physicalactivitypages/aqla.dart';
 import 'package:graduation_projectflutter/ui/physicalactivitypages/bikeriding.dart';
 import 'package:graduation_projectflutter/ui/physicalactivitypages/cardio.dart';
@@ -22,8 +23,26 @@ class _PhysicalActivityState extends State<PhysicalActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AllPatientContentPage()));
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: HexColor('#FA7D82').withOpacity(0.9),
+                    size: 30,
+                  ))
+            ],
+            backgroundColor: Colors.white.withOpacity(1),
+            elevation: 0,
+          ),
           title: Text("Physical Activity"),
-          backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
           centerTitle: true,
         ),
         body: Container(

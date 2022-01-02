@@ -1,17 +1,58 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
+import 'package:graduation_projectflutter/ui/questions.dart';
 
 import 'package:graduation_projectflutter/utility/widgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientsRegister extends StatefulWidget {
+  late final String? Id;
+  PatientsRegister({this.Id});
   @override
   _PatientsRegisterState createState() => _PatientsRegisterState();
 }
 
 class _PatientsRegisterState extends State<PatientsRegister> {
-  String _username = '', _password = '', _confirmPassword = '';
-  //final _GendersDropDownList = ["Male", "Female", "NA"];
-  // String _genderDropDownList = "NA";
+  TextEditingController Firstname = new TextEditingController();
+  TextEditingController Lastname = new TextEditingController();
+  TextEditingController username = new TextEditingController();
+  TextEditingController Password = new TextEditingController();
+  TextEditingController confarmpass = new TextEditingController();
+  GlobalKey<FormState> Formstate = new GlobalKey<FormState>();
+
+  Future PostNewPatient() async {
+    var url =
+        "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/AddnewPatient.php";
+    var data = {
+      "UserName": username.text,
+      "Password": Password.text,
+    };
+    var responce = await http.post(Uri.parse(url), body: data);
+    print("////////********************");
+    print(responce.body.toString());
+    print("////////********************");
+  }
+
+  signup() async {
+    var formdata = Formstate.currentState;
+    if (formdata!.validate()) {
+      formdata.save();
+      PostNewPatient();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => qusetions()));
+    }
+    print("Not Valid ");
+  }
+
+  savePref(String username) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("username", username);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +78,7 @@ class _PatientsRegisterState extends State<PatientsRegister> {
           ),
           padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Form(
-            //  key: formKey,
+            key: Formstate,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,11 +98,18 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 ),
                 TextFormField(
                   autofocus: false,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter your Frist Name' : null,
-                  onSaved: (value) => _password = value!,
+                  controller: Firstname,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "First Name can't be Empty ";
+                    } else if (value.trim().length < 2) {
+                      return "First Name can't be less than 2 letter ";
+                    } else if (value.trim().length > 20) {
+                      return "User Name can't be greater than 20 letter";
+                    }
+                  },
                   decoration: buildInputDecoration(
-                      "Enter Frist Name", Icons.accessibility),
+                      "Enter Frist Name", Icons.person_outlined),
                 ),
                 const SizedBox(
                   height: 20.0,
@@ -74,24 +122,29 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                     color: Colors.black,
                   ),
                 ),
-
                 const SizedBox(
                   height: 5.0,
                 ),
                 TextFormField(
                   autofocus: false,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter your Last Name' : null,
-                  onSaved: (value) => _password = value!,
+                  controller: Lastname,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Last Name can't be Empty ";
+                    } else if (value.trim().length < 2) {
+                      return "Last Name can't be less than 2 letter ";
+                    } else if (value.trim().length > 20) {
+                      return "Last Name can't be greater than 20 letter";
+                    }
+                  },
                   decoration: buildInputDecoration(
-                      "Enter Last Name", Icons.accessibility),
+                      "Enter Last Name", Icons.person_outline_sharp),
                 ),
-
                 const SizedBox(
                   height: 15.0,
                 ),
                 const Text(
-                  'Email',
+                  'Username',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
@@ -100,10 +153,19 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 ),
                 TextFormField(
                   autofocus: false,
-                  onSaved: (value) => _username = value!,
-                  decoration: buildInputDecoration("Enter Email", Icons.email),
+                  controller: username,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Username can't be Empty ";
+                    } else if (value.trim().length < 5) {
+                      return "Username can't be less than 5 letter ";
+                    } else if (value.trim().length > 20) {
+                      return "Username can't be greater than 20 letter";
+                    }
+                  },
+                  decoration:
+                      buildInputDecoration("Enter Username", Icons.person_pin),
                 ),
-
                 const SizedBox(
                   height: 20.0,
                 ),
@@ -120,10 +182,17 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 ),
                 TextFormField(
                   autofocus: false,
+                  controller: Password,
                   obscureText: true,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter password' : null,
-                  onSaved: (value) => _password = value!,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Password can't be Empty ";
+                    } else if (value.trim().length < 3) {
+                      return "Password can't be less than 3 letter ";
+                    } else if (value.trim().length < 4) {
+                      return "Please use a stronger password";
+                    }
+                  },
                   decoration:
                       buildInputDecoration("Enter Password", Icons.lock),
                 ),
@@ -141,53 +210,35 @@ class _PatientsRegisterState extends State<PatientsRegister> {
                 TextFormField(
                   autofocus: false,
                   obscureText: true,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Your password is required' : null,
-                  onSaved: (value) => _confirmPassword = value!,
+                  controller: confarmpass,
+                  validator: (value) {
+                    if (value! != Password.text) {
+                      return "Password does not match !";
+                    }
+                  },
                   decoration:
                       buildInputDecoration(" Confirm Password", Icons.lock),
                 ),
                 const SizedBox(
                   height: 20.0,
                 ),
-                const Text(
-                  'Phone Number',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.black,
-                  ),
+                const SizedBox(
+                  height: 20.0,
                 ),
                 const SizedBox(
                   height: 5.0,
                 ),
-                TextFormField(
-                  autofocus: false,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter your Phone Number' : null,
-                  onSaved: (value) => _password = value!,
-                  decoration:
-                      buildInputDecoration("Enter Phone Number", Icons.phone),
-                ),
                 const SizedBox(
                   height: 20.0,
                 ),
-
-                const SizedBox(
-                  height: 5.0,
-                ),
-
-                const SizedBox(
-                  height: 20.0,
-                ),
-                // auth.loggedInStatus == Status.Authenticating
-                //     ?loading
                 MaterialButton(
                   minWidth: double.infinity,
                   height: 40,
                   onPressed: () {
-                    //  Navigator.push(context, MaterialPageRoute(
-                    // builder: (context) => Login()));
+                    if (username != null) {
+                      savePref(username.text);
+                    }
+                    signup();
                   },
                   color: HexColor('#FA7D82').withOpacity(0.8),
                   elevation: 0,
@@ -212,32 +263,5 @@ class _PatientsRegisterState extends State<PatientsRegister> {
         ),
       ),
     );
-
-    /* ListTile(    ----->  DropDownList 
-                    title: DropdownButton<String>(
-                  items: _GendersDropDownList.map((String value) {
-                    return DropdownMenuItem<String>(
-                        value: value, child: Text(value));
-                  }).toList(),
-                  value: retrieveGender(patient.Gender),
-                  onChanged: (value) => updateGender(value!),
-                )),
-
-    String retrieveGender(String value) {
-    return _GendersDropDownList[];
-  }
-
-  void updateGender(String value) {
-    switch (value) {
-      case "Male":
-        patient.Gender = "Male";
-        break;
-         case "Female":
-        patient.Gender = "Female";
-        break;
-         case "NA":
-        patient.Gender = "NA";
-        break;
-    }*/
   }
 }

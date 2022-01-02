@@ -58,6 +58,12 @@ class _qusetionsState extends State<qusetions> {
     print(preferences.getString("ChronicDiseases"));
   }
 
+  savePref(String gender) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("gender", gender);
+    print(preferences.getString("gender"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -206,7 +212,7 @@ class _qusetionsState extends State<qusetions> {
                                 ),
                               ),
                               onTap: () {
-                                print("Male");
+                                savePref("Male");
                               },
                             ),
                             Text(
@@ -232,7 +238,7 @@ class _qusetionsState extends State<qusetions> {
                                 ),
                               ),
                               onTap: () {
-                                print("female");
+                                savePref("Female");
                               },
                             ),
                             Text(

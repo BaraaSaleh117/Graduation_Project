@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientDetails extends StatefulWidget {
   late final String Idd;
-  late final String ResId;
   late final String UserName;
   late final String height;
   late final String weight;
@@ -21,7 +20,6 @@ class PatientDetails extends StatefulWidget {
 
   PatientDetails({
     required this.Idd,
-    required this.ResId,
     required this.UserName,
     required this.height,
     required this.weight,

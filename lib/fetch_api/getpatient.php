@@ -1,9 +1,9 @@
-<?php 
+<?php
 require('connection.php');
-$makeQuery =" SELECT account.Id , account.UserName ,resolution.height,resolution.gender,resolution.weight,resolution.age,resolution.Drugs,resolution.ChronicDiseases, resolution.BloodSugerLevel  FROM account INNER JOIN resolution ON account.Id =resolution.ResId ORDER BY resolution.BloodSugerLevel DESC  ";
+$UserName = $_POST['UserName'] ;
+$makeQuery =" SELECT account.Id , account.UserName ,resolution.height,resolution.Active,resolution.parpase,resolution.weight,resolution.gender,resolution.age,resolution.Drugs,resolution.ChronicDiseases, resolution.BloodSugerLevel   FROM account INNER JOIN resolution ON account.Id =resolution.ResId  WHERE account.UserName = ? ORDER BY resolution.BloodSugerLevel DESC  ";
 $stamement =$connection->prepare($makeQuery);
-$stamement->execute();
-
+$stamement->execute(array($UserName));
 $myarray=array();
 
 while($resultsForm = $stamement ->fetch()){
@@ -13,12 +13,14 @@ while($resultsForm = $stamement ->fetch()){
             "Id" => $resultsForm['Id'],
             "UserName" => $resultsForm['UserName'],
             "height" => $resultsForm['height'],
-            "age" => $resultsForm['age'],
-            "gender" => $resultsForm['gender'],
             "weight" => $resultsForm['weight'],
+            "gender" => $resultsForm['gender'],
+            "age" => $resultsForm['age'],
             "Drugs" => $resultsForm['Drugs'],
             "ChronicDiseases" => $resultsForm['ChronicDiseases'],
             "BloodSugerLevel" => $resultsForm['BloodSugerLevel'],
+            "Active" => $resultsForm['Active'],
+            "parpase" => $resultsForm['parpase'],
             
         
         )

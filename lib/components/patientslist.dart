@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientsList extends StatelessWidget {
   late final String Id;
-  late final String ResId;
   late final String UserName;
   late final String height;
   late final String weight;
@@ -23,7 +22,6 @@ class PatientsList extends StatelessWidget {
   var List = [];
   PatientsList({
     required this.Id,
-    required this.ResId,
     required this.UserName,
     required this.height,
     required this.weight,
@@ -470,7 +468,6 @@ class PatientsList extends StatelessWidget {
                                       MaterialPageRoute(builder: (contex) {
                                     return PatientDetails(
                                       Idd: Id,
-                                      ResId: ResId,
                                       UserName: UserName,
                                       height: height,
                                       weight: weight,

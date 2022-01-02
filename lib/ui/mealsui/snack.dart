@@ -174,7 +174,7 @@ class _SnacksState extends State<Snacks> {
         appBar: AppBar(
           title: Text("Snacks"),
           centerTitle: true,
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.5),
           elevation: 6,
         ),
         body: FutureBuilder(

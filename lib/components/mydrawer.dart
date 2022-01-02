@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/home.dart';
 import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/patientlogin.dart';
@@ -160,9 +161,13 @@ class _MyDrawerState extends State<MyDrawer> {
               color: Colors.blueAccent,
               size: 35,
             ),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PatientLogin()));
+            onTap: () async {
+              SharedPreferences preferences =
+                  await SharedPreferences.getInstance();
+              preferences.remove("username");
+
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home()));
             },
           ),
         ],

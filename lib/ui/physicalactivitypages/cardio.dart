@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
+import 'package:graduation_projectflutter/ui/physicalactivity.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,9 +68,27 @@ class _MyCardio extends State<MyCardio> {
         'https://www.youtube.com/watch?v=0x4OP0yDE90&ab_channel=HennepinHealthcare';
     return Scaffold(
         appBar: AppBar(
+          leading: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PhysicalActivity()));
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: HexColor('#FA7D82').withOpacity(0.9),
+                    size: 30,
+                  ))
+            ],
+            backgroundColor: Colors.white.withOpacity(1),
+            elevation: 0,
+          ),
           title: Text(widget.title),
           centerTitle: true,
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.4),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
           elevation: 6,
         ),
         body: Container(
@@ -222,7 +241,7 @@ class _MyCardio extends State<MyCardio> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: HexColor('#5C5EDD').withOpacity(0.5),
+                        color: HexColor('#FA7D82').withOpacity(0.5),
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(.0),
                             topLeft: Radius.circular(40),
@@ -249,7 +268,7 @@ class _MyCardio extends State<MyCardio> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: HexColor('#5C5EDD').withOpacity(0.5),
+                        color: HexColor('#FA7D82').withOpacity(0.5),
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(.0),
                             topLeft: Radius.circular(40),
@@ -275,7 +294,7 @@ class _MyCardio extends State<MyCardio> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: HexColor('#5C5EDD').withOpacity(0.5),
+                        color: HexColor('#FA7D82').withOpacity(0.5),
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(.0),
                             topLeft: Radius.circular(40),
