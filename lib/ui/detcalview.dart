@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -253,10 +254,8 @@ class _DetCaloViewState extends State<DetCaloView> {
                   // saveqPref(_height.text, _age.text, Drugs.text,
                   //     ChronicDiseases.text);
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FoodListChosen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ConnectScale()));
                 },
                 color: HexColor('#FA7D82').withOpacity(0.8),
                 elevation: 20,

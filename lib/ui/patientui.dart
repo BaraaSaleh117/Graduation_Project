@@ -64,25 +64,9 @@ class _PatientUiState extends State<PatientUi> {
   var gender;
   var username;
   bool isSignIn = false;
+  int intId = 0;
 
-  Future getPatientID() async {
-    //Get Patients Data From Localhost API
-    String theUrl =
-        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetID.php";
-    var data = {
-      "UserName": username.toString(),
-    };
-    var res = await http.post(Uri.parse(theUrl),
-        body: data, headers: {"Accept": "application/json"});
-    var responceBody = json.decode(res.body);
-    print("THIS IS HASAN ID :");
-    print(responceBody);
-    return responceBody;
-  }
-
-  getId() {}
-
-  getusername() async {
+  getUserName() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     username = preferences.getString("username");
     if (username != null) {
@@ -94,17 +78,43 @@ class _PatientUiState extends State<PatientUi> {
     print(username);
   }
 
+  Future getPatientID() async {
+    if (isSignIn == false) {
+      username = "Jenan_Saleh";
+      print("Are You  --->" + username + " ?");
+    } else {
+      //Get Patients Data From Localhost API
+      String theUrl =
+          "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetID.php";
+      var data = {
+        "UserName": username.toString().trim(),
+      };
+      var res = await http.post(Uri.parse(theUrl),
+          body: data, headers: {"Accept": "application/json"});
+      var responceBody = json.decode(res.body);
+
+      String ID = responceBody[0].toString() as String;
+      String getid = ID[5] + ID[6];
+      intId = int.parse(getid);
+      print(intId);
+    }
+
+    return intId;
+  }
+
   getGender() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var gender = preferences.getString("gender");
+    gender = preferences.getString("Gen");
     if (gender != null) {
-      if (gender == "Male") {
+      if (gender == "male") {
         ismale = true;
-      } else if (gender == "Female") {
+        print(gender);
+      } else if (gender == "female") {
         ismale = false;
-      } else {
-        print("");
+        print(gender);
       }
+    } else {
+      print("Gender not ok 11111111111111111111111111");
     }
   }
 
@@ -143,30 +153,6 @@ class _PatientUiState extends State<PatientUi> {
   int getweightint() {
     int _weightOfUser = int.parse(weightt);
     return _weightOfUser;
-  }
-
-  getPHPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      Active = preferences.getString("Active");
-    });
-    print("Your are : " + Active);
-  }
-
-  getAgePref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-
-    Active = preferences.getString("aage");
-
-    print("Your age is : " + Active);
-  }
-
-  getPearpespref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      parpase = preferences.getString("parpase");
-    });
-    print("Your are : " + parpase);
   }
 
   double CalculateWater() {
@@ -331,29 +317,21 @@ class _PatientUiState extends State<PatientUi> {
     POFat = double.parse(POFat.toStringAsFixed(2));
   }
 
-  getweightPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      weightt = preferences.getString("weightt");
-    });
-  }
-
-  getSugerPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      Sugerb = preferences.getString("Sugerb");
-    });
-    print("Your blood sugar level is : " + Sugerb);
-  }
-
   getqPref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
-      Id = preferences.getString("Id");
+      if (Id != null) {
+        Id = preferences.getString("Id");
+      } else
+        Id = intId.toString();
       Height = preferences.getString("Height");
+      weightt = preferences.getString("weightt");
       Age = preferences.getString("aage");
       Drugs = preferences.getString("Drugs");
       ChronicDiseases = preferences.getString("ChronicDiseases");
+      Active = preferences.getString("Active");
+      parpase = preferences.getString("parpase");
+      Sugerb = preferences.getString("Sugerb");
     });
     print(Height + Age + Drugs + ChronicDiseases);
   }
@@ -373,7 +351,7 @@ class _PatientUiState extends State<PatientUi> {
     var url =
         "http://10.0.2.2/graduationProj/graduation_projectflutter/lib/PostData/PostPatientdata.php";
     var data = {
-      "ResId": Id.toString(),
+      "ResId": intId.toString(),
       "height": Height.toString(),
       "weight": weightt.toString(),
       "age": Age.toString(),
@@ -431,27 +409,18 @@ class _PatientUiState extends State<PatientUi> {
 
   @override
   void initState() {
+    getUserName();
+    // getPatientID();
     getGender();
-    getData();
-    getusername();
-    print(DateFormat('EEEE, d MMM, yyyy').format(date));
     getqPref();
-    getSugerPref();
-    getPHPref();
-    getPearpespref();
-    getweightPref();
-    getAgePref();
-    setState(() {
-      eaten = 0.0;
-      _cals = _Cal;
-    });
+
+    getData();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    getPatientID();
     getBMI(weightt, Height);
     getFat(_bmi, Age);
     getCaloris();
@@ -469,9 +438,13 @@ class _PatientUiState extends State<PatientUi> {
     SaveCal(_Cal.toString());
     CalcIdelWeight();
     print("123456789987654311");
+    print(Active.toString());
+    print(parpase.toString());
+
+    print("123456789987654311");
+    getPatientID();
 
     PostData();
-    print("patient Data  was Posted");
 
     late AnimationController? animationController;
     late Animation<double>? animation;

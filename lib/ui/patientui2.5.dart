@@ -37,10 +37,19 @@ class ListPatients extends StatefulWidget {
 }
 
 class _ListPatientsState extends State<ListPatients> {
-  saveqPref(String Id, String Height, String Weight, String gender, String Age,
-      String Drugs, String ChronicDiseases, String Suger) async {
+  saveqPref(
+      String Id,
+      String UserName,
+      String Height,
+      String Weight,
+      String gender,
+      String Age,
+      String Drugs,
+      String ChronicDiseases,
+      String Suger) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("Id", Id);
+    preferences.setString("username", UserName);
     preferences.setString("Height", Height);
     preferences.setString("weightt", Weight);
     preferences.setString("gender", gender);
@@ -66,6 +75,7 @@ class _ListPatientsState extends State<ListPatients> {
             onPressed: () {
               saveqPref(
                   widget.Id,
+                  widget.UserName,
                   widget.height,
                   widget.weight,
                   widget.gender,

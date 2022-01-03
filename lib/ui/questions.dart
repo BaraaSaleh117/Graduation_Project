@@ -60,8 +60,8 @@ class _qusetionsState extends State<qusetions> {
 
   savePref(String gender) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("gender", gender);
-    print(preferences.getString("gender"));
+    preferences.setString("Gen", gender);
+    print(preferences.getString("Gen"));
   }
 
   @override
@@ -212,7 +212,7 @@ class _qusetionsState extends State<qusetions> {
                                 ),
                               ),
                               onTap: () {
-                                savePref("Male");
+                                savePref("male");
                               },
                             ),
                             Text(
@@ -238,7 +238,7 @@ class _qusetionsState extends State<qusetions> {
                                 ),
                               ),
                               onTap: () {
-                                savePref("Female");
+                                savePref("female");
                               },
                             ),
                             Text(
