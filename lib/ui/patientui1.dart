@@ -53,7 +53,7 @@ class _DoctorUiState extends State<PatientUi1> {
         appBar: AppBar(
           title: Text("Patient Record"),
           centerTitle: true,
-          backgroundColor: HexColor('#5C5EDD').withOpacity(0.5),
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.8),
           elevation: 6,
         ),
         body: FutureBuilder(

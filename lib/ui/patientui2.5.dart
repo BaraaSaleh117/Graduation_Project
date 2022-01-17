@@ -3,6 +3,7 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
+import 'package:graduation_projectflutter/ui/updatereccrd.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ListPatients extends StatefulWidget {
@@ -63,35 +64,285 @@ class _ListPatientsState extends State<ListPatients> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.UserName + " ID is : " + widget.Id.toString());
     return GridView.count(
       shrinkWrap: true,
-      padding: EdgeInsets.only(left: 20, right: 20),
-      crossAxisCount: 2,
-      crossAxisSpacing: 18,
-      mainAxisSpacing: 18,
+      padding: EdgeInsets.only(left: 20, right: 20, top: 2, bottom: 0),
+      crossAxisCount: 1,
+      crossAxisSpacing: 20,
+      mainAxisSpacing: 20,
       children: [
-        Text(widget.Id),
-        IconButton(
-            onPressed: () {
-              saveqPref(
-                  widget.Id,
-                  widget.UserName,
-                  widget.height,
-                  widget.weight,
-                  widget.gender,
-                  widget.age,
-                  widget.Drugs,
-                  widget.ChronicDiseases,
-                  widget.BloodSugerLevel);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AllPatientContentPage()));
-            },
-            icon: Icon(
-              Icons.arrow_forward_rounded,
-              size: 28,
-            ))
+        ListView(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "Height : " + widget.height + " cm",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "Weight : " + widget.weight + " Kg",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "Age : " + widget.age + " year",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "Gender : " + widget.gender,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "ChronicDiseases : " + "\n" + widget.ChronicDiseases,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: const Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0),
+                      topRight: const Radius.circular(0.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+                child: Text(
+                  "Drugs : " + "\n" + widget.Drugs,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                )),
+          ],
+        ),
+        Container(
+          alignment: Alignment.topCenter,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("lib/assets/gw2.jpg"), fit: BoxFit.fill),
+          ),
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(top: 20, bottom: 20, left: 25, right: 25),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(68.0),
+                      bottomLeft: const Radius.circular(68.0),
+                      bottomRight: Radius.circular(68.0),
+                      topRight: const Radius.circular(68.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                alignment: Alignment.topCenter,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          saveqPref(
+                              widget.Id.toString(),
+                              widget.UserName,
+                              widget.height,
+                              widget.weight,
+                              widget.gender,
+                              widget.age,
+                              widget.Drugs,
+                              widget.ChronicDiseases,
+                              widget.BloodSugerLevel);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UpdateRecord()));
+                        },
+                        icon: Icon(
+                          Icons.edit,
+                          size: 35,
+                          color: Colors.red,
+                        )),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Update Form",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: FitnessAppTheme.white,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(68.0),
+                      bottomLeft: const Radius.circular(68.0),
+                      bottomRight: Radius.circular(68.0),
+                      topRight: const Radius.circular(68.0)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: HexColor('#FA7D82').withOpacity(0.8),
+                        offset: const Offset(1.8, 1.9),
+                        blurRadius: 18.0),
+                  ],
+                ),
+                alignment: Alignment.topCenter,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          saveqPref(
+                              widget.Id,
+                              widget.UserName,
+                              widget.height,
+                              widget.weight,
+                              widget.gender,
+                              widget.age,
+                              widget.Drugs,
+                              widget.ChronicDiseases,
+                              widget.BloodSugerLevel);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AllPatientContentPage()));
+                        },
+                        icon: Icon(
+                          Icons.double_arrow_sharp,
+                          size: 40,
+                          color: Colors.red,
+                        )),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Continue",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }
