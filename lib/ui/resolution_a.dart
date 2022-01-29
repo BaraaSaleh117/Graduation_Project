@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/components/mydrawer.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +25,16 @@ class _ResolutionAState extends State<ResolutionA> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
+        appBar: AppBar(
+          title: const Text(
+            "Blood Sugar Measurement Page",
+            textAlign: TextAlign.center,
+          ),
+          centerTitle: true,
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
+          elevation: 6,
+        ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -38,23 +50,37 @@ class _ResolutionAState extends State<ResolutionA> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Blood glucose meter device",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
-                      color: Colors.teal,
+                      color: HexColor('#FA7D82').withOpacity(0.9),
                     ),
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  const Text(
-                    "To measure blood sugar, a glucose meter is used,Use the device and enter the value ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black,
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 10),
+                    decoration: BoxDecoration(
+                      color: HexColor('#FA7D82').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(40),
+                          bottomLeft: Radius.circular(40)),
+                    ),
+                    child: Text(
+                      "To measure blood sugar, a glucose meter is used . Use the device and enter the value ",
+                      style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          wordSpacing: 2,
+                          letterSpacing: 1,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(
@@ -63,40 +89,46 @@ class _ResolutionAState extends State<ResolutionA> {
                   const SizedBox(
                     height: 30.0,
                   ),
-                  const Text(
-                    "Enter the value",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                      color: Colors.black,
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 5, left: 20, right: 10),
+                    decoration: BoxDecoration(
+                      color: HexColor('#FA7D82').withOpacity(0.5),
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(40),
+                          bottomLeft: Radius.circular(40)),
+                    ),
+                    child: Text(
+                      "Enter the value here",
+                      style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          wordSpacing: 2,
+                          letterSpacing: 1,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  TextFormField(
-                    controller: Suger,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    autofocus: false,
-                  ),
+                  TextField(
+                      controller: Suger,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                          labelText: "Ex : 120",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 90.0,
-                  ),
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
                   ),
                   const SizedBox(
                     height: 5.0,
                   ),
                   const SizedBox(
                     height: 50.0,
-                  ),
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-                  const SizedBox(
-                    height: 40.0,
                   ),
                   MaterialButton(
                     minWidth: double.infinity,
@@ -108,7 +140,7 @@ class _ResolutionAState extends State<ResolutionA> {
                           MaterialPageRoute(
                               builder: (context) => AllPatientContentPage()));
                     },
-                    color: Colors.teal,
+                    color: HexColor('#FA7D82').withOpacity(0.9),
                     elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),

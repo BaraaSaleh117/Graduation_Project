@@ -49,11 +49,11 @@ class _qusetionsState extends State<qusetions> {
       String Height, String Age, String Drugs, String ChronicDiseases) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("Height", Height);
-    preferences.setString("Age", Age);
+    preferences.setString("aage", Age);
     preferences.setString("Drugs", Drugs);
     preferences.setString("ChronicDiseases", ChronicDiseases);
     print(preferences.getString("Height"));
-    print(preferences.getString("Age"));
+    print(preferences.getString("aage"));
     print(preferences.getString("Drugs"));
     print(preferences.getString("ChronicDiseases"));
   }

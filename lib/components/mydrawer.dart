@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_projectflutter/home.dart';
+import 'package:graduation_projectflutter/main.dart';
+import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
+import 'package:graduation_projectflutter/ui/connectwithscale.dart';
+import 'package:graduation_projectflutter/ui/detcalview.dart';
 import 'package:graduation_projectflutter/ui/diabetesregulation.dart';
+import 'package:graduation_projectflutter/ui/hba1nc.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
 import 'package:graduation_projectflutter/ui/patientlogin.dart';
+import 'package:graduation_projectflutter/ui/questions.dart';
+import 'package:graduation_projectflutter/ui/resolution_a.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -43,87 +50,144 @@ class _MyDrawerState extends State<MyDrawer> {
             accountName: isSignIn
                 ? Text(
                     username,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   )
                 : Text(""),
             accountEmail: Text(
               "",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Icon(Icons.person),
+              backgroundColor: Colors.black,
+              child: Icon(
+                Icons.person_pin,
+                color: Colors.white,
+                size: 59,
+              ),
             ),
             decoration: BoxDecoration(
                 color: Colors.blueGrey,
                 image: DecorationImage(
-                    image: AssetImage("lib/assets/H.png"), fit: BoxFit.fill)),
+                    image: AssetImage("lib/assets/wwe.jpg"), fit: BoxFit.fill)),
           ),
           ListTile(
             title: Text(
               "Home",
               style: TextStyle(
-                color: Colors.teal,
-                fontSize: 17,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             leading: Icon(
-              Icons.home,
-              color: Colors.teal,
-              size: 35,
+              Icons.home_outlined,
+              color: HexColor('#FA7D82').withOpacity(0.8),
+              size: 40,
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PatientUi()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllPatientContentPage()));
             },
           ),
           ListTile(
             title: Text(
-              "Meals Today",
+              "Questionnaire Page",
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
             ),
             leading: Icon(
-              Icons.ramen_dining_rounded,
-              color: Colors.teal,
+              Icons.border_color_outlined,
+              color: HexColor('#FA7D82').withOpacity(0.8),
               size: 35,
             ),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DiabetesReg()));
+                  MaterialPageRoute(builder: (context) => qusetions()));
             },
           ),
           ListTile(
             title: Text(
-              "Physical Activity",
+              "Physical Activity Level Page",
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
             ),
             leading: Icon(
-              Icons.fitness_center,
-              color: Colors.teal,
+              Icons.volunteer_activism_outlined,
+              color: HexColor('#FA7D82').withOpacity(0.8),
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetCaloView()));
+            },
           ),
           ListTile(
             title: Text(
-              "My Evaluation",
+              "HbA1c Check Page",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            leading: Icon(
+              Icons.fact_check_outlined,
+              color: HexColor('#FA7D82').withOpacity(0.8),
+              size: 35,
+            ),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HbA1c()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Weight scale page",
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
               ),
             ),
             leading: Icon(
-              Icons.assignment,
-              color: Colors.teal,
+              Icons.monitor_weight_rounded,
+              color: HexColor('#FA7D82').withOpacity(0.8),
               size: 35,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ConnectScale()));
+            },
+          ),
+          ListTile(
+            title: Text(
+              "Blood Sugar Measurement Page",
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            leading: Icon(
+              Icons.directions_railway_sharp,
+              color: HexColor('#FA7D82').withOpacity(0.8),
+              size: 35,
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResolutionA()));
+            },
           ),
           Divider(
             color: Colors.black,
@@ -139,14 +203,10 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             leading: Icon(
               Icons.info_outline,
-              color: Colors.blueAccent,
+              color: HexColor('#FA7D82').withOpacity(0.8),
               size: 35,
             ),
             onTap: () {},
-          ),
-          Divider(
-            color: Colors.white,
-            height: 120,
           ),
           ListTile(
             title: Text(
@@ -157,8 +217,8 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
             leading: Icon(
-              Icons.exit_to_app_outlined,
-              color: Colors.blueAccent,
+              Icons.explicit_outlined,
+              color: Colors.black,
               size: 35,
             ),
             onTap: () async {

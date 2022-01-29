@@ -5,8 +5,8 @@ require('connection.php');
 $ResId = $_POST['ResId'] ;
 $age  = $_POST['age'] ; 
 $weight  = $_POST['weight'] ; 
- $Drugs  = $_POST['Drugs'] ; 
- $ChronicDiseases  = $_POST['ChronicDiseases'] ; 
+$Drugs  = $_POST['Drugs'] ; 
+$ChronicDiseases  = $_POST['ChronicDiseases'] ; 
 
  
 $sql ="UPDATE `resolution` SET `weight` = '$weight', `age` = '$age',`Drugs` = '$Drugs' ,`ChronicDiseases` = '$ChronicDiseases' WHERE `resolution`.`ResId` = '$ResId' " ;

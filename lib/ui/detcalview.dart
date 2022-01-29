@@ -3,6 +3,7 @@ import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
 import 'package:graduation_projectflutter/ui/foodlistschosen.dart';
+import 'package:graduation_projectflutter/ui/hba1nc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetCaloView extends StatefulWidget {
@@ -255,7 +256,7 @@ class _DetCaloViewState extends State<DetCaloView> {
                   //     ChronicDiseases.text);
 
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ConnectScale()));
+                      MaterialPageRoute(builder: (context) => HbA1c()));
                 },
                 color: HexColor('#FA7D82').withOpacity(0.8),
                 elevation: 20,

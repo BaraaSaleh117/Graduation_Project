@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_projectflutter/components/mydrawer.dart';
+import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_home_screen.dart';
 import 'package:graduation_projectflutter/scale/scaleapp.dart';
 import 'package:graduation_projectflutter/ui/patientUi.dart';
@@ -25,6 +27,16 @@ class _ConnectScaleState extends State<ConnectScale> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        drawer: MyDrawer(),
+        appBar: AppBar(
+          title: const Text(
+            "Weight Scale Page",
+            textAlign: TextAlign.center,
+          ),
+          centerTitle: true,
+          backgroundColor: HexColor('#FA7D82').withOpacity(0.9),
+          elevation: 6,
+        ),
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -38,12 +50,12 @@ class _ConnectScaleState extends State<ConnectScale> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Smart Scale",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
-                      color: Colors.teal,
+                      color: HexColor('#FA7D82').withOpacity(0.9),
                     ),
                   ),
                   const SizedBox(
@@ -93,7 +105,7 @@ class _ConnectScaleState extends State<ConnectScale> {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => ScaleApp()));
                     },
-                    color: Colors.teal,
+                    color: Colors.blue,
                     elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -113,12 +125,6 @@ class _ConnectScaleState extends State<ConnectScale> {
                     height: 5.0,
                   ),
                   const SizedBox(
-                    height: 50.0,
-                  ),
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-                  const SizedBox(
                     height: 40.0,
                   ),
                   MaterialButton(
@@ -134,7 +140,7 @@ class _ConnectScaleState extends State<ConnectScale> {
                           MaterialPageRoute(
                               builder: (context) => ResolutionA()));
                     },
-                    color: Colors.teal,
+                    color: HexColor('#FA7D82').withOpacity(0.9),
                     elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
