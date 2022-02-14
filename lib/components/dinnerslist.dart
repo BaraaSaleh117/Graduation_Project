@@ -29,7 +29,7 @@ class DinnersList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: 120,
+        height: 160,
         width: double.infinity,
         child: Card(
           child: Row(
@@ -70,23 +70,25 @@ class DinnersList extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Show Details",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.teal),
-                          ),
-                          Icon(
-                            Icons.dining_outlined,
-                            color: Colors.teal,
-                            size: 30,
-                          ),
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Show Details",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.teal),
+                            ),
+                            Icon(
+                              Icons.dining_outlined,
+                              color: Colors.teal,
+                              size: 30,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

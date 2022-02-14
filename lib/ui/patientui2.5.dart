@@ -39,15 +39,18 @@ class ListPatients extends StatefulWidget {
 
 class _ListPatientsState extends State<ListPatients> {
   saveqPref(
-      String Id,
-      String UserName,
-      String Height,
-      String Weight,
-      String gender,
-      String Age,
-      String Drugs,
-      String ChronicDiseases,
-      String Suger) async {
+    String Id,
+    String UserName,
+    String Height,
+    String Weight,
+    String gender,
+    String Age,
+    String Drugs,
+    String ChronicDiseases,
+    String Suger,
+    String Active,
+    String parpase,
+  ) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("Id", Id);
     preferences.setString("username", UserName);
@@ -58,6 +61,8 @@ class _ListPatientsState extends State<ListPatients> {
     preferences.setString("Drugs", Drugs);
     preferences.setString("ChronicDiseases", ChronicDiseases);
     preferences.setString("Sugerb", Suger);
+    preferences.setString("Active", Active);
+    preferences.setString("parpase", parpase);
 
     print(preferences.getString("gender"));
   }
@@ -256,7 +261,9 @@ class _ListPatientsState extends State<ListPatients> {
                               widget.age,
                               widget.Drugs,
                               widget.ChronicDiseases,
-                              widget.BloodSugerLevel);
+                              widget.BloodSugerLevel,
+                              widget.Active,
+                              widget.parpase);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -315,7 +322,9 @@ class _ListPatientsState extends State<ListPatients> {
                               widget.age,
                               widget.Drugs,
                               widget.ChronicDiseases,
-                              widget.BloodSugerLevel);
+                              widget.BloodSugerLevel,
+                              widget.Active,
+                              widget.parpase);
                           Navigator.push(
                               context,
                               MaterialPageRoute(

@@ -104,17 +104,17 @@ class _PatientUiState extends State<PatientUi> {
 
   getGender() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    gender = preferences.getString("Gen");
+    gender = preferences.getString("gender");
     if (gender != null) {
       if (gender == "male") {
         ismale = true;
         print(gender);
       } else if (gender == "female") {
         ismale = false;
-        print(gender);
+        print("User Gender is : " + gender);
       }
     } else {
-      print("Gender not ok 11111111111111111111111111");
+      print("Error in determain Gender");
     }
   }
 
@@ -412,6 +412,7 @@ class _PatientUiState extends State<PatientUi> {
     getUserName();
     // getPatientID();
     getGender();
+
     getqPref();
 
     getData();
@@ -423,6 +424,15 @@ class _PatientUiState extends State<PatientUi> {
   Widget build(BuildContext context) {
     getBMI(weightt, Height);
     getFat(_bmi, Age);
+    print("1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/");
+    print(weightt);
+
+    print(Age);
+    print(Active.toString());
+    print(parpase.toString());
+    print(gender);
+    print(Height);
+    print("1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/");
     getCaloris();
     CalculateWater();
     calculateCarbs();
@@ -438,8 +448,6 @@ class _PatientUiState extends State<PatientUi> {
     SaveCal(_Cal.toString());
     CalcIdelWeight();
     print("123456789987654311");
-    print(Active.toString());
-    print(parpase.toString());
 
     print("123456789987654311");
     getPatientID();
