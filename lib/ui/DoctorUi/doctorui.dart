@@ -58,6 +58,8 @@ class _DoctorUiState extends State<DoctorUi> {
                     Drugs: snapshot.data[i]['Drugs']!,
                     ChronicDiseases: snapshot.data[i]['ChronicDiseases']!,
                     BloodSugerLevel: snapshot.data[i]['BloodSugerLevel']!,
+                    HValue: snapshot.data[i]['HValue']!,
+                    HDate: snapshot.data[i]['HDate']!,
                   );
                 },
               );

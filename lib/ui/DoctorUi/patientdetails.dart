@@ -15,6 +15,8 @@ class PatientDetails extends StatefulWidget {
   late final String Drugs;
   late final String ChronicDiseases;
   late final String BloodSugerLevel;
+  late final String HValue;
+  late final String HDate;
 
   String DocMessage = " ";
 
@@ -27,6 +29,8 @@ class PatientDetails extends StatefulWidget {
     required this.Drugs,
     required this.ChronicDiseases,
     required this.BloodSugerLevel,
+    required this.HValue,
+    required this.HDate,
   });
 
   @override
@@ -701,8 +705,137 @@ class _PatientDetails extends State<PatientDetails> {
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                height: 20,
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 48,
+                                    width: 2,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          HexColor('#87A0E5').withOpacity(0.5),
+                                      borderRadius: const BorderRadius.all(
+                                          const Radius.circular(4.0)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 4, bottom: 2),
+                                          child: Text(
+                                            'HBA1C Value',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontFamily:
+                                                  FitnessAppTheme.fontName,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20,
+                                              letterSpacing: -0.1,
+                                              color: FitnessAppTheme.grey
+                                                  .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 4, bottom: 3),
+                                              child: Text(
+                                                widget.HValue,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                  fontFamily:
+                                                      FitnessAppTheme.fontName,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16,
+                                                  color: FitnessAppTheme
+                                                      .darkerText,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 48,
+                                    width: 2,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          HexColor('#87A0E5').withOpacity(0.5),
+                                      borderRadius: const BorderRadius.all(
+                                          const Radius.circular(4.0)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 4, bottom: 2),
+                                          child: Text(
+                                            'Last measurement for HBA1C',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontFamily:
+                                                  FitnessAppTheme.fontName,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20,
+                                              letterSpacing: -0.1,
+                                              color: FitnessAppTheme.grey
+                                                  .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: <Widget>[
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 4, bottom: 3),
+                                              child: Text(
+                                                widget.HDate,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                  fontFamily:
+                                                      FitnessAppTheme.fontName,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16,
+                                                  color: FitnessAppTheme
+                                                      .darkerText,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
                             ]),
                           ),

@@ -3,12 +3,22 @@ import 'package:graduation_projectflutter/components/mydrawer.dart';
 import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
 import 'package:graduation_projectflutter/ui/connectwithscale.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HbA1c extends StatefulWidget {
   const HbA1c({Key? key}) : super(key: key);
 
   @override
   _HbA1cState createState() => _HbA1cState();
+}
+
+TextEditingController _Value = TextEditingController();
+TextEditingController _Date = TextEditingController();
+
+savePref(String Value, String Date) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setString("HValue", Value);
+  preferences.setString("HDate", Date);
 }
 
 class _HbA1cState extends State<HbA1c> {
@@ -123,6 +133,7 @@ class _HbA1cState extends State<HbA1c> {
               textAlign: TextAlign.center,
             ),
             TextField(
+                controller: _Value,
                 decoration: InputDecoration(
                     labelText: "Ex : 6.5",
                     border: OutlineInputBorder(
@@ -143,6 +154,7 @@ class _HbA1cState extends State<HbA1c> {
               textAlign: TextAlign.center,
             ),
             TextField(
+                controller: _Date,
                 decoration: InputDecoration(
                     labelText: "dd-mm-yy",
                     border: OutlineInputBorder(
@@ -166,6 +178,9 @@ class _HbA1cState extends State<HbA1c> {
                 minWidth: double.infinity,
                 height: 40,
                 onPressed: () {
+                  savePref(_Value.text, _Date.text);
+                  print(_Value.text);
+                  print(_Date.text);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ConnectScale()));
                 },

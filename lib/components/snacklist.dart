@@ -70,23 +70,25 @@ class SnacksList extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Show Details",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.teal),
-                          ),
-                          Icon(
-                            Icons.dining_outlined,
-                            color: Colors.teal,
-                            size: 30,
-                          ),
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Show Details",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.teal),
+                            ),
+                            Icon(
+                              Icons.dining_outlined,
+                              color: Colors.teal,
+                              size: 30,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

@@ -39,6 +39,8 @@ class _PatientUiState extends State<PatientUi> {
   var Active;
   late String Sucomments;
   var parpase;
+  var HValue;
+  var HDate;
 
   late double _bmi = 0.0;
   late String comments = "";
@@ -332,6 +334,8 @@ class _PatientUiState extends State<PatientUi> {
       Active = preferences.getString("Active");
       parpase = preferences.getString("parpase");
       Sugerb = preferences.getString("Sugerb");
+      HValue = preferences.getString("HValue");
+      HDate = preferences.getString("HDate");
     });
     print(Height + Age + Drugs + ChronicDiseases);
   }
@@ -361,6 +365,8 @@ class _PatientUiState extends State<PatientUi> {
       "BloodSugerLevel": Sugerb.toString(),
       "Active": Active.toString(),
       "parpase": parpase.toString(),
+      "HValue": HValue.toString(),
+      "HDate": HDate.toString()
     };
     var responce = await http.post(Uri.parse(url), body: data);
 
@@ -424,21 +430,12 @@ class _PatientUiState extends State<PatientUi> {
   Widget build(BuildContext context) {
     getBMI(weightt, Height);
     getFat(_bmi, Age);
-    print("1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/");
-    print(weightt);
-
-    print(Age);
-    print(Active.toString());
-    print(parpase.toString());
-    print(gender);
-    print(Height);
-    print("1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/1/");
     getCaloris();
     CalculateWater();
     calculateCarbs();
     inbodycheck = (DateFormat('EEEE, h:mm a').format(date));
     detetenfood();
-    // getPref(); ///////////////////////////////////////////////////////////////////////////////////
+    //getPref(); ///////////////////////////////////////////////////////////////////////////////////
 
     calculateProten();
 
@@ -447,9 +444,7 @@ class _PatientUiState extends State<PatientUi> {
     SavecarbsCal(carbs.toString());
     SaveCal(_Cal.toString());
     CalcIdelWeight();
-    print("123456789987654311");
 
-    print("123456789987654311");
     getPatientID();
 
     PostData();

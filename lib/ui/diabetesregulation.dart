@@ -152,7 +152,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
   }
 
   void dethour() {
-    if (hour == "9:00 AM" || hour == "2:00 PM" || hour == "7:00 PM") {
+    if (hour == "9:00 AM" || hour == "2:00 PM" || hour == "9:00 PM") {
       hourtime = true;
       print(hour);
     } else {

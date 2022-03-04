@@ -75,6 +75,8 @@ class _DoctorUiState extends State<PatientUi1> {
                     BloodSugerLevel: snapshot.data[i]['BloodSugerLevel']!,
                     Active: snapshot.data[i]['Active']!,
                     parpase: snapshot.data[i]['parpase']!,
+                    HValue: snapshot.data[i]['HValue']!,
+                    HDate: snapshot.data[i]['HDate']!,
                   );
                 },
               );

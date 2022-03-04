@@ -60,8 +60,8 @@ class _qusetionsState extends State<qusetions> {
 
   savePref(String gender) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("Gen", gender);
-    print(preferences.getString("Gen"));
+    preferences.setString("gender", gender);
+    print(preferences.getString("gender"));
   }
 
   @override

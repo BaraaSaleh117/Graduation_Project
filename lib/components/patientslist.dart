@@ -14,6 +14,8 @@ class PatientsList extends StatelessWidget {
   late final String Drugs;
   late final String ChronicDiseases;
   late final String BloodSugerLevel;
+  late final String HValue;
+  late final String HDate;
 
   String status = "Low";
   double Sugerv = 0.0;
@@ -29,6 +31,8 @@ class PatientsList extends StatelessWidget {
     required this.Drugs,
     required this.ChronicDiseases,
     required this.BloodSugerLevel,
+    required this.HValue,
+    required this.HDate,
   });
 
   detSugerLevel() {
@@ -475,6 +479,8 @@ class PatientsList extends StatelessWidget {
                                       Drugs: Drugs,
                                       ChronicDiseases: ChronicDiseases,
                                       BloodSugerLevel: BloodSugerLevel,
+                                      HValue: HValue,
+                                      HDate: HDate,
                                     );
                                   }));
                                 },

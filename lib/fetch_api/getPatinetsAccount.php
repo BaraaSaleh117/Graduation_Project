@@ -1,6 +1,6 @@
 <?php 
 require('connection.php');
-$makeQuery =" SELECT account.Id , account.UserName ,resolution.height,resolution.gender,resolution.weight,resolution.age,resolution.Drugs,resolution.ChronicDiseases, resolution.BloodSugerLevel  FROM account INNER JOIN resolution ON account.Id =resolution.ResId ORDER BY resolution.BloodSugerLevel DESC  ";
+$makeQuery =" SELECT account.Id , account.UserName ,resolution.HValue,resolution.HDate,resolution.height,resolution.gender,resolution.weight,resolution.age,resolution.Drugs,resolution.ChronicDiseases, resolution.BloodSugerLevel  FROM account INNER JOIN resolution ON account.Id =resolution.ResId ORDER BY resolution.BloodSugerLevel DESC  ";
 $stamement =$connection->prepare($makeQuery);
 $stamement->execute();
 
@@ -19,6 +19,8 @@ while($resultsForm = $stamement ->fetch()){
             "Drugs" => $resultsForm['Drugs'],
             "ChronicDiseases" => $resultsForm['ChronicDiseases'],
             "BloodSugerLevel" => $resultsForm['BloodSugerLevel'],
+            "HValue" => $resultsForm['HValue'],
+            "HDate" => $resultsForm['HDate'],
             
         
         )

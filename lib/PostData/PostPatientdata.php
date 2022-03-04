@@ -12,9 +12,12 @@ $ChronicDiseases    = $_POST['ChronicDiseases'] ;
 $BloodSugerLevel  = $_POST['BloodSugerLevel'] ; 
 $Active  = $_POST['Active'] ; 
 $parpase  = $_POST['parpase'] ; 
+$HValue  = $_POST['HValue'] ; 
+$HDate  = $_POST['HDate'] ; 
+
  
 
- $sql = "INSERT INTO `resolution` (`ResId`, `height`, `weight`, `age` ,`gender`,`Drugs` ,`ChronicDiseases` ,`BloodSugerLevel`,`Active`,`parpase` ) VALUES (:ResId , :height , :weight , :age , :gender , :Drugs , :ChronicDiseases ,:BloodSugerLevel,:Active,:parpase )";
+ $sql = "INSERT INTO `resolution` (`ResId`, `height`, `weight`, `age` ,`gender`,`Drugs` ,`ChronicDiseases` ,`BloodSugerLevel`,`Active`,`parpase`,`HValue`,`HDate` ) VALUES (:ResId , :height , :weight , :age , :gender , :Drugs , :ChronicDiseases ,:BloodSugerLevel,:Active,:parpase,:HValue,:HDate )";
 
 
  $stmt = $connection->prepare($sql);
@@ -28,7 +31,9 @@ $parpase  = $_POST['parpase'] ;
   ":ChronicDiseases" => $ChronicDiseases,
   ":BloodSugerLevel" => $BloodSugerLevel,
   ":Active" => $Active,
-  ":parpase" => $parpase
+  ":parpase" => $parpase,
+  ":HValue" => $HValue,
+  ":HDate" => $HDate
 
 
  ));

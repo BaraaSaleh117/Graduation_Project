@@ -3,6 +3,7 @@ import 'package:graduation_projectflutter/main.dart';
 import 'package:graduation_projectflutter/patientPage/fitness_app_theme.dart';
 import 'package:graduation_projectflutter/patientPage/ui_view/mediterranean_diet_view.dart';
 import 'package:graduation_projectflutter/ui/allpatientcontentpage.dart';
+import 'package:graduation_projectflutter/ui/checkbloodsugerlevel.dart';
 import 'package:graduation_projectflutter/ui/updatereccrd.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,20 +19,23 @@ class ListPatients extends StatefulWidget {
   late final String BloodSugerLevel;
   late final String Active;
   late final String parpase;
+  late final String HValue;
+  late final String HDate;
 
-  ListPatients({
-    required this.Id,
-    required this.UserName,
-    required this.height,
-    required this.weight,
-    required this.gender,
-    required this.age,
-    required this.Drugs,
-    required this.ChronicDiseases,
-    required this.BloodSugerLevel,
-    required this.Active,
-    required this.parpase,
-  });
+  ListPatients(
+      {required this.Id,
+      required this.UserName,
+      required this.height,
+      required this.weight,
+      required this.gender,
+      required this.age,
+      required this.Drugs,
+      required this.ChronicDiseases,
+      required this.BloodSugerLevel,
+      required this.Active,
+      required this.parpase,
+      required this.HValue,
+      required this.HDate});
 
   @override
   _ListPatientsState createState() => _ListPatientsState();
@@ -39,18 +43,19 @@ class ListPatients extends StatefulWidget {
 
 class _ListPatientsState extends State<ListPatients> {
   saveqPref(
-    String Id,
-    String UserName,
-    String Height,
-    String Weight,
-    String gender,
-    String Age,
-    String Drugs,
-    String ChronicDiseases,
-    String Suger,
-    String Active,
-    String parpase,
-  ) async {
+      String Id,
+      String UserName,
+      String Height,
+      String Weight,
+      String gender,
+      String Age,
+      String Drugs,
+      String ChronicDiseases,
+      String Suger,
+      String Active,
+      String parpase,
+      String HValue,
+      String HDate) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("Id", Id);
     preferences.setString("username", UserName);
@@ -63,8 +68,8 @@ class _ListPatientsState extends State<ListPatients> {
     preferences.setString("Sugerb", Suger);
     preferences.setString("Active", Active);
     preferences.setString("parpase", parpase);
-
-    print(preferences.getString("gender"));
+    preferences.setString("HValue", HValue);
+    preferences.setString("HDate", HDate);
   }
 
   @override
@@ -263,7 +268,9 @@ class _ListPatientsState extends State<ListPatients> {
                               widget.ChronicDiseases,
                               widget.BloodSugerLevel,
                               widget.Active,
-                              widget.parpase);
+                              widget.parpase,
+                              widget.HValue,
+                              widget.HDate);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -324,12 +331,13 @@ class _ListPatientsState extends State<ListPatients> {
                               widget.ChronicDiseases,
                               widget.BloodSugerLevel,
                               widget.Active,
-                              widget.parpase);
+                              widget.parpase,
+                              widget.HValue,
+                              widget.HDate);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      AllPatientContentPage()));
+                                  builder: (context) => CheckBloodSuger()));
                         },
                         icon: Icon(
                           Icons.double_arrow_sharp,
