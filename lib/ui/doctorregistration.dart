@@ -56,10 +56,10 @@ class _DoctorRegistrationState extends State<DoctorRegistration> {
     if (formdata!.validate()) {
       formdata.save();
       PostNewDoctor();
-      PostDoctorData();
+      // PostDoctorData();
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => DoctorLogin()));
-      print("Ok");
+      print("A new doctor has been added");
     }
   }
 

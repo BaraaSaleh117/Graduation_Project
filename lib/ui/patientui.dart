@@ -81,25 +81,19 @@ class _PatientUiState extends State<PatientUi> {
   }
 
   Future getPatientID() async {
-    if (isSignIn == false) {
-      username = "Jenan_Saleh";
-      print("Are You  --->" + username + " ?");
-    } else {
-      //Get Patients Data From Localhost API
-      String theUrl =
-          "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetID.php";
-      var data = {
-        "UserName": username.toString().trim(),
-      };
-      var res = await http.post(Uri.parse(theUrl),
-          body: data, headers: {"Accept": "application/json"});
-      var responceBody = json.decode(res.body);
+    String theUrl =
+        "http://10.0.2.2/GraduationProj/graduation_projectflutter/lib/fetch_api/GetID.php";
+    var data = {
+      "UserName": username.toString().trim(),
+    };
+    var res = await http.post(Uri.parse(theUrl),
+        body: data, headers: {"Accept": "application/json"});
+    var responceBody = json.decode(res.body);
 
-      String ID = responceBody[0].toString() as String;
-      String getid = ID[5] + ID[6];
-      intId = int.parse(getid);
-      print(intId);
-    }
+    String ID = responceBody[0].toString() as String;
+    String getid = ID[5] + ID[6];
+    intId = int.parse(getid);
+    print(intId);
 
     return intId;
   }

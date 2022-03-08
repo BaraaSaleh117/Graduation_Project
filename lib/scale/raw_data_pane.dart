@@ -13,22 +13,22 @@ class RawDataPane extends StatefulWidget {
 }
 
 class _RawDataPaneState extends State<RawDataPane> {
-  // savePref(String weight) async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   preferences.setString("weight", weight);
+  savePref(String weight) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("weightt", weight);
 
-  //   print(preferences.getString("weight"));
-  // }
+    print(preferences.getString("weightt"));
+  }
 
-  // getPref() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   var weight = preferences.getString("weight");
-  //   if (weight != null) {
-  //     print(preferences.getString("weight"));
+  getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var weight = preferences.getString("weightt");
+    if (weight != null) {
+      print(preferences.getString("weightt"));
 
-  //     // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-  //   }
-  // }
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
+  }
 
   @override
   void initState() {
