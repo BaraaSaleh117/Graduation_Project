@@ -1025,7 +1025,7 @@ class _DiabetesRegState extends State<DiabetesReg> {
                         ),
                         ListTile(
                           title: Text(
-                            "Enter here the last thing you ate And please commit to the suggested healthy meals",
+                            " please commit to the suggested healthy meals",
                             style: TextStyle(
                               color: Colors.red.shade900,
                               fontSize: 15,
@@ -1034,18 +1034,9 @@ class _DiabetesRegState extends State<DiabetesReg> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        TextField(
-                            controller: Eten,
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Enter Meal Name',
-                            ),
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
                         ListTile(
                           title: Text(
-                            "Please check again in 8 hours",
+                            "And check again in 8 hours",
                             style: TextStyle(
                               color: Colors.red.shade900,
                               fontSize: 15,

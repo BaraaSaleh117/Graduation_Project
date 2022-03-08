@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
       ),
       home: Background(),
+      //ScaleApp()
       routes: {
         "PatientsUi": (context) {
           return PatientUi();
